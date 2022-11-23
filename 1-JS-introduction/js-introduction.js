@@ -1,16 +1,16 @@
-const myName = "Dmitry";
+const myName = 'Dmitry';
 let myAge = 35;
 let myScores = 7777777n;
 const haveKid = true;
 let prisonBreaks = null;
 let reasonsToDie = undefined;
 let myPerson = {
-  name: "Dmitry",
+  name: 'Dmitry',
   age: 35,
-  child: "Yaroslav",
-  musicBand: "Genoex",
+  child: 'Yaroslav',
+  musicBand: 'Genoex'
 };
-let myMusic = Symbol("genoex");
+let myMusic = Symbol('genoex');
 
 console.log(Number(myName), String(myName), Boolean(myName));
 console.log(Number(myAge), String(myAge), Boolean(myAge));
