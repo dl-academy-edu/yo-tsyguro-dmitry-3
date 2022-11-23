@@ -3,7 +3,7 @@ let myAge = 35;
 let myScores = 7777777n;
 const haveKid = true;
 let prisonBreaks = null;
-let reasonesToDie = undefined;
+let reasonsToDie = undefined;
 let myPerson = {
   name: "Dmitry",
   age: 35,
@@ -17,6 +17,6 @@ console.log(Number(myAge), String(myAge), Boolean(myAge));
 console.log(Number(myScores), String(myScores), Boolean(myScores));
 console.log(Number(haveKid), String(haveKid), Boolean(haveKid));
 console.log(Number(prisonBreaks), String(prisonBreaks), Boolean(prisonBreaks));
-console.log(Number(undefined), String(undefined), Boolean(undefined));
+console.log(Number(reasonsToDie), String(reasonsToDie), Boolean(reasonsToDie));
 console.log(Number(myPerson), String(myPerson), Boolean(myPerson));
 console.log(Number(myMusic), String(myMusic), Boolean(myMusic));
