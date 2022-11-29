@@ -1,12 +1,12 @@
 /*Задание 2*/
 console.log(`Задание 2`);
 
-let userValue = prompt("Введите значение в формате число");
+let userValue = prompt(`Введите значение в формате число`);
 
 for (let i = 0; ; i++) {
   if (!Number(userValue)) {
     console.log(`Введенное значение имеет неверный тип данных.`);
-    userValue = prompt("Введите значение в формате число");
+    userValue = prompt(`Введите значение в формате число`);
   } else {
     break;
   }
