@@ -34,9 +34,57 @@
     <link href="css/style.min.css" rel="stylesheet" />
     <!-- endbuild -->
   </head>
-  <body>
+  <body class="home-page">
     <div class="color-wrapper page-container">
-      @@include('blocks/header.html') @@include('blocks/footer.html')
+      @@include('blocks/header.html')
+      <div class="mobile-menu font-bold">
+        <button class="mobile-menu__close"></button>
+        <nav class="mobile-menu__nav">
+          <a
+            href="../../index.html"
+            class="mobile-menu__link header__home-active"
+            >Home</a
+          >
+          <a
+            href="../../my-blog.html"
+            class="mobile-menu__link header__my-blog-active"
+            >My blog</a
+          >
+          <button type="button" class="mobile-menu__link header__button">
+            Sign in
+          </button>
+          <button type="button" class="mobile-menu__link header__button">
+            Register
+          </button>
+          <a
+            href="../../my-profile.html"
+            class="mobile-menu__link hidden-item mobile-menu__my-profile-active"
+            >My profile</a
+          >
+        </nav>
+      </div>
+      <section class="main">
+        <h1 class="main__title">Tsyguro Dmitry</h1>
+        <p class="main__content">
+          Future front-end developer 35 years old, Tolyatti
+        </p>
+        <picture class="main__picture">
+          <source
+            srcset="
+              ../img/images/apple-1x.png 1x,
+              ../img/images/apple-2x.png 2x
+            "
+          />
+          <img
+            src="../img/images/apple-1x.png"
+            class="main__image"
+            width="179"
+            height="61"
+            alt="Apple logo"
+          />
+        </picture>
+      </section>
+      @@include('blocks/footer.html')
     </div>
     <div class="color-wrapper page-container"></div>
 

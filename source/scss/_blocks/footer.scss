@@ -2,9 +2,44 @@
   Код ниже нужно удалить, он добавлен просто для примера
 */
 .footer {
-  background-color: #151515;
-  color: #fff;
-  padding: 40px 0;
+  display: block;
   text-align: center;
-  height: 100px;
+  padding: 60px 0;
+}
+
+.footer__title {
+  font-size: 34px;
+  line-height: 41px;
+  margin-bottom: 20px;
+}
+.footer__commentary {
+  font-size: 18px;
+  line-height: 21px;
+  margin-bottom: 30px;
+}
+.footer__button {
+  padding: 10px 30px;
+  color: white;
+  background-color: black;
+  font-size: 18px;
+  line-height: 22px;
+  border-radius: 30px;
+  margin-bottom: 40px;
+}
+.footer__link-list {
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 420px;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.footer__link-list-item {
+  border: solid 3px;
+  border-radius: 30px;
+  padding: 10px 30px;
+  line-height: 22px;
 }

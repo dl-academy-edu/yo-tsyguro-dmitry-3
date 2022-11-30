@@ -17,6 +17,7 @@
 */
 @import "_blocks/page-container";
 @import "_blocks/footer";
+@import "_blocks/header";
 
 /*
   Ниже пример подключения других блоков
@@ -34,3 +35,54 @@
   Не стал выносить в отдельный файл, но если бы блок coming-soon действительно был бы нужен,
   то он должен был бы быть в файле _blocks/coming-soon.scss
 */
+
+////////////////Мобильное меню//////////////
+
+.mobile-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  @media (min-width: 355px) {
+    display: none;
+  }
+}
+.mobile-menu__close {
+  position: fixed;
+  top: 50px;
+  right: 13px;
+  padding: 0;
+  border: none;
+  width: 25px;
+  height: 25px;
+  background: none;
+  background-image: url("../img/icons/сlose-cross.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.mobile-menu__nav {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+.mobile-menu__link {
+  text-decoration: none;
+  text-align: right;
+  color: black;
+  font-size: 34px;
+  line-height: 41px;
+  opacity: 0.5;
+  transition: all 400ms;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
