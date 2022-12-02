@@ -129,7 +129,7 @@ console.log(`Информация будет выведена через 10 се
 let i = 10;
 
 let myPrinTextCounter = setInterval(function () {
-  console.log(i);
+  console.log(i + " ожидание...");
   i--;
 }, 1000);
 setTimeout(() => {
@@ -137,8 +137,12 @@ setTimeout(() => {
 }, 10000);
 setTimeout(printText, 10000);
 function printText() {
+  let finalText = [];
   for (i = 0; i < developers.length; i++) {
     let affectedByText = data[i].affectedBy.slice(0, 4).join(", ");
+    if (data[i].affectedBy.length > 4) {
+      affectedByText += " и другие языки программирования";
+    }
     let findedDeveloper;
     let influencedByList = data[i].influencedBy.join(", ");
     let filenameExtensionsText = data[i].filenameExtensions
@@ -153,8 +157,9 @@ function printText() {
         findedDeveloper = element;
       }
     });
-    console.log(
+    finalText.push(
       `${data[i].name} -  язык программирования выпущенный в ${data[i].year} году.\nАвтором языка стал ${findedDeveloper.name} - ${findedDeveloper.work}.\nФайлы программ, написанных на ${data[i].name}, могут иметь расширения ${filenameExtensionsText}.\n${data[i].name} испытал влияние ${data[i].influencedBy.length} языков программирования: ${influencedByList}.\n${data[i].name} повлиял на ${affectedByText}.`
     );
   }
+  console.log(finalText.join("\n\n"));
 }
