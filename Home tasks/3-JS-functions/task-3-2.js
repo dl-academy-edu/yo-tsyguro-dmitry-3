@@ -1,7 +1,6 @@
 /*Задание 2*/
 
 ////////Сложение//////////////
-validateAge();
 
 function sumNumbers(a, b) {
   return a + b;
