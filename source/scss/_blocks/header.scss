@@ -1,5 +1,18 @@
 .header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: white;
   padding: 33px 0;
+  // @media (min-width: 468px) and (max-width: 1099px) {
+  //   margin-left: 60px;
+  //   margin-right: 60px;
+  // }
+  // @media (max-width: 467px) {
+  //   margin-left: 20px;
+  //   margin-right: 20px;
+  // }
   @media (max-width: 354px) {
     display: none;
   }
