@@ -1,0 +1,19 @@
+.close-button {
+  border: none;
+  background-color: white;
+  width: 25px;
+  height: 25px;
+  background-image: url("/img/icons/cross-close.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: -3px;
+  right: -35px;
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 480px) {
+    top: -3px;
+    left: 40px;
+  }
+}

@@ -58,8 +58,13 @@ ul {
   font-family: "Gilroy-Bold", "Arial Black", sans-serif;
   font-size: 18px;
 }
+///////////Заголовки///////
+.section-title {
+  font-size: 34px;
+  line-height: 41px;
+}
 
 //////////////////////Цветной контейнер///////////////////////////////////////////////
-.color-wrapper:nth-child(odd) {
+.color-wrapper:nth-child(even) {
   background-color: #f6f6f6;
 }

@@ -18,6 +18,13 @@
 @import "_blocks/page-container";
 @import "_blocks/footer";
 @import "_blocks/header";
+@import "_blocks/scroll-top";
+@import "_blocks/log-in";
+@import "_blocks/register";
+@import "_blocks/checkbox";
+@import "_blocks/button";
+@import "_blocks/send-message";
+@import "_blocks/close-button";
 
 /*
   Ниже пример подключения других блоков
@@ -91,14 +98,18 @@
 ////////////////////////////////////INDEX start////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////main////////////////////////////////////////
+///////////////////////////////Main////////////////////////////////////////
 .main {
   display: flex;
   flex-wrap: wrap;
+  justify-content: start;
   margin-top: 88px;
   padding: 40px 0 60px;
   row-gap: 36px;
   align-items: flex-end;
+  @media (max-width: 355px) {
+    margin-top: 0;
+  }
 }
 .main__title {
   font-size: 47px;
@@ -110,8 +121,29 @@
     display: none;
   }
 }
+.main__content-wrapper {
+  display: flex;
+  justify-self: start;
+  column-gap: 43px;
+}
 .main__content {
   max-width: 250px;
+}
+.main__sandwich-button {
+  background-image: url("../img/icons/sandwich.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  width: 32px;
+  height: 30px;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+  transition: all 400ms;
+}
+.main__picture {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .main__image {
   width: 100%;
@@ -132,3 +164,221 @@
   background-color: black;
   opacity: 0.1;
 }
+
+///////////////////////////////About me////////////////////////////////////////
+
+.about {
+  padding: 60px 0;
+  text-align: center;
+}
+.about__title {
+  padding-bottom: 50px;
+}
+.about__cloud-section {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  row-gap: 40px;
+}
+.about__cloud-message {
+  border: solid 2.5px;
+  padding: 15px;
+  max-width: 500px;
+}
+.left-cloud-message,
+.right-cloud-message {
+  position: relative;
+  &:before {
+    border: 20px solid transparent;
+    border-top-color: black;
+    position: absolute;
+    bottom: -41px;
+    content: "";
+  }
+  &:after {
+    border: 19px solid transparent;
+    border-top-color: white;
+    position: absolute;
+    bottom: -37px;
+    content: "";
+  }
+}
+.left-cloud-message {
+  position: relative;
+  &:before {
+    right: 25px;
+  }
+  &:after {
+    right: 26px;
+  }
+}
+.right-cloud-message {
+  align-self: flex-end;
+  position: relative;
+  &:before {
+    left: 25px;
+  }
+  &:after {
+    left: 26px;
+  }
+}
+
+/////////////////////////////////
+@media (max-width: 680px) {
+  .about__cloud-section {
+    width: 100%;
+  }
+}
+///////////////////////////////Skills////////////////////////////////////////
+.skills {
+  padding: 60px 0;
+  text-align: center;
+  align-content: center;
+}
+.skills__title {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+.skills__comment {
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+.skills__rate-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style: none;
+  column-gap: 25px;
+  row-gap: 40px;
+  align-content: center;
+}
+.skills__rate-list-item {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.skills__progress-wrapper {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}
+.skills__percent {
+  font-weight: 14px;
+  opacity: 0.5;
+}
+.skills__progress-bar {
+  background-color: #e5e5e5;
+  width: 142px;
+  height: 9px;
+  position: relative;
+}
+.skills__progress-bar-html,
+.skills__progress-bar-css,
+.skills__progress-bar-js,
+.skills__progress-bar-git,
+.skills__progress-bar-figma {
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 100%;
+    background-color: black;
+  }
+}
+.skills__progress-bar-html {
+  &::after {
+    width: 85%;
+  }
+}
+.skills__progress-bar-css {
+  &::after {
+    width: 55%;
+  }
+}
+.skills__progress-bar-js {
+  &::after {
+    width: 5%;
+  }
+}
+.skills__progress-bar-git {
+  &::after {
+    width: 15%;
+  }
+}
+.skills__progress-bar-figma {
+  &::after {
+    width: 80%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .skills__rate-list-item {
+    width: 147px;
+  }
+  .skills__progress-bar {
+    background-color: #e5e5e5;
+    width: 111px;
+  }
+  .skills__rate-list {
+    column-gap: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .skills__rate-list-item {
+    width: 130px;
+  }
+  .skills__progress-bar {
+    width: 94px;
+  }
+  .skills__rate-list {
+    column-gap: 20px;
+  }
+}
+///////////////////////////////Portfolio////////////////////////////////////////
+.portfolio {
+  padding: 60px 0;
+  text-align: center;
+  align-content: center;
+  position: relative;
+}
+.portfolio__title {
+  font-size: 34px;
+  margin-bottom: 20px;
+}
+.portfolio__image {
+  width: 100%;
+  height: 100%;
+}
+.portfolio__description-wrapper {
+  padding: 31px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  transform: translate(0 -30%);
+  left: 0;
+  right: 0;
+  background-color: black;
+  z-index: 2;
+  opacity: 0.8;
+}
+.portfolio__desription-title {
+  color: white;
+  text-decoration: underline dashed;
+  text-underline-position: under;
+  margin-bottom: 15px;
+}
+.portfolio__description-text {
+  color: white;
+  max-width: 400px;
+  font-size: 14px;
+  line-height: 16px;
+}
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////INDEX end////////////////////////////
+///////////////////////////////////////////////////////////////////////////

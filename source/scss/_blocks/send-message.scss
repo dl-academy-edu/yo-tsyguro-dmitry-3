@@ -1,0 +1,79 @@
+.send-message-modal {
+  background-color: white;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+.send-message-modal__form {
+  padding: 40px;
+  width: 680px;
+  height: 533px;
+  border: 3px solid;
+  position: relative;
+}
+.send-message-modal__email-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.send-message-modal__field {
+  height: 50px;
+}
+.send-message-modal__name-surname-wrapper,
+.send-message-modal__password-repeat-wrapper,
+.send-message-modal__location-age-wrapper {
+  display: flex;
+  column-gap: 20px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.send-message-modal__name-wrapper,
+.send-message-modal__surname-wrapper,
+.send-message-modal__password-wrapper,
+.send-message-modal__repeat-wrapper,
+.send-message-modal__location-wrapper,
+.send-message-modal__age-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.send-message-modal__label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  & span {
+    color: red;
+  }
+}
+.send-message-modal__name-surname-wrapper,
+.send-message-modal__password-repeat-wrapper,
+.send-message-modal__location-age-wrapper {
+  display: flex;
+}
+
+.send-message-modal__checkbox {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.send-message-active_js {
+  opacity: 1;
+}
+@media (max-width: 480px) {
+  .send-message-modal__form {
+    border: none;
+    position: relative;
+  }
+}
+@media (max-width: 480px) {
+  .send-message-modal__form {
+    border: none;
+    position: relative;
+  }
+}
