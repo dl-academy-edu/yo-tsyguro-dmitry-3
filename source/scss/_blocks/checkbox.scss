@@ -1,0 +1,23 @@
+.checkbox {
+  margin-right: 15px;
+  cursor: pointer;
+  opacity: 0.1;
+  &:hover {
+    opacity: 0.6;
+  }
+  &:checked {
+    opacity: 1;
+  }
+  &:checked ~ .checkbox__name {
+    opacity: 1;
+  }
+}
+
+.checkbox__name {
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.1;
+  &:hover {
+    opacity: 0.6;
+  }
+}
