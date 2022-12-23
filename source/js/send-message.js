@@ -40,23 +40,54 @@ messageCheckbox.addEventListener("change", () => {
     }
     console.log(email.value);
     //условия валидации
-    if (!isEmailValid(email.value)) {
+    if (!email.value) {
+      errors.email = "This field is required";
+      addInvalidColor(email);
+    } else if (!isEmailValid(email.value)) {
       errors.email =
         'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+      addInvalidColor(email);
+    } else {
+      addValidColor(email);
     }
+
     if (!name.value) {
+      errors.name = "This field is required";
+      addInvalidColor(name);
+    } else if (!name.value) {
       errors.name =
         "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
+      addInvalidColor(name);
+    } else {
+      addValidColor(name);
     }
+
     if (!subject.value) {
+      errors.subject = "This field is required";
+      addInvalidColor(subject);
+    } else if (!subject.value) {
       errors.subject = "Please enter a subject of your message";
+      addInvalidColor(subject);
+    } else {
+      addValidColor(subject);
     }
-    if (!isMobilePhoneValid(mobilePhone.value)) {
+
+    if (!mobilePhone.value) {
+      errors.mobilePhone = "This field is required";
+      addInvalidColor(mobilePhone);
+    } else if (!isMobilePhoneValid(mobilePhone.value)) {
       errors.mobilePhone =
         "Please enter a valid phone number (example: +7 945 385 4534)";
+      addInvalidColor(mobilePhone);
+    } else {
+      addValidColor(mobilePhone);
     }
+
     if (!message.value) {
       errors.message = "Please enter a message";
+      addInvalidColor(message);
+    } else {
+      addValidColor(message);
     }
 
     /////////////////сообщение об ошибке/////////////
@@ -82,30 +113,6 @@ messageCheckbox.addEventListener("change", () => {
     console.log(data);
   });
 })();
-
-// //создание кода с ошибкой
-// function errorCreator(message) {
-//   let messageError = document.createElement("div");
-//   messageError.classList.add("invalid-feedback");
-//   messageError.innerText = message;
-//   // console.log(messageError);
-//   return messageError;
-// }
-
-// //добавление ошибки инпуту
-// function setErrorText(input, errorMessage) {
-//   const error = errorCreator(errorMessage);
-//   input.classList.add("is-invalid");
-//   input.insertAdjacentElement("afterend", error);
-//   input.addEventListener(
-//     "input",
-//     function () {
-//       error.remove();
-//       input.classList.remove("is-invalid");
-//     },
-//     { once: true }
-//   );
-// }
 
 //валидация телефона (используется выше)
 

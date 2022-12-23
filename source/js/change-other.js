@@ -1,5 +1,15 @@
 const changeOtherForm = document.forms.changeOther;
 
+////////////////////Закрытие окна Esc//////////
+(function () {
+  if (!changeOtherModal) return;
+  window.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) {
+      changeOtherModal.classList.add("hidden-item");
+    }
+  });
+})();
+
 /////////////////////Изменение текста в поле//////////////////////////
 (function uploadName() {
   if (!changeOtherForm) return;

@@ -127,7 +127,6 @@ checkbox.addEventListener("change", () => {
         const messageError = errors[key];
         const input = signUpForm.elements[key];
         setErrorText(input, messageError);
-        console.log(input);
         // console.log(messageError);
       });
     }
@@ -155,7 +154,7 @@ function errorCreator(message) {
 /////////////////////////////
 (function deleteFieldStyle() {
   const inputs = [...signUpForm.getElementsByTagName("input")];
-  console.log(inputs);
+  // console.log(inputs);
   inputs.forEach((input) => {
     input.addEventListener(
       "input",

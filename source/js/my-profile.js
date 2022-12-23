@@ -41,13 +41,13 @@ let closeBtnChangeOther = document.querySelector(
   });
 })();
 
-// //////////////Закрытие нажатием Esc//////////////////////////////
-// (function () {
-//   if (!signInModal && !registerModal) return;
-//   window.addEventListener("keydown", (e) => {
-//     if (e.keyCode === 27) {
-//       signInModal.classList.add("hidden-item");
-//       registerModal.classList.add("hidden-item");
-//     }
-//   });
-// })();
+//////////////Закрытие нажатием Esc//////////////////////////////
+(function () {
+  if (!signInModal && !registerModal) return;
+  window.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) {
+      signInModal.classList.add("hidden-item");
+      registerModal.classList.add("hidden-item");
+    }
+  });
+})();

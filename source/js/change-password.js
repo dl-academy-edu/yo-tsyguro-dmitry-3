@@ -1,3 +1,11 @@
+(function () {
+  if (!changePassModal) return;
+  window.addEventListener("keydown", (e) => {
+    if (e.keyCode === 27) {
+      changePassModal.classList.add("hidden-item");
+    }
+  });
+})();
 // ///////////////////////////////Функция валидации////////////////////////////////
 (function () {
   const changePassForm = document.forms.changePassword;
@@ -10,7 +18,6 @@
   //Нажатие на submit
   changePassForm.addEventListener("submit", (e) => {
     errors = {}; //обнуляем объект
-
     e.preventDefault(); //отменяем стандартное поведение при submit
     //очищаем предварительно код от ошибки после первого нажатия на submit
     const errorMessages = changePassForm.querySelectorAll(".invalid-feedback");
@@ -19,17 +26,36 @@
         errorMessage.remove();
       }
     }
+
     //прописываем сообщения при валидации
-    if (!isPasswordValid(oldPass.value)) {
+    if (!oldPass.value) {
+      errors.oldPassword = "This field is required";
+      addInvalidColor(oldPass);
+    } else if (!isPasswordValid(oldPass.value)) {
       errors.oldPassword = "Please enter a valid password (6 symbols minimum)";
+      addInvalidColor(oldPass);
+    } else {
+      addValidColor(oldPass);
     }
-    if (!isNewPasswordValid(oldPass.value, newPass.value)) {
+    if (!newPass.value) {
+      errors.newPassword = "This field is required";
+      addInvalidColor(newPass);
+    } else if (!isNewPasswordValid(oldPass.value, newPass.value)) {
       errors.newPassword =
         "Please enter a valid password (6 symbols minimum). Do not use the old password";
+      addInvalidColor(newPass);
+    } else {
+      addValidColor(newPass);
     }
-    if (!isPasswordRepeatValid(newPass.value, repeatPass.value)) {
+    if (!repeatPass.value) {
+      errors.repeatPassword = "This field is required";
+      addInvalidColor(repeatPass);
+    } else if (!isPasswordRepeatValid(newPass.value, repeatPass.value)) {
       errors.repeatPassword =
         "The entered value does not match with entered password above";
+      addInvalidColor(repeatPass);
+    } else {
+      addValidColor(repeatPass);
     }
     /////////////////сообщение об ошибке/////////////
     if (Object.keys(errors).length) {
@@ -47,7 +73,7 @@
       newPassword: newPass.value,
       repeatPassword: repeatPass.value,
     };
-    console.log(errors);
+    // console.log(errors);
     console.log(data);
   });
 })();

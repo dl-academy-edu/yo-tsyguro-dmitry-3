@@ -1,9 +1,9 @@
 const loginForm = document.forms.login;
-const email = loginForm.elements.email;
-const password = loginForm.elements.password;
 
 ///////////////////////////////Функция валидации////////////////////////////////
 (function () {
+  const email = loginForm.elements.email;
+  const password = loginForm.elements.password;
   let errors = {}; //объект ошибок
 
   //Нажатие на submit
@@ -20,12 +20,24 @@ const password = loginForm.elements.password;
       }
     }
     //прописываем сообщения при валидации
-    if (!isEmailValid(email.value)) {
+    if (!email.value) {
+      errors.email = "This field is required";
+      addInvalidColor(email);
+    } else if (!isEmailValid(email.value)) {
       errors.email =
         'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+      addInvalidColor(email);
+    } else {
+      addValidColor(email);
     }
-    if (!isPasswordValid(password.value)) {
+    if (!password.value) {
+      errors.password = "This field is required";
+      addInvalidColor(password);
+    } else if (!isPasswordValid(password.value)) {
       errors.password = "Please enter a valid password (6 symbols minimum)";
+      addInvalidColor(password);
+    } else {
+      addValidColor(password);
     }
     /////////////////сообщение об ошибке/////////////
     if (Object.keys(errors).length) {
@@ -45,10 +57,3 @@ const password = loginForm.elements.password;
     console.log(data);
   });
 })();
-
-//валидация пароля (используется выше)
-function isPasswordValid(password) {
-  if (password.length >= 6) {
-    return true;
-  }
-}
