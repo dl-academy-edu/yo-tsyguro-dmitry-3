@@ -1,32 +1,5 @@
-.sign-in-modal {
-  background-color: white;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-}
 .sign-in-modal__form {
-  padding: 40px;
   width: 370px;
-  height: 318px;
-  border: 3px solid;
-  position: relative;
-  // &::after {
-  //   content: "";
-  //   width: 25px;
-  //   height: 25px;
-  //   background-image: url("/img/icons/cross-close.png");
-  //   background-repeat: no-repeat;
-  //   background-size: cover;
-  //   position: absolute;
-  //   top: -3px;
-  //   right: -35px;
-  // }
 }
 .sign-in-modal__field-wrapper {
   display: flex;
@@ -40,20 +13,9 @@
     color: red;
   }
 }
-
 .sign-in-modal__email {
   margin-bottom: 20px;
-  border: 2px solid #e5e5e5;
-  height: 50px;
 }
 .sign-in-modal__password {
   margin-bottom: 30px;
-  border: 2px solid #e5e5e5;
-  height: 50px;
-}
-
-@media (max-width: 480px) {
-  .sign-in-modal__form {
-    border: none;
-  }
 }

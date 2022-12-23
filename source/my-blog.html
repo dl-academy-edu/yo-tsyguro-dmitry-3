@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="google" content="notranslate" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Crimson+Text:ital,wght@1,400;1,700&family=Inter:wght@400;700&family=KoHo:wght@700&family=Lato:wght@400;700&family=Montserrat:wght@200;300;600;700&family=Open+Sans:wght@400;700&family=Pridi:wght@400;500;700&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>My blog</title>
+    <meta
+      name="description"
+      content="Данный сайт сверстал студент курса по
+    изучению специальности Frontend-разработчик"
+    />
+    <meta
+      name="keywords"
+      content="Frontend, gulp, javascript, css, scss, html"
+    />
+
+    <script>
+      var docElement = document.documentElement;
+      docElement.className =
+        docElement.className.replace(/\bno-js\b/, "") + " js";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- Favicon -->
+
+    <!-- build:css -->
+    <link href="css/style.min.css" rel="stylesheet" />
+
+    <!-- endbuild -->
+  </head>
+  <body class="my-blog-page font-medium page-container">
+    @@include('blocks/header.html')
+    <h1 class="main__title my-blog-page__title">My blog</h1>
+    <section class="my-blog__filter">
+      <h2 class="my-blog__filter-title hidden-item">Filter</h2>
+      <div class="filter__container">
+        <div class="filter__tags-wrapper">
+          <legend class="filter__title">Tags</legend>
+          <ul class="filter__color-checkbox-list">
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-blue"
+                class="filter__blue-checkbox"
+              />
+              <label class="filter__blue-label" for="checkbox-blue"></label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-light-blue"
+                class="filter__light-blue-checkbox"
+              />
+              <label
+                class="filter__light-blue-label"
+                for="checkbox-light-blue"
+              ></label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-yellow"
+                class="filter__yellow-checkbox"
+              />
+              <label class="filter__yellow-label" for="checkbox-yellow"></label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-marine"
+                class="filter__marine-checkbox"
+              />
+              <label class="filter__marine-label" for="checkbox-marine"></label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-orange"
+                class="filter__orange-checkbox"
+              />
+              <label class="filter__orange-label" for="checkbox-orange"></label>
+            </li>
+
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-pink"
+                class="filter__pink-checkbox"
+              />
+              <label class="filter__pink-label" for="checkbox-pink"></label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-purple"
+                class="filter__purple-checkbox"
+              />
+              <label class="filter__purple-label" for="checkbox-purple"></label>
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-green"
+                class="filter__green-checkbox"
+              />
+              <label class="filter__green-label" for="checkbox-green"></label>
+            </li>
+          </ul>
+        </div>
+        <div class="filter__views-wrapper">
+          <legend class="filter__title">Views</legend>
+          <ul class="filter__views-list">
+            <li>
+              <input
+                type="radio"
+                id="radio-min"
+                class="filter__views-min-checkbox"
+                value="100-500"
+                name="filter__views-group"
+              />
+              <label class="filter__views-min-label" for="radio-min"
+                >100-500</label
+              >
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="radio-middle"
+                class="filter__views-middle-checkbox"
+                value="500-1000"
+                name="filter__views-group"
+              />
+              <label class="filter__views-middle-label" for="radio-middle"
+                >500-1000</label
+              >
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="radio-max"
+                class="filter__views-max-checkbox"
+                value="1000-2000"
+                name="filter__views-group"
+              />
+              <label class="filter__views-max-label" for="radio-max"
+                >1000-2000</label
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="filter__comments-wrapper">
+          <legend class="filter__title">Comments</legend>
+          <ul class="filter__comments-list">
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-0"
+                class="filter__comments-min-checkbox"
+                value="0"
+              />
+              <label class="filter__comments-min-label" for="checkbox-0"
+                >0</label
+              >
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-0-1"
+                class="filter__comments-middle-checkbox"
+                value="0-1"
+              />
+              <label class="filter__comments-middle-label" for="checkbox-0-1"
+                >0-1</label
+              >
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="checkbox-1-50"
+                class="filter__comments-max-checkbox"
+                value="1-50"
+              />
+              <label class="filter__comments-max-label" for="checkbox-1-50"
+                >1-50</label
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="filter__how-show-wrapper">
+          <legend class="filter__title">How show?</legend>
+          <ul class="filter__how-show-list">
+            <li>
+              <input
+                type="radio"
+                id="radio-show-5"
+                class="filter__how-show-min-radio"
+                value="show 5"
+                name="filter__how-show-group"
+              />
+              <label class="filter__how-show-min-label" for="radio-show-5"
+                >show 5</label
+              >
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="radio-show-10"
+                class="filter__how-show-max-radio"
+                name="filter__how-show-group"
+              />
+              <label class="filter__how-show-max-label" for="radio-show-10"
+                >show 10</label
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="filter__sort-by-wrapper">
+          <legend class="filter__title">Sort by</legend>
+          <ul class="filter__sort-by-list">
+            <li>
+              <input
+                type="radio"
+                id="radio-sort-by-date"
+                class="filter__sort-by-date-radio"
+                value="date"
+                name="filter__sort-by-group"
+              />
+              <label class="filter__sort-by-date-label" for="radio-sort-by-date"
+                >date</label
+              >
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="radio-sort-by-title"
+                class="filter__sort-by-title-radio"
+                value="title"
+                name="filter__sort-by-group"
+              />
+              <label
+                class="filter__sort-by-title-label"
+                for="radio-sort-by-title"
+                >title</label
+              >
+            </li>
+            <li>
+              <input
+                type="radio"
+                id="radio-sort-by-views"
+                class="filter__sort-by-views-radio"
+                value="views"
+                name="filter__sort-by-group"
+              />
+              <label
+                class="filter__sort-by-views-label"
+                for="radio-sort-by-views"
+                >views</label
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="filter__submit">
+          <button type="submit" class="button filter__submit-button">
+            Apply
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="my-blog-page__articles page-container">
+      <h2 class="my-blog__articles-title hidden-item">Articles list</h2>
+
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="/img/images/blog-page-2000x1208-2x.jpg" />
+          </div>
+          <div class="swiper-slide">
+            <img src="/img/images/monster-page-2000x1208-2x.jpg" />
+          </div>
+        </div>
+        <div class="swiper-pagination-numbers"></div>
+      </div>
+      <div class="swiper-button-left"></div>
+      <div class="swiper-button-right"></div>
+    </section>
+
+    @@include('blocks/footer.html') @@include('blocks/log-in.html')
+    @@include('blocks/register.html') @@include('blocks/send-message.html')
+    <script src="js/app.js" defer></script>
+    <script src="js/scroll-top.js" defer></script>
+    <script src="js/header.js" defer></script>
+    <script src="js/footer.js" defer></script>
+    <script src="js/my-profile.js" defer></script>
+    <script src="js/send-message.js" defer></script>
+    <script src="js/log-in.js" defer></script>
+    <script src="js/registration.js" defer></script>
+    <script src="js/change-password.js" defer></script>
+    <script src="js/change-other.js" defer></script>
+  </body>
+</html>

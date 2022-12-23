@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="google" content="notranslate" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Crimson+Text:ital,wght@1,400;1,700&family=Inter:wght@400;700&family=KoHo:wght@700&family=Lato:wght@400;700&family=Montserrat:wght@200;300;600;700&family=Open+Sans:wght@400;700&family=Pridi:wght@400;500;700&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>My profile</title>
+    <meta
+      name="description"
+      content="Данный сайт сверстал студент курса по
+    изучению специальности Frontend-разработчик"
+    />
+    <meta
+      name="keywords"
+      content="Frontend, gulp, javascript, css, scss, html"
+    />
+
+    <script>
+      var docElement = document.documentElement;
+      docElement.className =
+        docElement.className.replace(/\bno-js\b/, "") + " js";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- Favicon -->
+
+    <!-- build:css -->
+    <link href="css/style.min.css" rel="stylesheet" />
+
+    <!-- endbuild -->
+  </head>
+  <body class="my-profile-page font-medium page-container">
+    @@include('blocks/header.html')
+    <section class="my-profile">
+      <h1 class="main__title my-profile-page__title">My profile</h1>
+      <div class="my-profile__container">
+        <picture class="my-profile__picture">
+          <source
+            media="(min-width: 920px)"
+            srcset="
+              ../img/images/profile-320x450-1x.jpg 1x,
+              ../img/images/profile-640x900-2x.jpg 2x
+            "
+          />
+          <!-- <source
+            media="(min-width: 846px) and (max-width: 919px)"
+            srcset="
+              ../img/images/profile-314x450-tablet-1x.jpg 1x,
+              ../img/images/profile-628x900-tablet-2x.jpg 2x
+            "
+          /> -->
+          <source
+            media="(max-width: 919px)"
+            srcset="
+              ../img/images/profile-280x450-mobile-1x.jpg 1x,
+              ../img/images/profile-560x900-mobile-2x.jpg 2x
+            "
+          />
+          <img
+            src="../img/images/profile-560x900-mobile-2x.jpg"
+            class="my-profile__image"
+            width="1000"
+            height="465"
+            alt="Моя фотка"
+          />
+        </picture>
+        <div class="my-profile__data-container font-medium">
+          <div class="my-profile__data-wrapper">
+            <p class="my-profile__name-label font-bold">Name:</p>
+            <p class="my-profile__name-data">Name</p>
+          </div>
+          <div class="my-profile__data-wrapper">
+            <p class="my-profile__surname-label font-bold">Surname:</p>
+            <p class="my-profile__surname-data">Surname</p>
+          </div>
+          <div class="my-profile__data-wrapper">
+            <p class="my-profile__email-label font-bold">Email:</p>
+            <p class="my-profile__email-data">Email</p>
+          </div>
+          <div class="my-profile__data-wrapper">
+            <p class="my-profile__password-label font-bold">Password:</p>
+            <p class="my-profile__password-data">Password</p>
+          </div>
+          <div class="my-profile__data-wrapper">
+            <p class="my-profile__location-label font-bold">Location:</p>
+            <p class="my-profile__location-data">Location</p>
+          </div>
+          <div class="my-profile__data-wrapper">
+            <p class="my-profile__age-label font-bold">Age:</p>
+            <p class="my-profile__age-data">Age</p>
+          </div>
+          <button
+            class="my-profile__password-btn button my-profile__password-btn_js"
+          >
+            Change password
+          </button>
+          <button class="my-profile__data-btn button my-profile__other-btn_js">
+            Change other data
+          </button>
+          <button
+            class="my-profile__delete-btn button my-profile__delete-btn_js"
+          >
+            Delete account
+          </button>
+        </div>
+      </div>
+    </section>
+
+    @@include('blocks/footer.html') @@include('blocks/log-in.html')
+    @@include('blocks/register.html') @@include('blocks/send-message.html')
+    @@include('blocks/change-password.html')
+    @@include('blocks/change-other.html')
+    <script src="js/app.js" defer></script>
+    <script src="js/scroll-top.js" defer></script>
+    <script src="js/header.js" defer></script>
+    <script src="js/footer.js" defer></script>
+    <script src="js/my-profile.js" defer></script>
+    <script src="js/send-message.js" defer></script>
+    <script src="js/log-in.js" defer></script>
+    <script src="js/registration.js" defer></script>
+    <script src="js/change-password.js" defer></script>
+    <script src="js/change-other.js" defer></script>
+  </body>
+</html>

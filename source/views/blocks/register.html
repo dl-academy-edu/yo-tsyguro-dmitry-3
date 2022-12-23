@@ -1,74 +1,110 @@
-<div class="register-modal register-modal_js hidden-item">
-  <form class="register-modal__form" action="#">
+<div class="modal register-modal_js hidden-item">
+  <form name="signUp" class="register-modal__form modal__form" action="#">
     <div class="register-modal__email-wrapper">
-      <label for="email-field" class="register-modal__label"
+      <label for="register-email-field" class="modal__label"
         >Email<span>*</span></label
       >
-      <input type="email" id="email-field" class="register-modal__field" />
+      <input
+        type="text"
+        id="register-email-field"
+        class="register-modal__field modal__field"
+        name="email"
+      />
     </div>
     <div class="register-modal__name-surname-wrapper">
-      <div class="register-modal__name-wrapper">
-        <label for="name-field" class="register-modal__label"
+      <div class="modal__wrapper">
+        <label for="register-name-field" class="modal__label"
           >Name<span>*</span></label
         >
-        <input type="text" id="name-field" class="register-modal__field" />
+        <input
+          type="text"
+          id="register-name-field"
+          class="register-modal__field modal__field"
+          name="name"
+        />
       </div>
-      <div class="register-modal__surname-wrapper">
-        <label for="surname-field" class="register-modal__label"
+      <div class="modal__wrapper">
+        <label for="register-surname-field" class="modal__label"
           >Surname<span>*</span></label
         >
-        <input type="text" id="surname-field" class="register-modal__field" />
+        <input
+          type="text"
+          id="register-surname-field"
+          class="register-modal__field modal__field"
+          name="surname"
+        />
       </div>
     </div>
     <div class="register-modal__password-repeat-wrapper">
-      <div class="register-modal__password-wrapper">
-        <label for="password-field" class="register-modal__label"
+      <div class="modal__wrapper">
+        <label for="register-password-field" class="modal__label"
           >Password<span>*</span></label
         >
         <input
           type="password"
-          id="password-field"
-          class="register-modal__field"
+          id="register-password-field"
+          class="register-modal__field modal__field"
+          name="password"
         />
       </div>
-      <div class="register-modal__repeat-wrapper">
-        <label for="repeat-field" class="register-modal__label"
+      <div class="modal__wrapper">
+        <label for="register-repeat-field" class="modal__label"
           >Repeat password<span>*</span></label
         >
         <input
           type="password"
-          id="password-field"
-          class="register-modal__field"
+          id="register-repeat-field"
+          class="register-modal__field modal__field"
+          name="passwordRepeat"
         />
       </div>
     </div>
     <div class="register-modal__location-age-wrapper">
-      <div class="register-modal__location-wrapper">
-        <label for="location-field" class="register-modal__label"
+      <div class="modal__wrapper">
+        <label for="register-location-field" class="modal__label"
           >Location<span>*</span></label
         >
-        <input type="text" id="location-field" class="register-modal__field" />
+        <input
+          type="text"
+          id="register-location-field"
+          class="register-modal__field modal__field"
+          name="location"
+        />
       </div>
-      <div class="register-modal__age-wrapper">
-        <label for="age-field" class="register-modal__label"
+      <div class="modal__wrapper">
+        <label for="register-age-field" class="modal__label"
           >Age<span>*</span></label
         >
-        <input type="text" id="age-field" class="register-modal__field" />
+        <input
+          type="text"
+          id="register-age-field"
+          class="register-modal__field modal__field"
+          name="age"
+        />
       </div>
     </div>
     <div class="register-modal__checkbox register-checkbox_js">
-      <input type="checkbox" id="checkbox-field" class="checkbox" />
-      <label for="checkbox-field" class="checkbox__name"
+      <input
+        type="checkbox"
+        id="register-checkbox-field"
+        class="checkbox"
+        name="checkbox"
+      />
+      <label for="register-checkbox-field" class="checkbox__name"
         >Clicking on the button, you consent to the processing of your personal
         data.</label
       >
     </div>
-    <button type="button" class="button font-bold register-button_js">
+    <button
+      type="submit"
+      class="button font-bold register-button_js"
+      disabled="disabled"
+    >
       Sign up
     </button>
     <button
       type="button"
-      class="close-button close-button-register_js"
+      class="close-button register-modal__close-button close-button-register_js"
     ></button>
   </form>
 </div>
