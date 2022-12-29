@@ -1,4 +1,6 @@
 (function () {
+  let changePassModal = document.querySelector(".change-password-modal_js");
+
   if (!changePassModal) return;
   window.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) {

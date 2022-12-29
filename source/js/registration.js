@@ -2,7 +2,6 @@ const signUpForm = document.forms.signUp; //получаем форму
 const EMAIL_REGEXP =
   '/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/iu';
 //const NAME_REGEXP = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/; // имя + фамилия (исходник что нашел в инете)
-//const NAME_REGEXP = /^[a-zA-Z']?$/;
 
 ///////////////////Включение кнопки чекбоксом///////////////////////////////
 const checkbox = signUpForm.elements.checkbox;
@@ -151,18 +150,33 @@ function errorCreator(message) {
   // console.log(messageError);
   return messageError;
 }
-/////////////////////////////
+/////////////////////////////Удалить цвет полей при вводе в инпут//////////////////////
+// (function deleteFieldStyle() {
+//   let inputs = [...document.querySelectorAll(".modal-is-valid-field")];
+//   // console.log(inputs);
+//   if (!inputs) return;
+//   inputs.forEach((input) => {
+//     input.addEventListener(
+//       "input",
+//       function () {
+//         input.classList.remove("modal-is-valid-field");
+//       },
+//       { once: true }
+//     );
+//   });
+// })();
 (function deleteFieldStyle() {
-  const inputs = [...signUpForm.getElementsByTagName("input")];
-  // console.log(inputs);
+  const inputs = [...document.getElementsByTagName("input")];
   inputs.forEach((input) => {
     input.addEventListener(
       "input",
-      function () {
-        input.classList.remove("modal-is-valid-field");
-        input.classList.remove("modal-is-invalid-field");
-      },
-      { once: true }
+      () => {
+        if (input.classList.contains("modal-is-valid-field")) {
+          console.log("удаляю");
+          input.classList.remove("modal-is-valid-field");
+        }
+      }
+      // { once: true }
     );
   });
 })();
@@ -176,7 +190,7 @@ function setErrorText(input, errorMessage) {
     function () {
       error.remove();
       input.classList.remove("is-invalid");
-      input.classList.remove("modal-is-valid-field");
+      //Удалить красный цвет поля при вводе в инпут
       input.classList.remove("modal-is-invalid-field");
     },
     { once: true }

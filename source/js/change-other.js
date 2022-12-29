@@ -2,6 +2,7 @@ const changeOtherForm = document.forms.changeOther;
 
 ////////////////////Закрытие окна Esc//////////
 (function () {
+  let changeOtherModal = document.querySelector(".change-other-modal_js");
   if (!changeOtherModal) return;
   window.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) {
