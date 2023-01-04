@@ -1,13 +1,13 @@
 let filterForm = document.forms.myBlogFilterForm;
 ///проверяем наличие поискового запроса в url
 if (location.search) {
-  let params = {}; //создаем объект будущих параметров
+  const params = {}; //создаем объект будущих параметров
 
-  //создаем массив строк параметров например ['phoneId=apple', 'phoneId=xiaomi', 'howShow=10'];
+  //создаем массив строк параметров например ['tagId=checkbox-blue, 'tagId=checkbox-light-blue', 'howShowId=radio-show-5'];
   const arrayStringParams = location.search.substring(1).split("&");
   //делаем перебор массива, коротый мы создали выше.
   for (let stringParam of arrayStringParams) {
-    // создаем массив одного параметра ('phoneId=apple' => ['phoneId', 'apple'])
+    // создаем массив одного параметра ('tagId=checkbox-blue' => ['tagId', 'checkbox-blue'])
     let param = stringParam.split("=");
     let nameParam = param[0]; // получаем имя параметра.
     let valueParam = param[1]; // получаем значение параметра
@@ -20,43 +20,40 @@ if (location.search) {
       //иначе создаем ключ внутри объекта и кладем в него значение параметра
       params[nameParam] = [valueParam];
     }
+    console.log(`7 строка условия отработала`);
   }
-
-  console.log(filterForm);
 
   const updateInput = (gInputs, typeParam) => {
     for (let input of gInputs) {
       const param = params[typeParam];
-      for (partParam of param) {
+      console.log(`params: ${params}`, `param: ${param}`);
+      for (partParam of [...param]) {
         if (partParam === input.value) input.checked = true;
       }
     }
   };
-
-  updateInput(filterForm.filterTag, "tagId");
-  updateInput(filterForm.filterViewsGroup, "viewsId");
-  updateInput(filterForm.filterComments, "commentsId");
-  updateInput(filterForm.filterHowShowGroup, "howShowId");
-  updateInput(filterForm.filterSortByGroup, "sortById");
+  // console.log(`param: ${param}, params: ${params}`);
+  // console.log(`filterForm: ${filterForm.filterTag}`);
+  updateInput(filterForm.filterTag, `tagId`);
+  updateInput(filterForm.filterViewsGroup, `viewsId`);
+  updateInput(filterForm.filterComments, `commentsId`);
+  updateInput(filterForm.filterHowShowGroup, `howShowId`);
+  updateInput(filterForm.filterSortByGroup, `sortById`);
 }
 console.log(filterForm);
 
 filterForm.addEventListener("submit", (e) => {
-  console.log("Нажал submit");
   e.preventDefault();
 
   let arrayCheckedInput = [];
   const addCheckedInput = (nameGroupInput, typeParam) => {
-    for (checkbox of nameGroupInput) {
+    for (let checkbox of nameGroupInput) {
       if (checkbox.checked) {
         arrayCheckedInput.push(`${typeParam}=${checkbox.value}`);
       }
     }
   };
-  console.log(e.target.filterSortByGroup);
-  console.log(filterForm);
   addCheckedInput(e.target.filterTag, `tagId`);
-  console.log(filterForm);
   addCheckedInput(e.target.filterViewsGroup, `viewsId`);
   addCheckedInput(e.target.filterComments, `commentsId`);
   addCheckedInput(e.target.filterHowShowGroup, `howShowId`);
@@ -75,6 +72,62 @@ filterForm.addEventListener("submit", (e) => {
   const newUrl = baseUrl + `?${stringCheckedInput}`;
   location = newUrl;
 });
+
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////работаем с location history////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-// Не работает функция
+// if (location.search) {
+//   const params = {};
+
+//   const arrayStringParams = location.search.substring(1).split("&");
+
+//   for (let stringParam of arrayStringParams) {
+//     let param = stringParam.split("=");
+//     let nameParam = param[0];
+//     let valueParam = param[1];
+//     if (nameParam in params) {
+//       params[nameParam] = [valueParam];
+//     }
+//   }
+
+//   const updateInput = (gInputs, typeParam) => {
+//     for (let input of gInputs) {
+//       const param = params[typeParam];
+//       for (partParam of param) {
+//         if (partParam === input.value) input.checked = true;
+//       }
+//     }
+//   };
+
+//   updateInput(filterForm.filterTag, "tagId");
+//   updateInput(filterForm.filterViewsGroup, "viewsId");
+//   updateInput(filterForm.filterComments, "commentsId");
+//   updateInput(filterForm.filterHowShowGroup, "howShowId");
+//   updateInput(filterForm.filterSortByGroup, "sortById");
+// }
+
+// const url = new URL(location.partname, location.origin);
+// filterForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   url.searchParams.delete("tagId");
+//   url.searchParams.delete("viewsId");
+//   url.searchParams.delete("commentsId");
+//   url.searchParams.delete("howShowId");
+//   url.searchParams.delete("sortById");
+
+//   const addCheckedInput = (nameGroupInput, typeParam) => {
+//     for (let checkbox of nameGroupInput) {
+//       if (checkbox.checked) {
+//         url.searchParams.append(typeParam, checkbox.value);
+//       }
+//     }
+//   };
+//   addCheckedInput(e.target.filterTag, `tagId`);
+//   addCheckedInput(e.target.filterViewsGroup, `viewsId`);
+//   addCheckedInput(e.target.filterComments, `commentsId`);
+//   addCheckedInput(e.target.filterHowShowGroup, `howShowId`);
+//   addCheckedInput(e.target.filterSortByGroup, `sortById`);
+
+//   history.replaceState(null, "", url);
+// });
