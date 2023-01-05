@@ -242,7 +242,7 @@
                   type="radio"
                   id="radio-show-5"
                   class="filter__how-show-min-radio"
-                  value="show 5"
+                  value="show-5"
                   name="filterHowShowGroup"
                 />
                 <label class="filter__how-show-min-label" for="radio-show-5"
@@ -254,7 +254,7 @@
                   type="radio"
                   id="radio-show-10"
                   class="filter__how-show-max-radio"
-                  value="show 10"
+                  value="show-10"
                   name="filterHowShowGroup"
                 />
                 <label class="filter__how-show-max-label" for="radio-show-10"
@@ -345,7 +345,14 @@
           <div class="swiper-button-right"></div>
         </div>
       </section>
+      <div class="result_js"></div>
+      <div class="main-loader_js loader hidden">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
     </div>
+
     <div class="color-wrapper">@@include('blocks/footer.html')</div>
     @@include('blocks/log-in.html') @@include('blocks/register.html')
     @@include('blocks/send-message.html')
