@@ -680,6 +680,14 @@
 .my-blog-page__articles {
   margin-top: 50px;
 }
+.my-blog__card {
+  display: flex;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.my-blog__card-img {
+  width: 320px;
+}
 //////////////////////// Swiper/////////////////
 
 .my-blog-slider {

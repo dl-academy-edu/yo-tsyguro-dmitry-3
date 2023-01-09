@@ -1,4 +1,5 @@
 const signUpForm = document.forms.signUp; //получаем форму
+// const registerModal = document.querySelector(".register-modal_js");
 const EMAIL_REGEXP =
   '/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/iu';
 //const NAME_REGEXP = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/; // имя + фамилия (исходник что нашел в инете)
@@ -7,7 +8,8 @@ const EMAIL_REGEXP =
 const checkbox = signUpForm.elements.checkbox;
 
 const signUpButton = document.querySelector(".register-button_js");
-
+const BASE_SERVER_PATH = "https://academy.directlinedev.com/";
+const loaderRegister = document.querySelector(".register-loader_js");
 ///////////////////////////////////включаем кнопку////////////
 checkbox.addEventListener("change", () => {
   if (checkbox.checked) {
@@ -27,22 +29,24 @@ checkbox.addEventListener("change", () => {
   const passwordRepeat = signUpForm.elements.passwordRepeat;
   const location = signUpForm.elements.location;
   const age = signUpForm.elements.age;
-  // console.log(age);
+
   //объект ошибок
   let errors = {};
 
-  //Нажатие на submit
+  ////////////////////////////////Нажатие на submit/////////////////////////
   signUpForm.addEventListener("submit", (e) => {
     errors = {}; //обнуляем объект
     e.preventDefault(); //отменяем стандартное поведение при submit
+    loaderRegister.classList.remove("hidden-item"); // показываем loader
 
     //очищаем предварительно код от ошибки после первого нажатия на submit
-    const errorMessages = signUpForm.querySelectorAll(".invalid-feedback");
-    if (errorMessages) {
-      for (let errorMessage of errorMessages) {
-        errorMessage.remove();
-      }
-    }
+    clearErrors(signUpForm);
+    // const errorMessages = signUpForm.querySelectorAll(".invalid-feedback");
+    // if (errorMessages) {
+    //   for (let errorMessage of errorMessages) {
+    //     errorMessage.remove();
+    //   }
+    // }
 
     //условия валидации
     if (!email.value) {
@@ -120,15 +124,19 @@ checkbox.addEventListener("change", () => {
     }
 
     /////////////////сообщение об ошибке/////////////
-    if (Object.keys(errors).length) {
-      //перебираем массив с ошибками
-      Object.keys(errors).forEach((key) => {
-        const messageError = errors[key];
-        const input = signUpForm.elements[key];
-        setErrorText(input, messageError);
-        // console.log(messageError);
-      });
+    function errorFormHandler(errors, form) {
+      if (Object.keys(errors).length) {
+        //перебираем массив с ошибками
+        Object.keys(errors).forEach((key) => {
+          const messageError = errors[key];
+          const input = form.elements[key];
+          setErrorText(input, messageError);
+        });
+        return;
+      }
     }
+    errorFormHandler(errors, signUpForm);
+
     //данные для отправки на сервер
     const data = {
       email: email.value,
@@ -138,99 +146,147 @@ checkbox.addEventListener("change", () => {
       location: location.value,
       age: age.value,
     };
-    console.log(data);
-  });
-})();
-
-//создание кода с ошибкой
-function errorCreator(message) {
-  let messageError = document.createElement("div");
-  messageError.classList.add("invalid-feedback");
-  messageError.innerText = message;
-  // console.log(messageError);
-  return messageError;
-}
-/////////////////////////////Удалить цвет полей при вводе в инпут//////////////////////
-// (function deleteFieldStyle() {
-//   let inputs = [...document.querySelectorAll(".modal-is-valid-field")];
-//   // console.log(inputs);
-//   if (!inputs) return;
-//   inputs.forEach((input) => {
-//     input.addEventListener(
-//       "input",
-//       function () {
-//         input.classList.remove("modal-is-valid-field");
-//       },
-//       { once: true }
-//     );
-//   });
-// })();
-(function deleteFieldStyle() {
-  const inputs = [...document.getElementsByTagName("input")];
-  inputs.forEach((input) => {
-    input.addEventListener(
-      "input",
-      () => {
-        if (input.classList.contains("modal-is-valid-field")) {
-          console.log("удаляю");
-          input.classList.remove("modal-is-valid-field");
+    sendRequest({
+      url: "api/users",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.success) {
+          registerModal.classList.add("hidden-item");
+          alert(
+            `Пользователь ${response.data.name} & email ${response.data.email} успешно зарегистрирован`
+          );
+          loaderRegister.classList.add("hidden-item"); // убираем loader
+          signUpForm.reset();
         }
+      })
+      .catch((err) => {
+        clearErrors(signUpForm);
+        errorFormHandler(err.errors, signUpForm);
+      })
+      .finally(() => {
+        loaderRegister.classList.add("hidden-item");
+      });
+    // })();
+
+    //создание кода с ошибкой
+    function errorCreator(message) {
+      let messageError = document.createElement("div");
+      messageError.classList.add("invalid-feedback");
+      messageError.innerText = message;
+      // console.log(messageError);
+      return messageError;
+    }
+    /////////////////////////////Удалить цвет полей при вводе в инпут//////////////////////
+    // (function deleteFieldStyle() {
+    //   let inputs = [...document.querySelectorAll(".modal-is-valid-field")];
+    //   // console.log(inputs);
+    //   if (!inputs) return;
+    //   inputs.forEach((input) => {
+    //     input.addEventListener(
+    //       "input",
+    //       function () {
+    //         input.classList.remove("modal-is-valid-field");
+    //       },
+    //       { once: true }
+    //     );
+    //   });
+    // })();
+    (function deleteFieldStyle() {
+      const inputs = [...document.getElementsByTagName("input")];
+      inputs.forEach((input) => {
+        input.addEventListener(
+          "input",
+          () => {
+            if (input.classList.contains("modal-is-valid-field")) {
+              console.log("удаляю");
+              input.classList.remove("modal-is-valid-field");
+            }
+          }
+          // { once: true }
+        );
+      });
+    })();
+    //добавление ошибки инпуту
+    function setErrorText(input, errorMessage) {
+      const error = errorCreator(errorMessage);
+      input.classList.add("is-invalid");
+      input.insertAdjacentElement("afterend", error);
+      input.addEventListener(
+        "input",
+        function () {
+          error.remove();
+          input.classList.remove("is-invalid");
+          //Удалить красный цвет поля при вводе в инпут
+          input.classList.remove("modal-is-invalid-field");
+        },
+        { once: true }
+      );
+    }
+    //очистка ошибок
+    function clearErrors(element) {
+      const messages = element.querySelectorAll(".invalid-feedback");
+      const invalids = element.querySelectorAll(".is-invalid");
+      messages.forEach((message) => message.remove());
+      invalids.forEach((invalid) => invalid.classList.remove(".is-invalid"));
+    }
+
+    //валидация почты (используется выше)
+
+    function isEmailValid(email) {
+      if (!email) {
+        return false;
+      } else {
+        return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
       }
-      // { once: true }
-    );
+    }
+    //валидация пароля (используется выше)
+    function isPasswordValid(password) {
+      if (password.length >= 6) {
+        return true;
+      }
+    }
+    //валидация повтора пароля (используется выше)
+    function isPasswordRepeatValid(password, passwordRepeat) {
+      if (password === passwordRepeat) {
+        return true;
+      }
+    }
+    //валидация возраста (используется выше)
+    function isAgeValid(age) {
+      if (age > 6 && age < 1000 && Number.isInteger(Number(age))) {
+        return true;
+      }
+    }
+    // добавить красный цвет бордеру
+    function addInvalidColor(field) {
+      field.classList.remove("modal-is-valid-field");
+      field.classList.add("modal-is-invalid-field");
+    }
+    // добавить зеленый цвет бордеру
+    function addValidColor(field) {
+      field.classList.remove("modal-is-invalid-field");
+      field.classList.add("modal-is-valid-field");
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////Отправка запроса////////////////////////////////////////////////////
+
+    function sendRequest({ url, method = "GET", headers, body = null }) {
+      return fetch(BASE_SERVER_PATH + url + "?v=0.0.1", {
+        method,
+        headers,
+        body,
+      });
+    }
   });
+  // function register(e){
+  //   e.preventDefault();
+  //   loaderRegister.classList.remove('hidden');
+  // }};
 })();
-//добавление ошибки инпуту
-function setErrorText(input, errorMessage) {
-  const error = errorCreator(errorMessage);
-  input.classList.add("is-invalid");
-  input.insertAdjacentElement("afterend", error);
-  input.addEventListener(
-    "input",
-    function () {
-      error.remove();
-      input.classList.remove("is-invalid");
-      //Удалить красный цвет поля при вводе в инпут
-      input.classList.remove("modal-is-invalid-field");
-    },
-    { once: true }
-  );
-}
-
-//валидация почты (используется выше)
-
-function isEmailValid(email) {
-  if (!email) {
-    return false;
-  } else {
-    return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
-  }
-}
-//валидация пароля (используется выше)
-function isPasswordValid(password) {
-  if (password.length >= 6) {
-    return true;
-  }
-}
-//валидация повтора пароля (используется выше)
-function isPasswordRepeatValid(password, passwordRepeat) {
-  if (password === passwordRepeat) {
-    return true;
-  }
-}
-//валидация возраста (используется выше)
-function isAgeValid(age) {
-  if (age > 6 && age < 1000 && Number.isInteger(Number(age))) {
-    return true;
-  }
-}
-// добавить красный цвет бордеру
-function addInvalidColor(field) {
-  field.classList.remove("modal-is-valid-field");
-  field.classList.add("modal-is-invalid-field");
-}
-// добавить зеленый цвет бордеру
-function addValidColor(field) {
-  field.classList.remove("modal-is-invalid-field");
-  field.classList.add("modal-is-valid-field");
-}

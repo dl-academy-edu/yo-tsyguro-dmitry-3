@@ -2,77 +2,77 @@ let filterForm = document.forms.myBlogFilterForm;
 const SERVER_URL = "https://academy.directlinedev.com";
 const mainLoader = document.querySelector(".main-loader_js");
 //проверяем наличие поискового запроса в url
-// if (location.search) {
-//   const params = {}; //создаем объект будущих параметров
+if (location.search) {
+  const params = {}; //создаем объект будущих параметров
 
-//   //создаем массив строк параметров например ['tagId=checkbox-blue, 'tagId=checkbox-light-blue', 'howShowId=radio-show-5'];
-//   const arrayStringParams = location.search.substring(1).split("&");
-//   //делаем перебор массива, коротый мы создали выше.
-//   for (let stringParam of arrayStringParams) {
-//     // создаем массив одного параметра ('tagId=checkbox-blue' => ['tagId', 'checkbox-blue'])
-//     let param = stringParam.split("=");
-//     let nameParam = param[0]; // получаем имя параметра.
-//     let valueParam = param[1]; // получаем значение параметра
-//     //выполняем проверку на то, присутствует ли имя параметра в нашем объекте params.
+  //создаем массив строк параметров например ['tagId=checkbox-blue, 'tagId=checkbox-light-blue', 'howShowId=radio-show-5'];
+  const arrayStringParams = location.search.substring(1).split("&");
+  //делаем перебор массива, коротый мы создали выше.
+  for (let stringParam of arrayStringParams) {
+    // создаем массив одного параметра ('tagId=checkbox-blue' => ['tagId', 'checkbox-blue'])
+    let param = stringParam.split("=");
+    let nameParam = param[0]; // получаем имя параметра.
+    let valueParam = param[1]; // получаем значение параметра
+    //выполняем проверку на то, присутствует ли имя параметра в нашем объекте params.
 
-//     if (nameParam in params) {
-//       // если присутствует то добавляем в массив значение параметра,
-//       params[nameParam].push(valueParam);
-//     } else {
-//       //иначе создаем ключ внутри объекта и кладем в него значение параметра
-//       params[nameParam] = [valueParam];
-//     }
-//   }
+    if (nameParam in params) {
+      // если присутствует то добавляем в массив значение параметра,
+      params[nameParam].push(valueParam);
+    } else {
+      //иначе создаем ключ внутри объекта и кладем в него значение параметра
+      params[nameParam] = [valueParam];
+    }
+  }
 
-//   const updateInput = (gInputs, typeParam) => {
-//     for (let input of gInputs) {
-//       if (!params[typeParam]) continue;
-//       const param = params[typeParam];
-//       // console.log(`params: ${params}`, `param: ${param}`);
-//       for (partParam of [...param]) {
-//         if (partParam === input.value) input.checked = true;
-//       }
-//     }
-//   };
+  const updateInput = (gInputs, typeParam) => {
+    for (let input of gInputs) {
+      if (!params[typeParam]) continue;
+      const param = params[typeParam];
+      // console.log(`params: ${params}`, `param: ${param}`);
+      for (partParam of [...param]) {
+        if (partParam === input.value) input.checked = true;
+      }
+    }
+  };
 
-//   updateInput(filterForm.filterTag, `tagId`);
-//   updateInput(filterForm.filterViewsGroup, `viewsId`);
-//   updateInput(filterForm.filterComments, `commentsId`);
-//   updateInput(filterForm.filterHowShowGroup, `howShowId`);
-//   updateInput(filterForm.filterSortByGroup, `sortById`);
-// }
+  updateInput(filterForm.filterTag, `tagId`);
+  updateInput(filterForm.filterViewsGroup, `viewsId`);
+  updateInput(filterForm.filterComments, `commentsId`);
+  updateInput(filterForm.filterHowShowGroup, `howShowId`);
+  updateInput(filterForm.filterSortByGroup, `sortById`);
+}
 
-// filterForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
+filterForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-//   let arrayCheckedInput = [];
-//   const addCheckedInput = (nameGroupInput, typeParam) => {
-//     for (let checkbox of nameGroupInput) {
-//       if (checkbox.checked) {
-//         arrayCheckedInput.push(`${typeParam}=${checkbox.value}`);
-//       }
-//     }
-//   };
+  let arrayCheckedInput = [];
+  const addCheckedInput = (nameGroupInput, typeParam) => {
+    for (let checkbox of nameGroupInput) {
+      if (checkbox.checked) {
+        arrayCheckedInput.push(`${typeParam}=${checkbox.value}`);
+      }
+    }
+  };
 
-//   addCheckedInput(e.target.filterTag, `tagId`);
-//   addCheckedInput(e.target.filterViewsGroup, `viewsId`);
-//   addCheckedInput(e.target.filterComments, `commentsId`);
-//   addCheckedInput(e.target.filterHowShowGroup, `howShowId`);
-//   addCheckedInput(e.target.filterSortByGroup, `sortById`);
+  addCheckedInput(e.target.filterTag, `tagId`);
+  addCheckedInput(e.target.filterViewsGroup, `viewsId`);
+  addCheckedInput(e.target.filterComments, `commentsId`);
+  addCheckedInput(e.target.filterHowShowGroup, `howShowId`);
+  addCheckedInput(e.target.filterSortByGroup, `sortById`);
 
-//   //собираем строку с нажатыми инпутами
-//   let stringCheckedInput = "";
-//   for ([index, activeInput] of arrayCheckedInput.entries()) {
-//     stringCheckedInput += activeInput;
+  //собираем строку с нажатыми инпутами
+  let stringCheckedInput = "";
+  for ([index, activeInput] of arrayCheckedInput.entries()) {
+    stringCheckedInput += activeInput;
 
-//     if (index != arrayCheckedInput.length - 1) {
-//       stringCheckedInput += "&";
-//     }
-//   }
-//   const baseUrl = `${location.origin}${location.pathname}`;
-//   const newUrl = baseUrl + `?${stringCheckedInput}`;
-// location = newUrl;
-// });
+    if (index != arrayCheckedInput.length - 1) {
+      stringCheckedInput += "&";
+    }
+  }
+  const baseUrl = `${location.origin}${location.pathname}`;
+  const newUrl = baseUrl + `?${stringCheckedInput}`;
+  location = newUrl;
+});
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////работаем с location history////////////////////////
@@ -139,11 +139,12 @@ filterForm.addEventListener("submit", (e) => {
 ///////////////////////////XHR запрос/////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 let loaderCount = 0;
-
+///Функция Показать loader////
 const showLoader = () => {
   loaderCount++;
   mainLoader.classList.remove("hidden-item");
 };
+///Функция Скрыть loader////
 const hideLoader = () => {
   loaderCount--;
   if (loaderCount <= 0) {
@@ -152,17 +153,13 @@ const hideLoader = () => {
   }
 };
 
+/////////////////////Функция///////////////
 (function () {
   filterForm.addEventListener("submit", (e) => {
     e.preventDefault();
+    ///Создаем и наполняем  объект с выбранными фильтрами////
     let data = {};
 
-    // data.tags = [];
-    // for (let checkbox of [...filterForm.elements.filterTag]) {
-    //   if (checkbox.checked) {
-    //     data.tags.push(checkbox.value);
-    //   }
-    // }
     data.tags = [...filterForm.elements.tags]
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -187,6 +184,7 @@ const hideLoader = () => {
         (radio) => radio.checked
       ) || { value: null }
     ).value;
+    console.log(data);
     getData(data);
     setSearchParams(data);
   });
@@ -199,15 +197,16 @@ const hideLoader = () => {
     const tags = JSON.parse(xhr.response).data;
     const tagsBox = document.querySelector(".select-of-box_js");
     // tags.forEach((tag) => {
-    // const tagHTML = createTag(tag);
-    // tagsBox.insertAdjacentHTML("beforeend", tagHTML);
+    //   const tagHTML = createTag(tag);
+    //   tagsBox.insertAdjacentHTML("beforeend", tagHTML);
     // });
     const params = getParamsFromLocation();
-    setDataToFilter(params);
+    // setDataToFilter(params);
     getData(params);
     hideLoader();
   };
 })();
+/////////////////////Функция получения данных из location.search///////////////
 function getParamsFromLocation() {
   let searchParams = new URLSearchParams(location.search);
   return {
@@ -218,7 +217,7 @@ function getParamsFromLocation() {
     sortby: searchParams.get("sortby"),
   };
 }
-
+/////////////////////Функция  позволяет положить новые значения в searchParams///////////////
 function setSearchParams(data) {
   let searchParams = new URLSearchParams();
   if (data.name) {
@@ -249,7 +248,7 @@ function setSearchParams(data) {
   }
   history.replaceState(null, document.title, "?" + searchParams.toString());
 }
-
+/////////////////////Функция выделение элементов верстки которые выбраны///////////////
 function setDataToFilter(data) {
   filterForm.elements.tags.forEach((checkbox) => {
     checkbox.checked = data.tags.includes(checkbox.value);
@@ -267,6 +266,7 @@ function setDataToFilter(data) {
     checkbox.checked = data.sortby.includes(checkbox.value);
   });
 }
+/////////////////////Функция///////////////
 function getData(params) {
   const result = document.querySelector(".result_js");
   let xhr = new XMLHttpRequest();
@@ -305,11 +305,13 @@ function getData(params) {
     hideLoader();
   };
 }
+
+/////////////////////Функция создания верстки карточек///////////////
 function cardCreate({ title, text, src, tags }) {
   return `
   <div class="my-blog__article">
-    <div class="card">
-      <img src="${SERVER_URL}${src}" class="card-img-top" alt="$[title}"></img>
+    <div class="my-blog__card">
+      <img src="${SERVER_URL}${src}" class="my-blog__card-img" alt="$[title}"></img>
       <div class="card-body">
         <h5 class="card-title">${title}</h5>
         <p class="card-text">${text}</p>${tags
@@ -319,9 +321,11 @@ function cardCreate({ title, text, src, tags }) {
     </div>
   </div> `;
 }
-
-function setDataToFilter(data) {}
-
-// function createTag({ id, name, color }) {
-//   return;
-// }
+////Функция создания тегов(чекбоксов) - не используется//////
+function createTag({ id, name, color }) {
+  return `
+  <div class="filter__tags-group">
+    <input name="tags" type="checkbox" class="filter__check-input" id="tags-${id}" value="${id}">
+    <label style="color: ${color}" class="filter__check-label" for="tags-${id}">${name}</label>
+  </div>`;
+}
