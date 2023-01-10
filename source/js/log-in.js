@@ -4,6 +4,8 @@ const loginForm = document.forms.login;
 (function () {
   const email = loginForm.elements.email;
   const password = loginForm.elements.password;
+  const isLogin = localStorage.getItem("token");
+  if (isLogin) rerenderLinks();
   let errors = {}; //объект ошибок
 
   //Нажатие на submit
@@ -11,14 +13,14 @@ const loginForm = document.forms.login;
     errors = {}; //обнуляем объект
     e.preventDefault(); //отменяем стандартное поведение при submit
 
-    //очищаем предварительно код от ошибки после первого нажатия на submit
-    const errorMessages = loginForm.querySelectorAll(".invalid-feedback");
+    // //очищаем предварительно код от ошибки после первого нажатия на submit
+    // const errorMessages = loginForm.querySelectorAll(".invalid-feedback");
 
-    if (errorMessages) {
-      for (let errorMessage of errorMessages) {
-        errorMessage.remove();
-      }
-    }
+    // if (errorMessages) {
+    //   for (let errorMessage of errorMessages) {
+    //     errorMessage.remove();
+    //   }
+    // }
     //прописываем сообщения при валидации
     if (!email.value) {
       errors.email = "This field is required";
@@ -54,6 +56,35 @@ const loginForm = document.forms.login;
       email: email.value,
       password: password.value,
     };
-    console.log(data);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////Аутинтификация по токену///////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    sendRequest({
+      method: "POST",
+      url: "/api/users/login",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("Вы успешно вошли!");
+        console.log(res);
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userId", res.data.userId);
+        rerenderLinks();
+        signInModal.classList.add("hidden-item");
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err._message) {
+          alert(err._message);
+        }
+        clearErrors(loginForm);
+        errorFormHandler(err.errors, loginForm);
+      });
   });
 })();

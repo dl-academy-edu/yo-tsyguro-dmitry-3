@@ -4,7 +4,6 @@ const mainLoader = document.querySelector(".main-loader_js");
 //проверяем наличие поискового запроса в url
 if (location.search) {
   const params = {}; //создаем объект будущих параметров
-
   //создаем массив строк параметров например ['tagId=checkbox-blue, 'tagId=checkbox-light-blue', 'howShowId=radio-show-5'];
   const arrayStringParams = location.search.substring(1).split("&");
   //делаем перебор массива, коротый мы создали выше.
@@ -159,31 +158,37 @@ const hideLoader = () => {
     e.preventDefault();
     ///Создаем и наполняем  объект с выбранными фильтрами////
     let data = {};
-
     data.tags = [...filterForm.elements.tags]
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
+
     data.view = (
       [...filterForm.elements.filterViewsGroup].find(
         (radio) => radio.checked
       ) || { value: null }
     ).value;
-    data.comments = [];
-    for (let checkbox of [...filterForm.elements.filterComments]) {
-      if (checkbox.checked) {
-        data.comments.push(checkbox.value);
-      }
-    }
+
+    // data.comments = (
+    //   [...filterForm.elements.filterComments].filter(
+    //     (checkbox) => checkbox.checked
+    //   ) || { value: null }
+    // ).value;
+    data.comments = [...filterForm.elements.filterComments]
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+
     data.howshow = (
       [...filterForm.elements.filterHowShowGroup].find(
         (radio) => radio.checked
       ) || { value: null }
     ).value;
+
     data.sortby = (
       [...filterForm.elements.filterSortByGroup].find(
         (radio) => radio.checked
       ) || { value: null }
     ).value;
+
     console.log(data);
     getData(data);
     setSearchParams(data);
@@ -201,7 +206,7 @@ const hideLoader = () => {
     //   tagsBox.insertAdjacentHTML("beforeend", tagHTML);
     // });
     const params = getParamsFromLocation();
-    // setDataToFilter(params);
+    setDataToFilter(params);
     getData(params);
     hideLoader();
   };
@@ -223,9 +228,11 @@ function setSearchParams(data) {
   if (data.name) {
     searchParams.set("name", data.name);
   }
-  data.tags.forEach((tag) => {
-    searchParams.append("tags", tag);
-  });
+  if (data.tags) {
+    data.tags.forEach((tag) => {
+      searchParams.append("tags", tag);
+    });
+  }
   if (data.view) {
     data.view.forEach((view) => {
       searchParams.append("view", view);
@@ -242,14 +249,13 @@ function setSearchParams(data) {
     });
   }
   if (data.sortby) {
-    data.vsortby.forEach((sortby) => {
-      searchParams.append("sortby", sortby);
-    });
+    searchParams.set("sortby", data.sortby);
   }
   history.replaceState(null, document.title, "?" + searchParams.toString());
 }
 /////////////////////Функция выделение элементов верстки которые выбраны///////////////
 function setDataToFilter(data) {
+  console.log(data);
   filterForm.elements.tags.forEach((checkbox) => {
     checkbox.checked = data.tags.includes(checkbox.value);
   });
@@ -262,11 +268,11 @@ function setDataToFilter(data) {
   filterForm.elements.howshow.forEach((radio) => {
     radio.checked = data.howshow === radio.value;
   });
-  filterForm.elements.sortby.forEach((checkbox) => {
-    checkbox.checked = data.sortby.includes(checkbox.value);
+  filterForm.elements.sortby.forEach((radio) => {
+    radio.checked = data.sortby === radio.value;
   });
 }
-/////////////////////Функция///////////////
+/////////////////////Функция получения постов///////////////
 function getData(params) {
   const result = document.querySelector(".result_js");
   let xhr = new XMLHttpRequest();
@@ -278,6 +284,7 @@ function getData(params) {
   }
 
   let filter = {};
+  //если есть name то выставляем поиск по имени
   if (params.name) {
     filter.title = params.name;
   }

@@ -1,5 +1,6 @@
 let signInButton = document.querySelector(".header__sign-in_js");
 let registerButton = document.querySelector(".header__register_js");
+let toProfileButton = document.querySelector(".header__my-profile_js");
 let signInModal = document.querySelector(".sign-in-modal_js");
 let registerModal = document.querySelector(".register-modal_js");
 let closeButtonLogin = document.querySelector(".close-button-login_js");

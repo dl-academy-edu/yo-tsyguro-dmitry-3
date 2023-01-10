@@ -123,18 +123,6 @@ checkbox.addEventListener("change", () => {
       addValidColor(age);
     }
 
-    /////////////////сообщение об ошибке/////////////
-    function errorFormHandler(errors, form) {
-      if (Object.keys(errors).length) {
-        //перебираем массив с ошибками
-        Object.keys(errors).forEach((key) => {
-          const messageError = errors[key];
-          const input = form.elements[key];
-          setErrorText(input, messageError);
-        });
-        return;
-      }
-    }
     errorFormHandler(errors, signUpForm);
 
     //данные для отправки на сервер
@@ -152,7 +140,7 @@ checkbox.addEventListener("change", () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data), //???????????????????????????????????????????????????????????????
     })
       .then((response) => response.json())
       .then((response) => {
@@ -174,14 +162,6 @@ checkbox.addEventListener("change", () => {
       });
     // })();
 
-    //создание кода с ошибкой
-    function errorCreator(message) {
-      let messageError = document.createElement("div");
-      messageError.classList.add("invalid-feedback");
-      messageError.innerText = message;
-      // console.log(messageError);
-      return messageError;
-    }
     /////////////////////////////Удалить цвет полей при вводе в инпут//////////////////////
     // (function deleteFieldStyle() {
     //   let inputs = [...document.querySelectorAll(".modal-is-valid-field")];
@@ -212,81 +192,46 @@ checkbox.addEventListener("change", () => {
         );
       });
     })();
-    //добавление ошибки инпуту
-    function setErrorText(input, errorMessage) {
-      const error = errorCreator(errorMessage);
-      input.classList.add("is-invalid");
-      input.insertAdjacentElement("afterend", error);
-      input.addEventListener(
-        "input",
-        function () {
-          error.remove();
-          input.classList.remove("is-invalid");
-          //Удалить красный цвет поля при вводе в инпут
-          input.classList.remove("modal-is-invalid-field");
-        },
-        { once: true }
-      );
-    }
-    //очистка ошибок
-    function clearErrors(element) {
-      const messages = element.querySelectorAll(".invalid-feedback");
-      const invalids = element.querySelectorAll(".is-invalid");
-      messages.forEach((message) => message.remove());
-      invalids.forEach((invalid) => invalid.classList.remove(".is-invalid"));
-    }
-
-    //валидация почты (используется выше)
-
-    function isEmailValid(email) {
-      if (!email) {
-        return false;
-      } else {
-        return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
-      }
-    }
-    //валидация пароля (используется выше)
-    function isPasswordValid(password) {
-      if (password.length >= 6) {
-        return true;
-      }
-    }
-    //валидация повтора пароля (используется выше)
-    function isPasswordRepeatValid(password, passwordRepeat) {
-      if (password === passwordRepeat) {
-        return true;
-      }
-    }
-    //валидация возраста (используется выше)
-    function isAgeValid(age) {
-      if (age > 6 && age < 1000 && Number.isInteger(Number(age))) {
-        return true;
-      }
-    }
-    // добавить красный цвет бордеру
-    function addInvalidColor(field) {
-      field.classList.remove("modal-is-valid-field");
-      field.classList.add("modal-is-invalid-field");
-    }
-    // добавить зеленый цвет бордеру
-    function addValidColor(field) {
-      field.classList.remove("modal-is-invalid-field");
-      field.classList.add("modal-is-valid-field");
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////Отправка запроса////////////////////////////////////////////////////
-
-    function sendRequest({ url, method = "GET", headers, body = null }) {
-      return fetch(BASE_SERVER_PATH + url + "?v=0.0.1", {
-        method,
-        headers,
-        body,
-      });
-    }
   });
   // function register(e){
   //   e.preventDefault();
   //   loaderRegister.classList.remove('hidden');
   // }};
 })();
+//валидация почты (используется выше)
+
+function isEmailValid(email) {
+  if (!email) {
+    return false;
+  } else {
+    return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
+  }
+}
+//валидация пароля (используется выше)
+function isPasswordValid(password) {
+  if (password.length >= 6) {
+    return true;
+  }
+}
+//валидация повтора пароля (используется выше)
+function isPasswordRepeatValid(password, passwordRepeat) {
+  if (password === passwordRepeat) {
+    return true;
+  }
+}
+//валидация возраста (используется выше)
+function isAgeValid(age) {
+  if (age > 6 && age < 1000 && Number.isInteger(Number(age))) {
+    return true;
+  }
+}
+// добавить красный цвет бордеру
+function addInvalidColor(field) {
+  field.classList.remove("modal-is-valid-field");
+  field.classList.add("modal-is-invalid-field");
+}
+// добавить зеленый цвет бордеру
+function addValidColor(field) {
+  field.classList.remove("modal-is-invalid-field");
+  field.classList.add("modal-is-valid-field");
+}

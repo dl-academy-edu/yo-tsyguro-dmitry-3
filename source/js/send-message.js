@@ -1,5 +1,6 @@
-const messageForm = document.forms.message; //получаем форму
+const { data } = require("autoprefixer");
 
+const messageForm = document.forms.message; //получаем форму
 ///////////////////Включение кнопки чекбоксом///////////////////////////////
 const messageCheckbox = messageForm.elements.checkbox;
 const sendButton = document.querySelector(".send-message-button_js");
@@ -12,7 +13,7 @@ messageCheckbox.addEventListener("change", () => {
     sendButton.setAttribute("disabled", "disabled");
   }
 });
-//////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////Главная функция////////////////////////////////////////////////////
 (function () {
   //получаем элементы формы
@@ -38,7 +39,7 @@ messageCheckbox.addEventListener("change", () => {
         errorMessage.remove();
       }
     }
-    console.log(email.value);
+
     //условия валидации
     if (!email.value) {
       errors.email = "This field is required";
@@ -97,11 +98,11 @@ messageCheckbox.addEventListener("change", () => {
         const messageError = errors[key];
         const input = messageForm.elements[key];
         setErrorText(input, messageError);
-        // console.log(input);
-        // console.log(messageError);
       });
     }
-    //данные для отправки на сервер
+    /////////////////////////////////
+    //Данные для отправки на сервер//
+    /////////////////////////////////
     const data = {
       email: email.value,
       name: name.value,
@@ -110,7 +111,30 @@ messageCheckbox.addEventListener("change", () => {
       message: message.value,
     };
 
-    console.log(data);
+    sendRequest({
+      url: "api/emails",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.success) {
+          sendMessageModal.classList.add("hidden-item");
+          alert(`Сообщение успешно отправлено пользователем ${data.name}`);
+          loaderRegister.classList.add("hidden-item"); // убираем loader
+          messageForm.reset();
+        }
+      })
+      .catch((err) => {
+        clearErrors(messageForm);
+        errorFormHandler(err.errors, messageForm);
+      })
+      .finally(() => {
+        loaderRegister.classList.add("hidden-item");
+      });
   });
 })();
 
@@ -121,3 +145,22 @@ function isMobilePhoneValid(mobilePhone) {
     /(\+7|8)[\s(]?(\d{3})[\s)]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})/g
   );
 }
+
+(function () {
+  let sendMessageData = { name: "Dmitry" };
+  let email = "noy@yandex.ru";
+  let data = { to: email, body: JSON.stringify(sendMessageData) };
+  sendRequest({
+    url: "api/emails?",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: data,
+  })
+    .then((response) => response.json())
+    .then((response) => console.log(response))
+    .catch((err) => {
+      console.log(err);
+    });
+})();
