@@ -16,4 +16,8 @@
     top: -3px;
     left: 40px;
   }
+  @media (min-width: 481px) and (max-width: 820px) {
+    top: -35px;
+    right: -3px;
+  }
 }

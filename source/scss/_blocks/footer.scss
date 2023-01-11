@@ -25,6 +25,9 @@
   line-height: 22px;
   border-radius: 30px;
   margin-bottom: 40px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .footer__link-list {
   margin: 0 auto;
