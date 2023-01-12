@@ -1,6 +1,10 @@
+// const { active } = require("browser-sync");
+
 let filterForm = document.forms.myBlogFilterForm;
 const SERVER_URL = "https://academy.directlinedev.com";
 const mainLoader = document.querySelector(".main-loader_js");
+const paginationLinks = document.querySelector(".my-blog__pagination_js");
+
 //проверяем наличие поискового запроса в url
 if (location.search) {
   const params = {}; //создаем объект будущих параметров
@@ -118,6 +122,7 @@ filterForm.addEventListener("submit", (e) => {
   url.searchParams.delete("commentsCount");
   url.searchParams.delete("limit");
   url.searchParams.delete("sort");
+  url.searchParams.delete("page"); ////////////////////////////?????????????????????/
 
   const addCheckedInput = (nameGroupInput, typeParam) => {
     for (let checkbox of nameGroupInput) {
@@ -158,7 +163,9 @@ const hideLoader = () => {
   filterForm.addEventListener("submit", (e) => {
     e.preventDefault();
     ///Создаем и наполняем  объект с выбранными фильтрами////
-    let data = {};
+    let data = {
+      page: 0,
+    };
     data.tags = [...filterForm.elements.filterTag]
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -200,14 +207,13 @@ const hideLoader = () => {
   xhr.send();
   showLoader();
   xhr.onload = () => {
-    const tags = JSON.parse(xhr.response).data;
-    const tagsBox = document.querySelector(".select-of-box_js");
+    // const tags = JSON.parse(xhr.response).data;
+    // const tagsBox = document.querySelector(".select-of-box_js");
     // tags.forEach((tag) => {
     //   const tagHTML = createTag(tag);
     //   tagsBox.insertAdjacentHTML("beforeend", tagHTML);
     // });
     const params = getParamsFromLocation();
-
     // setDataToFilter(params);
     getData(params);
     hideLoader();
@@ -216,13 +222,13 @@ const hideLoader = () => {
 /////////////////////Функция получения данных из location.search///////////////
 function getParamsFromLocation() {
   let searchParams = new URLSearchParams(location.search);
-
   return {
     tags: searchParams.getAll("tags"),
     views: searchParams.get("views"), //("filter")
     commentsCount: searchParams.getAll("commentsCount"), //("filter")
     limit: searchParams.get("limit"), //("filter")
     sort: searchParams.get("sort"),
+    page: +searchParams.get("page") || 0,
   };
 }
 /////////////////////Функция  позволяет положить новые значения в searchParams///////////////
@@ -253,6 +259,11 @@ function setSearchParams(data) {
   }
   if (data.sort) {
     searchParams.set("sort", data.sort);
+  }
+  if (data.page) {
+    searchParams.set("page", data.page);
+  } else {
+    searchParams.set("page", 0);
   }
   history.replaceState(null, document.title, "?" + searchParams.toString());
 }
@@ -290,56 +301,135 @@ function getData(params) {
   if (params.tags && Array.isArray(params.tags) && params.tags.length) {
     searchParams.set("tags", JSON.stringify(params.tags));
   }
-  //по просмотрам и комментариям//
+  ////////по просмотрам и комментариям//////////
   let filter = {};
-
+  //по просмотрам
   if (params.views) {
     filter.views = {
       $between: [+params.views.split("-")[0], +params.views.split("-")[1]],
     };
   }
-  console.log(params);
-  if (
-    params.commentsCount &&
-    Array.isArray(params.commentsCount) &&
-    params.commentsCount.length
-  ) {
-    filter.commentsCount = {
-      $between: [
-        +params.commentsCount[0].split("-")[0],
-        +params.commentsCount[0].split("-")[1],
-      ],
-    };
+  //формируем объект чекбоксов с комментариями///
+  let maxComments;
+  let minComments;
+  let commentsArr = params.commentsCount;
+  switch (commentsArr.length) {
+    //нажаты все чекбоксы
+    case "${commentsArr.length}": {
+      minComments = commentsArr[0].split("-")[0];
+      maxComments = commentsArr[commentsArr.length - 1].split("-")[1];
+      console.log(minComments);
+      break;
+    }
+    case "0": {
+      maxComments = 0;
+      minComments = 0;
+      break;
+    }
+    default: {
+      minComments = commentsArr[0].split("-")[0];
+      maxComments = commentsArr[commentsArr.length - 1].split("-")[1];
+    }
   }
+  filter.commentsCount = {
+    $between: [minComments, maxComments],
+  };
+  console.log(filter.commentsCount);
+
+  // console.log(params.commentsCount);
+  // if (
+  //   params.commentsCount &&
+  //   Array.isArray(params.commentsCount) &&
+  //   params.commentsCount.length
+  // ) {
+  //   filter.commentsCount = {
+  //     $between: [
+  //       +params.commentsCount[0].split("-")[0],
+  //       +params.commentsCount[0].split("-")[1],
+  //     ],
+  //   };
+  // }
+
   console.log(filter);
   searchParams.set("filter", JSON.stringify(filter));
   //по кол-ву постов//
-  if (params.limit) {
-    searchParams.set("limit", +params.limit);
+  let postLimit = (() => {
+    if (+params.limit > 0) {
+      return +params.limit;
+    } else {
+      return 10;
+    }
+  })();
+  if (postLimit) {
+    searchParams.set("limit", postLimit);
   }
   //по виду сортировки//
   if (params.sort) {
     searchParams.set("sort", JSON.stringify([params.sort, "DESC"]));
   }
+  //по пропущенным постам (для пагинации)//
+  if (+params.page) {
+    searchParams.set("offset", +params.page * postLimit);
+  }
+  console.log(searchParams.toString());
+  ///////////////////////////////////////////////////////////////////
   ////////////Запрос//////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////
   xhr.open("GET", SERVER_URL + "/api/posts?" + searchParams.toString());
   xhr.send();
   showLoader();
   result.innerHTML = "";
+  paginationLinks.innerHTML = ""; ///?????????????????????????????????????????????????????????????????
+
   xhr.onload = () => {
     const response = JSON.parse(xhr.response);
+    let dataPosts = "";
     response.data.forEach((post) => {
-      const card = cardCreate({
+      dataPosts += cardCreate({
         title: post.title,
         text: post.text,
         src: post.photo.desktopPhotoUrl,
         tags: post.tags,
       });
-      result.insertAdjacentHTML("beforeend", card);
     });
+    result.innerHTML = dataPosts;
+
+    const pageCount = Math.ceil(response.count / postLimit);
+    for (let i = 0; i < pageCount; i++) {
+      const link = linkElementCreate(i);
+      paginationLinks.insertAdjacentElement("beforeend", link);
+      paginationLinks.insertAdjacentHTML("beforeend", "<br>");
+    }
     hideLoader();
   };
 }
+////////////////////////////////////////////////////////////////////////
+/////////////////////Функция создания ссылки для пагинации//////////////
+function linkElementCreate(page) {
+  const link = document.createElement("a");
+  link.href = "?page=" + page;
+  link.innerText = "Страница №" + (page + 1);
+  link.classList.add("link_js");
+
+  let params = getParamsFromLocation();
+  if (page === +params.page) {
+    link.classList.add("active");
+  }
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    const links = document.querySelectorAll(".link_js");
+    let searchParams = new URLSearchParams(location.search);
+    let params = getParamsFromLocation();
+    links[params.page].classList.remove("active");
+    searchParams.set("page", page);
+    console.log(links[page]);
+    links[page].classList.add("active");
+    history.replaceState(null, document.title, "?" + searchParams.toString());
+    getData(getParamsFromLocation());
+  });
+  return link;
+}
+
 /////////////////////////////////////////////////////////////////////
 /////////////////////Функция создания верстки карточек///////////////
 //////////////////////////////////////////////////////////////////////
@@ -357,6 +447,7 @@ function cardCreate({ title, text, src, tags }) {
     </div>
   </div> `;
 }
+
 ////Функция создания тегов(чекбоксов) - не используется//////
 // function createTag({ id, name, color }) {
 //   return `
