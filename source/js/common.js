@@ -1,3 +1,5 @@
+const BASE_SERVER_PATH = "https://academy.directlinedev.com/";
+
 ///////////////////////Перерисовать ссылки/////////////////////
 function rerenderLinks() {
   const isLogin = localStorage.getItem("token");
@@ -68,4 +70,33 @@ function sendRequest({ url, method = "GET", headers, body = null }) {
     headers,
     body,
   });
+}
+
+//////////////////////валидация пароля //////////////////////
+function isPasswordValid(password) {
+  if (password.length >= 6) {
+    return true;
+  }
+}
+////////////////////валидация повтора пароля ////////////////
+function isPasswordRepeatValid(password, passwordRepeat) {
+  if (password === passwordRepeat) {
+    return true;
+  }
+}
+////////////////////////валидация возраста //////////////////
+function isAgeValid(age) {
+  if (age > 6 && age < 1000 && Number.isInteger(Number(age))) {
+    return true;
+  }
+}
+///////////////// добавить красный цвет бордеру/////////////
+function addInvalidColor(field) {
+  field.classList.remove("modal-is-valid-field");
+  field.classList.add("modal-is-invalid-field");
+}
+// ///////////////добавить зеленый цвет бордеру///////////////
+function addValidColor(field) {
+  field.classList.remove("modal-is-invalid-field");
+  field.classList.add("modal-is-valid-field");
 }

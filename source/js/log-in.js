@@ -21,6 +21,7 @@ const loginForm = document.forms.login;
     //     errorMessage.remove();
     //   }
     // }
+
     //прописываем сообщения при валидации
     if (!email.value) {
       errors.email = "This field is required";
@@ -49,6 +50,12 @@ const loginForm = document.forms.login;
         const input = loginForm.elements[key];
         setErrorText(input, messageError);
       });
+    }
+    if (errors.length) {
+      clearErrors(loginForm);
+      errorFormHandler(errors, loginForm);
+      errors = {};
+      return;
     }
 
     //данные для отправки на сервер
@@ -83,8 +90,6 @@ const loginForm = document.forms.login;
         if (err._message) {
           alert(err._message);
         }
-        clearErrors(loginForm);
-        errorFormHandler(err.errors, loginForm);
       });
   });
 })();

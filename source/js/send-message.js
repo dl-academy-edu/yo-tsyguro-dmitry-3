@@ -1,4 +1,4 @@
-const { data } = require("autoprefixer");
+// const { data } = require("autoprefixer");
 
 const messageForm = document.forms.message; //получаем форму
 ///////////////////Включение кнопки чекбоксом///////////////////////////////
@@ -100,6 +100,7 @@ messageCheckbox.addEventListener("change", () => {
         setErrorText(input, messageError);
       });
     }
+
     /////////////////////////////////
     //Данные для отправки на сервер//
     /////////////////////////////////
@@ -146,6 +147,10 @@ function isMobilePhoneValid(mobilePhone) {
   );
 }
 
+////////////////////////////////////////////////////
+///////////////////////////////////////////////////
+//////////////////////////////////////////////////
+//Доделать и перенести наверх//
 (function () {
   let sendMessageData = { name: "Dmitry" };
   let email = "noy@yandex.ru";

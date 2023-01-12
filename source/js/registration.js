@@ -8,7 +8,7 @@ const EMAIL_REGEXP =
 const checkbox = signUpForm.elements.checkbox;
 
 const signUpButton = document.querySelector(".register-button_js");
-const BASE_SERVER_PATH = "https://academy.directlinedev.com/";
+
 const loaderRegister = document.querySelector(".register-loader_js");
 ///////////////////////////////////включаем кнопку////////////
 checkbox.addEventListener("change", () => {
@@ -206,32 +206,4 @@ function isEmailValid(email) {
   } else {
     return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
   }
-}
-//валидация пароля (используется выше)
-function isPasswordValid(password) {
-  if (password.length >= 6) {
-    return true;
-  }
-}
-//валидация повтора пароля (используется выше)
-function isPasswordRepeatValid(password, passwordRepeat) {
-  if (password === passwordRepeat) {
-    return true;
-  }
-}
-//валидация возраста (используется выше)
-function isAgeValid(age) {
-  if (age > 6 && age < 1000 && Number.isInteger(Number(age))) {
-    return true;
-  }
-}
-// добавить красный цвет бордеру
-function addInvalidColor(field) {
-  field.classList.remove("modal-is-valid-field");
-  field.classList.add("modal-is-invalid-field");
-}
-// добавить зеленый цвет бордеру
-function addValidColor(field) {
-  field.classList.remove("modal-is-invalid-field");
-  field.classList.add("modal-is-valid-field");
 }
