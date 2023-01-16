@@ -1,3 +1,6 @@
+const changePassForm = document.forms.changePassword;
+
+const changePassInputs = [...changePassForm.getElementsByTagName("input")];
 (function () {
   let changePassModal = document.querySelector(".change-password-modal_js");
 
@@ -10,7 +13,6 @@
 })();
 // ///////////////////////////////Функция валидации////////////////////////////////
 (function () {
-  const changePassForm = document.forms.changePassword;
   if (!changePassForm) return;
   const oldPass = changePassForm.elements.oldPassword;
   const newPass = changePassForm.elements.newPassword;
@@ -28,37 +30,46 @@
         errorMessage.remove();
       }
     }
-
-    //прописываем сообщения при валидации
-    if (!oldPass.value) {
-      errors.oldPassword = "This field is required";
-      addInvalidColor(oldPass);
-    } else if (!isPasswordValid(oldPass.value)) {
-      errors.oldPassword = "Please enter a valid password (6 symbols minimum)";
-      addInvalidColor(oldPass);
-    } else {
-      addValidColor(oldPass);
-    }
-    if (!newPass.value) {
-      errors.newPassword = "This field is required";
-      addInvalidColor(newPass);
-    } else if (!isNewPasswordValid(oldPass.value, newPass.value)) {
-      errors.newPassword =
-        "Please enter a valid password (6 symbols minimum). Do not use the old password";
-      addInvalidColor(newPass);
-    } else {
-      addValidColor(newPass);
-    }
-    if (!repeatPass.value) {
-      errors.repeatPassword = "This field is required";
-      addInvalidColor(repeatPass);
-    } else if (!isPasswordRepeatValid(newPass.value, repeatPass.value)) {
-      errors.repeatPassword =
-        "The entered value does not match with entered password above";
-      addInvalidColor(repeatPass);
-    } else {
-      addValidColor(repeatPass);
-    }
+    //////проверяем на наличие required////
+    changePassInputs.forEach((input) => {
+      if (input.hasAttribute("required")) {
+        //прописываем сообщения при валидации
+        if (input === oldPass) {
+          if (!oldPass.value) {
+            errors.oldPassword = "This field is required";
+            addInvalidColor(oldPass);
+          } else if (!isPasswordValid(oldPass.value)) {
+            errors.oldPassword =
+              "Please enter a valid password (6 symbols minimum)";
+            addInvalidColor(oldPass);
+          } else {
+            addValidColor(oldPass);
+          }
+        } else if (input === newPass) {
+          if (!newPass.value) {
+            errors.newPassword = "This field is required";
+            addInvalidColor(newPass);
+          } else if (!isNewPasswordValid(oldPass.value, newPass.value)) {
+            errors.newPassword =
+              "Please enter a valid password (6 symbols minimum). Do not use the old password";
+            addInvalidColor(newPass);
+          } else {
+            addValidColor(newPass);
+          }
+        } else if (input === repeatPass) {
+          if (!repeatPass.value) {
+            errors.repeatPassword = "This field is required";
+            addInvalidColor(repeatPass);
+          } else if (!isPasswordRepeatValid(newPass.value, repeatPass.value)) {
+            errors.repeatPassword =
+              "The entered value does not match with entered password above";
+            addInvalidColor(repeatPass);
+          } else {
+            addValidColor(repeatPass);
+          }
+        }
+      }
+    });
     /////////////////сообщение об ошибке/////////////
     if (Object.keys(errors).length) {
       //перебираем массив с ошибками

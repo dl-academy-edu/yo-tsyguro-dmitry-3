@@ -1,4 +1,4 @@
-const BASE_SERVER_PATH = "https://academy.directlinedev.com/";
+const BASE_SERVER_PATH = "https://academy.directlinedev.com";
 
 ///////////////////////Перерисовать ссылки/////////////////////
 function rerenderLinks() {
@@ -90,6 +90,14 @@ function isAgeValid(age) {
     return true;
   }
 }
+/////////////////////валидация почты ////////////////////
+function isEmailValid(email) {
+  if (!email) {
+    return false;
+  } else {
+    return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
+  }
+}
 ///////////////// добавить красный цвет бордеру/////////////
 function addInvalidColor(field) {
   field.classList.remove("modal-is-valid-field");
@@ -100,3 +108,31 @@ function addValidColor(field) {
   field.classList.remove("modal-is-invalid-field");
   field.classList.add("modal-is-valid-field");
 }
+/////////////////////////////Удалить цвет полей при вводе в инпут//////////////////////
+(function deleteFieldStyle() {
+  const inputs = [...document.getElementsByTagName("input")];
+  inputs.forEach((input) => {
+    input.addEventListener(
+      "input",
+      () => {
+        if (input.classList.contains("modal-is-valid-field")) {
+          input.classList.remove("modal-is-valid-field");
+        }
+      }
+      // { once: true }
+    );
+  });
+})();
+
+/////////////////////////Рендеринг данных профиля//////////////////////
+function renderProfile(profile) {
+  console.log(profile.photoUrl);
+  profileImg.src = `${BASE_SERVER_PATH + profile.photoUrl}`;
+  profileName.innerText = profile.name;
+  profileSurname.innerText = profile.surname;
+  profileEmail.innerText = profile.email;
+  profileLocation.innerText = profile.location;
+  profileAge.innerText = profile.age;
+}
+
+console.log(document.querySelector(".change-other-modal__file-input_js"));

@@ -1,14 +1,20 @@
 <div class="modal register-modal_js hidden-item">
-  <form name="signUp" class="register-modal__form modal__form" action="#">
+  <form
+    name="signUp"
+    class="register-modal__form modal__form"
+    action="#"
+    novalidate
+  >
     <div class="register-modal__email-wrapper">
       <label for="register-email-field" class="modal__label"
         >Email<span>*</span></label
       >
       <input
-        type="text"
+        type="email"
         id="register-email-field"
         class="register-modal__field modal__field"
         name="email"
+        required
       />
     </div>
     <div class="register-modal__name-surname-wrapper">
@@ -21,6 +27,7 @@
           id="register-name-field"
           class="register-modal__field modal__field"
           name="name"
+          required
         />
       </div>
       <div class="modal__wrapper">
@@ -32,6 +39,7 @@
           id="register-surname-field"
           class="register-modal__field modal__field"
           name="surname"
+          required
         />
       </div>
     </div>
@@ -45,6 +53,7 @@
           id="register-password-field"
           class="register-modal__field modal__field"
           name="password"
+          required
         />
       </div>
       <div class="modal__wrapper">
@@ -56,6 +65,7 @@
           id="register-repeat-field"
           class="register-modal__field modal__field"
           name="passwordRepeat"
+          required
         />
       </div>
     </div>
@@ -69,6 +79,7 @@
           id="register-location-field"
           class="register-modal__field modal__field"
           name="location"
+          required
         />
       </div>
       <div class="modal__wrapper">
@@ -80,6 +91,7 @@
           id="register-age-field"
           class="register-modal__field modal__field"
           name="age"
+          required
         />
       </div>
     </div>
@@ -89,6 +101,7 @@
         id="register-checkbox-field"
         class="checkbox"
         name="checkbox"
+        required
       />
       <label for="register-checkbox-field" class="checkbox__name"
         >Clicking on the button, you consent to the processing of your personal

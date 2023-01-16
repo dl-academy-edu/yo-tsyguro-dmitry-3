@@ -10,6 +10,13 @@ let closeBtnChangePass = document.querySelector(
 let closeBtnChangeOther = document.querySelector(
   ".close-button-change-other_js"
 );
+let profileImgWrapper = document.querySelector(".my-profile__picture_js");
+const profileImg = document.querySelector(".my-profile__image_js");
+const profileName = document.querySelector(".my-profile__name_js");
+const profileSurname = document.querySelector(".my-profile__surname_js");
+const profileEmail = document.querySelector(".my-profile__email_js");
+const profileLocation = document.querySelector(".my-profile__location_js");
+const profileAge = document.querySelector(".my-profile__age_js");
 
 // /////////////////Открытие Change password//////////////////////////////
 (function () {

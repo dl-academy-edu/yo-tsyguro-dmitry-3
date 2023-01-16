@@ -1,8 +1,9 @@
 const changeOtherForm = document.forms.changeOther;
-
+console.log(changeOtherForm);
 ////////////////////Закрытие окна Esc//////////
 (function () {
   let changeOtherModal = document.querySelector(".change-other-modal_js");
+
   if (!changeOtherModal) return;
   window.addEventListener("keydown", (e) => {
     if (e.keyCode === 27) {
@@ -11,7 +12,7 @@ const changeOtherForm = document.forms.changeOther;
   });
 })();
 
-/////////////////////Изменение текста в поле//////////////////////////
+/////////////////////Изменение текста в поле инпут file//////////////////////////
 (function uploadName() {
   if (!changeOtherForm) return;
   //   inputFileFieldText.innerHTML = "Choose a file...";
@@ -29,9 +30,10 @@ const changeOtherForm = document.forms.changeOther;
   });
 })();
 
-/////////////////////Валидация полей//////////////////////////////////
+////////////////////////////////////////////////////////////////////
+/////////////////Запрос на редактирование данных////////////////////
+////////////////////////////////////////////////////////////////////
 (function () {
-  if (!changeOtherForm) return;
   //получаем элементы формы
   const email = changeOtherForm.elements.email;
   const name = changeOtherForm.elements.name;
@@ -42,9 +44,55 @@ const changeOtherForm = document.forms.changeOther;
   // console.log(age);
 
   let errors = {}; //объект ошибок
+  // let profile = null;
+  rerenderLinks();
+  getProfile();
 
-  //Нажатие на submit
-  changeOtherForm.addEventListener("submit", (e) => {
+  /////////////////////////////////////////////////////////
+  //////////////Получаем данные пользователя с сервера/////
+  /////////////////////////////////////////////////////////
+  function getProfile() {
+    sendRequest({
+      method: "GET",
+      url: `/api/users/${localStorage.getItem("userId")}`,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          profile = res.data; // для заполнения полей формы ниже
+          renderProfile(res.data);
+          console.log(res.data);
+        } else {
+          throw new Error(`${res.status} ${res.message}`);
+          console.log("throw");
+        }
+      })
+      .catch((err) => {
+        console.log("catch");
+        //     err = err.split('');
+        // if(err.message === 204){
+        //   alert(err[message])
+        // }
+      });
+  }
+  //////////////////////////////////////////////////////////////
+  /////////////////Изменение данных пользователя////////////////
+  //////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////
+  /////////////////заполнение формы данными при открытиии///////
+  changeOtherBtn.addEventListener("click", () => {
+    changeOtherForm.email.value = profile.email;
+    changeOtherForm.name.value = profile.name;
+    changeOtherForm.surname.value = profile.surname;
+    changeOtherForm.location.value = profile.location;
+    changeOtherForm.age.value = profile.age;
+  });
+
+  /////////////////////////////////////////////////////////////////////
+  /////////////////////Отправка  данных на сервер//////////////////////
+  /////////////////////////////////////////////////////////////////////
+  const changeData = (e) => {
     errors = {}; //обнуляем объект
     e.preventDefault(); //отменяем стандартное поведение при submit
 
@@ -55,25 +103,34 @@ const changeOtherForm = document.forms.changeOther;
         errorMessage.remove();
       }
     }
-
     //условия валидации
-    if (!isEmailValid(email.value)) {
-      errors.email =
-        'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+    if (email.value) {
+      if (!isEmailValid(email.value)) {
+        errors.email =
+          'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+      }
     }
-    if (!name.value) {
-      errors.name =
-        "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
+    if (name.value) {
+      if (!name.value) {
+        errors.name =
+          "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
+      }
     }
-    if (!surname.value) {
-      errors.surname =
-        "Please enter a valid surname (2 letters minimum, and no numbers and other symbols)";
+    if (surname.value) {
+      if (!surname.value) {
+        errors.surname =
+          "Please enter a valid surname (2 letters minimum, and no numbers and other symbols)";
+      }
     }
-    if (!location.value) {
-      errors.location = "Please enter a valid location (2 letters minimum)";
+    if (location.value) {
+      if (!location.value) {
+        errors.location = "Please enter a valid location (2 letters minimum)";
+      }
     }
-    if (!isAgeValid(age.value)) {
-      errors.age = "Please enter your age (only integer numbers required)";
+    if (age.value) {
+      if (!isAgeValid(age.value)) {
+        errors.age = "Please enter your age 7+ (only integer numbers required)";
+      }
     }
 
     /////////////////сообщение об ошибке/////////////
@@ -87,14 +144,75 @@ const changeOtherForm = document.forms.changeOther;
       });
     }
     //данные для отправки на сервер
-    const data = {
-      email: email.value,
-      name: name.value,
-      surname: surname.value,
-      location: location.value,
-      age: age.value,
-      picture: file.value,
-    };
-    console.log(data);
-  });
+    // const data = {
+    //   email: email.value,
+    //   name: name.value,
+    //   surname: surname.value,
+    //   location: location.value,
+    //   age: age.value,
+    //   avatar: file.files[0],
+    // };
+    // console.log(data);
+
+    if (!Object.keys(errors).length) {
+      e.preventDefault();
+      console.log(changeOtherForm);
+      const data = new FormData(changeOtherForm);
+      sendRequest({
+        url: "/api/users",
+        method: "PUT",
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+        body: data,
+      })
+        .then((response) => {
+          if (response.status === 401 || response.status === 403) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            location.pathname = "/";
+            console.log("Данные успешно отправлены на сервер!");
+            return;
+          }
+          return response.json();
+        })
+        .then((response) => {
+          if (response.success) {
+            profile = response.data; ///////////////??????????????????????????????
+            renderProfile(profile);
+          } else {
+            throw response;
+          }
+        })
+        .catch((err) => {
+          if (err._message) {
+            alert(err._message);
+          }
+          clearErrors(changeOtherForm);
+          errorFormHandler(errors, changeOtherForm);
+        })
+        .finally(() => {
+          changeOtherModal.classList.add("hidden-item");
+        });
+    }
+  };
+  //////////////////////////////////////////////////////////////
+  /////////////////////////Submit///////////////////////////////
+  changeOtherForm.addEventListener("submit", changeData);
 })();
+
+/////////////////////////////////////////////
+////////////Вставить фото (по не работает), в change-other.html строка 72////////////////////
+//https://www.youtube.com/watch?v=UKfWpdkxAfY//
+////////////////////////////////////////////////
+// function downloadPhoto(input) {
+//   let file = input.files[0];
+//   let reader = new FileReader();
+//   reader.readAsDataURL(file);
+
+//   reader.onload = function () {
+//     let img = document.createElement("img");
+//     profileImgWrapper.appendChild(img);
+//     img.src = reader.result;
+//   }
+// }

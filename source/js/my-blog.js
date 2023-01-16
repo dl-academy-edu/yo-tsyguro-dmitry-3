@@ -315,13 +315,7 @@ function getData(params) {
   let commentsArr = params.commentsCount;
   switch (commentsArr.length) {
     //нажаты все чекбоксы
-    case "${commentsArr.length}": {
-      minComments = commentsArr[0].split("-")[0];
-      maxComments = commentsArr[commentsArr.length - 1].split("-")[1];
-      console.log(minComments);
-      break;
-    }
-    case "0": {
+    case 0: {
       maxComments = 0;
       minComments = 0;
       break;
@@ -329,6 +323,7 @@ function getData(params) {
     default: {
       minComments = commentsArr[0].split("-")[0];
       maxComments = commentsArr[commentsArr.length - 1].split("-")[1];
+      break;
     }
   }
   filter.commentsCount = {
@@ -380,7 +375,7 @@ function getData(params) {
   showLoader();
   result.innerHTML = "";
   paginationLinks.innerHTML = ""; ///?????????????????????????????????????????????????????????????????
-
+  console.log(SERVER_URL + "/api/posts?" + searchParams.toString());
   xhr.onload = () => {
     const response = JSON.parse(xhr.response);
     let dataPosts = "";

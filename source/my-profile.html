@@ -50,14 +50,14 @@
     <section class="my-profile">
       <h1 class="main__title my-profile-page__title">My profile</h1>
       <div class="my-profile__container">
-        <picture class="my-profile__picture">
-          <source
+        <picture class="my-profile__picture my-profile__picture_js">
+          <!-- <source
             media="(min-width: 920px)"
             srcset="
-              ../img/images/profile-320x450-1x.jpg 1x,
-              ../img/images/profile-640x900-2x.jpg 2x
+              ../img/images/profile-draft-360x490-1x.jpg 1x,
+              ../img/images/profile-draft-720x980-2x.jpg 2x
             "
-          />
+          /> -->
           <!-- <source
             media="(min-width: 846px) and (max-width: 919px)"
             srcset="
@@ -65,16 +65,16 @@
               ../img/images/profile-628x900-tablet-2x.jpg 2x
             "
           /> -->
-          <source
+          <!-- <source
             media="(max-width: 919px)"
             srcset="
-              ../img/images/profile-280x450-mobile-1x.jpg 1x,
-              ../img/images/profile-560x900-mobile-2x.jpg 2x
+              ../img/images/profile-draft-280x450-mobile-1x.jpg 1x,
+              ../img/images/profile-draft-560x900-mobile-2x.jpg 2x
             "
-          />
+          /> -->
           <img
-            src="../img/images/profile-560x900-mobile-2x.jpg"
-            class="my-profile__image"
+            src=""
+            class="my-profile__image my-profile__image_js"
             width="1000"
             height="465"
             alt="Моя фотка"
@@ -83,27 +83,29 @@
         <div class="my-profile__data-container font-medium">
           <div class="my-profile__data-wrapper">
             <p class="my-profile__name-label font-bold">Name:</p>
-            <p class="my-profile__name-data">Name</p>
+            <p class="my-profile__name-data my-profile__name_js"></p>
           </div>
           <div class="my-profile__data-wrapper">
             <p class="my-profile__surname-label font-bold">Surname:</p>
-            <p class="my-profile__surname-data">Surname</p>
+            <p class="my-profile__surname-data my-profile__surname_js"></p>
           </div>
           <div class="my-profile__data-wrapper">
             <p class="my-profile__email-label font-bold">Email:</p>
-            <p class="my-profile__email-data">Email</p>
+            <p class="my-profile__email-data my-profile__email_js"></p>
           </div>
           <div class="my-profile__data-wrapper">
             <p class="my-profile__password-label font-bold">Password:</p>
-            <p class="my-profile__password-data">Password</p>
+            <p class="my-profile__password-data my-profile__password_js">
+              ********
+            </p>
           </div>
           <div class="my-profile__data-wrapper">
             <p class="my-profile__location-label font-bold">Location:</p>
-            <p class="my-profile__location-data">Location</p>
+            <p class="my-profile__location-data my-profile__location_js"></p>
           </div>
           <div class="my-profile__data-wrapper">
             <p class="my-profile__age-label font-bold">Age:</p>
-            <p class="my-profile__age-data">Age</p>
+            <p class="my-profile__age-data my-profile__age_js"></p>
           </div>
           <button
             class="my-profile__password-btn button my-profile__password-btn_js"
@@ -126,16 +128,16 @@
     @@include('blocks/register.html') @@include('blocks/send-message.html')
     @@include('blocks/change-password.html')
     @@include('blocks/change-other.html')
-    <script src="js/app.js" defer></script>
-    <script src="js/common.js" defer></script>
-    <script src="js/scroll-top.js" defer></script>
-    <script src="js/header.js" defer></script>
-    <script src="js/footer.js" defer></script>
-    <script src="js/my-profile.js" defer></script>
-    <script src="js/send-message.js" defer></script>
-    <script src="js/log-in.js" defer></script>
-    <script src="js/registration.js" defer></script>
-    <script src="js/change-password.js" defer></script>
-    <script src="js/change-other.js" defer></script>
+    <script src="js/app.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/scroll-top.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/my-profile.js"></script>
+    <script src="js/send-message.js"></script>
+    <script src="js/log-in.js"></script>
+    <script src="js/registration.js"></script>
+    <script src="js/change-password.js"></script>
+    <script src="js/change-other.js"></script>
   </body>
 </html>

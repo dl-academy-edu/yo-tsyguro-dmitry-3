@@ -4,7 +4,7 @@ const messageForm = document.forms.message; //получаем форму
 ///////////////////Включение кнопки чекбоксом///////////////////////////////
 const messageCheckbox = messageForm.elements.checkbox;
 const sendButton = document.querySelector(".send-message-button_js");
-
+const messageInputs = [...messageForm.getElementsByTagName("input")];
 ///////////////////////////////////включаем кнопку////////////
 messageCheckbox.addEventListener("change", () => {
   if (messageCheckbox.checked) {
@@ -23,7 +23,6 @@ messageCheckbox.addEventListener("change", () => {
   const mobilePhone = messageForm.elements.mobilePhone;
   const message = messageForm.elements.message;
 
-  // console.log(age);
   //объект ошибок
   let errors = {};
 
@@ -39,58 +38,63 @@ messageCheckbox.addEventListener("change", () => {
         errorMessage.remove();
       }
     }
-
-    //условия валидации
-    if (!email.value) {
-      errors.email = "This field is required";
-      addInvalidColor(email);
-    } else if (!isEmailValid(email.value)) {
-      errors.email =
-        'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
-      addInvalidColor(email);
-    } else {
-      addValidColor(email);
-    }
-
-    if (!name.value) {
-      errors.name = "This field is required";
-      addInvalidColor(name);
-    } else if (!name.value) {
-      errors.name =
-        "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
-      addInvalidColor(name);
-    } else {
-      addValidColor(name);
-    }
-
-    if (!subject.value) {
-      errors.subject = "This field is required";
-      addInvalidColor(subject);
-    } else if (!subject.value) {
-      errors.subject = "Please enter a subject of your message";
-      addInvalidColor(subject);
-    } else {
-      addValidColor(subject);
-    }
-
-    if (!mobilePhone.value) {
-      errors.mobilePhone = "This field is required";
-      addInvalidColor(mobilePhone);
-    } else if (!isMobilePhoneValid(mobilePhone.value)) {
-      errors.mobilePhone =
-        "Please enter a valid phone number (example: +7 945 385 4534)";
-      addInvalidColor(mobilePhone);
-    } else {
-      addValidColor(mobilePhone);
-    }
-
-    if (!message.value) {
-      errors.message = "Please enter a message";
-      addInvalidColor(message);
-    } else {
-      addValidColor(message);
-    }
-
+    //////проверяем на наличие required////
+    messageInputs.forEach((input) => {
+      if (input.hasAttribute("required")) {
+        //условия валидации
+        if (input === email) {
+          if (!email.value) {
+            errors.email = "This field is required";
+            addInvalidColor(email);
+          } else if (!isEmailValid(email.value)) {
+            errors.email =
+              'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+            addInvalidColor(email);
+          } else {
+            addValidColor(email);
+          }
+        } else if (input === name) {
+          if (!name.value) {
+            errors.name = "This field is required";
+            addInvalidColor(name);
+          } else if (!name.value) {
+            errors.name =
+              "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
+            addInvalidColor(name);
+          } else {
+            addValidColor(name);
+          }
+        } else if (input === subject) {
+          if (!subject.value) {
+            errors.subject = "This field is required";
+            addInvalidColor(subject);
+          } else if (!subject.value) {
+            errors.subject = "Please enter a subject of your message";
+            addInvalidColor(subject);
+          } else {
+            addValidColor(subject);
+          }
+        } else if (input === mobilePhone) {
+          if (!mobilePhone.value) {
+            errors.mobilePhone = "This field is required";
+            addInvalidColor(mobilePhone);
+          } else if (!isMobilePhoneValid(mobilePhone.value)) {
+            errors.mobilePhone =
+              "Please enter a valid phone number (example: +7 945 385 4534)";
+            addInvalidColor(mobilePhone);
+          } else {
+            addValidColor(mobilePhone);
+          }
+        }
+        ///////////Валидация поля с сообщением ( не требуется, сделал на всякий случай)
+        // if (!message.value) {
+        //   errors.message = "Please enter a message";
+        //   addInvalidColor(message);
+        // } else {
+        //   addValidColor(message);
+        // }
+      }
+    });
     /////////////////сообщение об ошибке/////////////
     if (Object.keys(errors).length) {
       //перебираем массив с ошибками
@@ -112,30 +116,38 @@ messageCheckbox.addEventListener("change", () => {
       message: message.value,
     };
 
-    sendRequest({
-      url: "api/emails",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.success) {
-          sendMessageModal.classList.add("hidden-item");
-          alert(`Сообщение успешно отправлено пользователем ${data.name}`);
-          loaderRegister.classList.add("hidden-item"); // убираем loader
-          messageForm.reset();
-        }
+    if (!Object.keys(errors).length) {
+      let sendMessageData = {
+        to: data.email,
+        body: JSON.stringify(data),
+      };
+      sendRequest({
+        url: "/api/emails",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sendMessageData),
       })
-      .catch((err) => {
-        clearErrors(messageForm);
-        errorFormHandler(err.errors, messageForm);
-      })
-      .finally(() => {
-        loaderRegister.classList.add("hidden-item");
-      });
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.success) {
+            sendMessageModal.classList.add("hidden-item");
+            alert(`Сообщение успешно отправлено пользователем ${data.name}`);
+            loaderRegister.classList.add("hidden-item"); // убираем loader
+            messageForm.reset();
+          }
+        })
+        .catch((err) => {
+          clearErrors(messageForm);
+          errorFormHandler(err.errors, messageForm);
+        })
+        .finally(() => {
+          loaderRegister.classList.add("hidden-item");
+        });
+    } else {
+      console.log("Есть ошибки в заполнении формы");
+    }
   });
 })();
 
@@ -146,26 +158,3 @@ function isMobilePhoneValid(mobilePhone) {
     /(\+7|8)[\s(]?(\d{3})[\s)]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})/g
   );
 }
-
-////////////////////////////////////////////////////
-///////////////////////////////////////////////////
-//////////////////////////////////////////////////
-//Доделать и перенести наверх//
-(function () {
-  let sendMessageData = { name: "Dmitry" };
-  let email = "noy@yandex.ru";
-  let data = { to: email, body: JSON.stringify(sendMessageData) };
-  sendRequest({
-    url: "api/emails?",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data,
-  })
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => {
-      console.log(err);
-    });
-})();

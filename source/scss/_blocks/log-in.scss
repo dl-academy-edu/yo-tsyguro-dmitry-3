@@ -1,9 +1,10 @@
 .sign-in-modal__form {
   width: 370px;
 }
-.sign-in-modal__field-wrapper {
+.sign-in-modal__wrapper {
   display: flex;
   flex-direction: column;
+  margin-bottom: 25px;
 }
 
 .sign-in-modal__label {
@@ -13,9 +14,6 @@
     color: red;
   }
 }
-.sign-in-modal__email {
+.sign-in-modal__field-wrapper {
   margin-bottom: 20px;
-}
-.sign-in-modal__password {
-  margin-bottom: 30px;
 }

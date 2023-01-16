@@ -1,14 +1,12 @@
 const signUpForm = document.forms.signUp; //получаем форму
-// const registerModal = document.querySelector(".register-modal_js");
+const reisterInputs = [...signUpForm.getElementsByTagName("input")];
 const EMAIL_REGEXP =
   '/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/iu';
 //const NAME_REGEXP = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/; // имя + фамилия (исходник что нашел в инете)
 
 ///////////////////Включение кнопки чекбоксом///////////////////////////////
 const checkbox = signUpForm.elements.checkbox;
-
 const signUpButton = document.querySelector(".register-button_js");
-
 const loaderRegister = document.querySelector(".register-loader_js");
 ///////////////////////////////////включаем кнопку////////////
 checkbox.addEventListener("change", () => {
@@ -47,82 +45,94 @@ checkbox.addEventListener("change", () => {
     //     errorMessage.remove();
     //   }
     // }
-
-    //условия валидации
-    if (!email.value) {
-      errors.email = "This field is required";
-      addInvalidColor(email);
-    } else if (!isEmailValid(email.value)) {
-      errors.email =
-        'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
-      addInvalidColor(email);
-    } else {
-      addValidColor(email);
-    }
-
-    if (!name.value) {
-      errors.name = "This field is required";
-      addInvalidColor(name);
-    } else if (!name.value) {
-      errors.name =
-        "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
-      addInvalidColor(name);
-    } else {
-      addValidColor(name);
-    }
-
-    if (!surname.value) {
-      errors.surname = "This field is required";
-      addInvalidColor(surname);
-    } else if (!surname.value) {
-      errors.surname =
-        "Please enter a valid surname (2 letters minimum, and no numbers and other symbols)";
-      addInvalidColor(password);
-    } else {
-      addValidColor(surname);
-    }
-
-    if (!password.value) {
-      errors.password = "This field is required";
-      addInvalidColor(password);
-    } else if (!isPasswordValid(password.value)) {
-      errors.password = "Please enter a valid password (6 symbols minimum)";
-      addInvalidColor(password);
-    } else {
-      addValidColor(password);
-    }
-
-    if (!passwordRepeat.value) {
-      errors.passwordRepeat = "This field is required";
-      addInvalidColor(passwordRepeat);
-    } else if (!isPasswordRepeatValid(password.value, passwordRepeat.value)) {
-      errors.passwordRepeat =
-        "The entered value does not match with entered password above";
-      addInvalidColor(passwordRepeat);
-    } else {
-      addValidColor(passwordRepeat);
-    }
-
-    if (!location.value) {
-      errors.location = "This field is required";
-      addInvalidColor(location);
-    } else if (!location.value) {
-      errors.location = "Please enter a valid location (2 letters minimum)";
-      addInvalidColor(location);
-    } else {
-      addValidColor(location);
-    }
-
-    if (!age.value) {
-      errors.age = "This field is required";
-      addInvalidColor(age);
-    } else if (!isAgeValid(age.value)) {
-      errors.age = "Please enter your age (only integer numbers required)";
-      addInvalidColor(age);
-    } else {
-      addValidColor(age);
-    }
-
+    //////проверяем на наличие required////
+    reisterInputs.forEach((input) => {
+      if (input.hasAttribute("required")) {
+        if (input === email) {
+          //условия валидации
+          if (!email.value) {
+            errors.email = "This field is required";
+            addInvalidColor(email);
+          } else if (!isEmailValid(email.value)) {
+            errors.email =
+              'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+            addInvalidColor(email);
+          } else {
+            addValidColor(email);
+          }
+        } else if (input === name) {
+          if (!name.value) {
+            errors.name = "This field is required";
+            addInvalidColor(name);
+          } else if (!name.value) {
+            errors.name =
+              "Please enter a valid name (2 letters minimum, and no numbers and other symbols)";
+            addInvalidColor(name);
+          } else {
+            addValidColor(name);
+          }
+        } else if (input === surname) {
+          if (!surname.value) {
+            errors.surname = "This field is required";
+            addInvalidColor(surname);
+          } else if (!surname.value) {
+            errors.surname =
+              "Please enter a valid surname (2 letters minimum, and no numbers and other symbols)";
+            addInvalidColor(password);
+          } else {
+            addValidColor(surname);
+          }
+        } else if (input === password) {
+          if (!password.value) {
+            errors.password = "This field is required";
+            addInvalidColor(password);
+          } else if (!isPasswordValid(password.value)) {
+            errors.password =
+              "Please enter a valid password (6 symbols minimum)";
+            addInvalidColor(password);
+          } else {
+            addValidColor(password);
+          }
+        } else if (input === passwordRepeat) {
+          if (!passwordRepeat.value) {
+            errors.passwordRepeat = "This field is required";
+            addInvalidColor(passwordRepeat);
+          } else if (
+            !isPasswordRepeatValid(password.value, passwordRepeat.value)
+          ) {
+            errors.passwordRepeat =
+              "The entered value does not match with entered password above";
+            addInvalidColor(passwordRepeat);
+          } else {
+            addValidColor(passwordRepeat);
+          }
+        } else if (input === location) {
+          if (!location.value) {
+            errors.location = "This field is required";
+            addInvalidColor(location);
+          } else if (!location.value) {
+            errors.location =
+              "Please enter a valid location (2 letters minimum)";
+            addInvalidColor(location);
+          } else {
+            addValidColor(location);
+          }
+        } else if (input === age) {
+          if (!age.value) {
+            errors.age = "This field is required";
+            addInvalidColor(age);
+          } else if (!isAgeValid(age.value)) {
+            errors.age =
+              "Please enter your age 7+ (only integer numbers required)";
+            addInvalidColor(age);
+          } else {
+            addValidColor(age);
+          }
+        }
+      } else {
+        return;
+      }
+    });
     errorFormHandler(errors, signUpForm);
 
     //данные для отправки на сервер
@@ -134,76 +144,42 @@ checkbox.addEventListener("change", () => {
       location: location.value,
       age: age.value,
     };
-    sendRequest({
-      url: "api/users",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data), //???????????????????????????????????????????????????????????????
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.success) {
-          registerModal.classList.add("hidden-item");
-          alert(
-            `Пользователь ${response.data.name} & email ${response.data.email} успешно зарегистрирован`
-          );
-          loaderRegister.classList.add("hidden-item"); // убираем loader
-          signUpForm.reset();
-        }
+    if (!Object.keys(errors).length) {
+      sendRequest({
+        url: "/api/users",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), //???????????????????????????????????????????????????????????????
       })
-      .catch((err) => {
-        clearErrors(signUpForm);
-        errorFormHandler(err.errors, signUpForm);
-      })
-      .finally(() => {
-        loaderRegister.classList.add("hidden-item");
-      });
-    // })();
+        .then((response) => response.json())
+        .then((response) => {
+          if (response.success === true) {
+            registerModal.classList.add("hidden-item");
+            alert(
+              `Пользователь ${response.data.name} & email ${response.data.email} успешно зарегистрирован`
+            );
 
-    /////////////////////////////Удалить цвет полей при вводе в инпут//////////////////////
-    // (function deleteFieldStyle() {
-    //   let inputs = [...document.querySelectorAll(".modal-is-valid-field")];
-    //   // console.log(inputs);
-    //   if (!inputs) return;
-    //   inputs.forEach((input) => {
-    //     input.addEventListener(
-    //       "input",
-    //       function () {
-    //         input.classList.remove("modal-is-valid-field");
-    //       },
-    //       { once: true }
-    //     );
-    //   });
-    // })();
-    (function deleteFieldStyle() {
-      const inputs = [...document.getElementsByTagName("input")];
-      inputs.forEach((input) => {
-        input.addEventListener(
-          "input",
-          () => {
-            if (input.classList.contains("modal-is-valid-field")) {
-              console.log("удаляю");
-              input.classList.remove("modal-is-valid-field");
-            }
+            signUpForm.reset();
           }
-          // { once: true }
-        );
-      });
-    })();
+        })
+        .catch((err) => {
+          // console.log(err.errors);
+          clearErrors(signUpForm);
+          errorFormHandler(err.errors, signUpForm);
+        })
+        .finally(() => {
+          loaderRegister.classList.add("hidden-item"); // убираем loader
+        });
+    } else {
+      console.log("Есть ошибки в заполнении формы");
+      loaderRegister.classList.add("hidden-item"); // убираем loader
+    }
   });
-  // function register(e){
-  //   e.preventDefault();
-  //   loaderRegister.classList.remove('hidden');
-  // }};
 })();
-//валидация почты (используется выше)
 
-function isEmailValid(email) {
-  if (!email) {
-    return false;
-  } else {
-    return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
-  }
-}
+//////////////////////////////////////////////////
+///////////////для required///////////////////////
+//1 на форму атрибут "no validate"
+//2 сделать проверку на наличие атрибута required  у инпута и исходя из этого уже валидировать

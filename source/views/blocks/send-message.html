@@ -1,5 +1,10 @@
 <div class="modal font-medium send-message-modal_js hidden-item">
-  <form class="send-message-modal__form modal__form" action="#" name="message">
+  <form
+    class="send-message-modal__form modal__form"
+    action="#"
+    name="message"
+    novalidate
+  >
     <div class="send-message-modal__name-subject-wrapper">
       <div class="send-message-modal__name-wrapper modal__wrapper">
         <label for="send-message-name-field" class="modal__label"
@@ -10,6 +15,7 @@
           id="send-message-name-field"
           class="modal__field"
           name="name"
+          required
         />
       </div>
       <div class="send-message-modal__subject-wrapper modal__wrapper">
@@ -21,6 +27,7 @@
           id="send-message-subject-field"
           class="modal__field"
           name="subject"
+          required
         />
       </div>
     </div>
@@ -34,6 +41,7 @@
           id="send-message-email-field"
           class="modal__field"
           name="email"
+          required
         />
       </div>
       <div class="send-message-modal__phone-wrapper modal__wrapper">
@@ -45,6 +53,7 @@
           id="send-message-phone-field"
           class="modal__field"
           name="mobilePhone"
+          required
         />
       </div>
     </div>

@@ -11,9 +11,9 @@
   let dots = [];
   let slideWidth = wrapper.offsetWidth; // ширина врапера
   let activeSlideIndex;
-  console.log(activeSlideIndex);
+
   updateSlideCount();
-  console.log(activeSlideIndex);
+
   //////////делаем управление кнопками//////////
   buttonLeft.addEventListener("click", () => {
     setActiveSlide(activeSlideIndex - 1);
