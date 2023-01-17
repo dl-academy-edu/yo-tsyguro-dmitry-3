@@ -1,6 +1,8 @@
 const changePassForm = document.forms.changePassword;
+if (changePassForm) {
+  const changePassInputs = [...changePassForm.getElementsByTagName("input")];
+}
 
-const changePassInputs = [...changePassForm.getElementsByTagName("input")];
 (function () {
   let changePassModal = document.querySelector(".change-password-modal_js");
 
@@ -11,7 +13,7 @@ const changePassInputs = [...changePassForm.getElementsByTagName("input")];
     }
   });
 })();
-// ///////////////////////////////Функция валидации////////////////////////////////
+/////////////////////////////////Функция валидации////////////////////////////////
 (function () {
   if (!changePassForm) return;
   const oldPass = changePassForm.elements.oldPassword;
@@ -79,15 +81,47 @@ const changePassInputs = [...changePassForm.getElementsByTagName("input")];
         setErrorText(input, messageError);
       });
     }
-
-    //данные для отправки на сервер
-    const data = {
-      oldPassword: oldPass.value,
-      newPassword: newPass.value,
-      repeatPassword: repeatPass.value,
-    };
-    // console.log(errors);
-    console.log(data);
+    ///////////////////////////////////////////////////////////
+    ////////////////////Запрос/////////////////////////////////
+    if (!Object.keys(errors).length) {
+      const data = new FormData(changePassForm);
+      sendRequest({
+        url: "/api/users",
+        method: "PUT",
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+        body: data,
+      })
+        .then((response) => {
+          if (response.status === 401 || response.status === 403) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+            location.pathname = "/";
+            console.log("Данные о смене пароля успешно отправлены на сервер!");
+            return;
+          }
+          return response.json();
+        })
+        .then((response) => {
+          if (response.success) {
+            profile = response.data; ///////////////??????????????????????????????
+            renderProfile(profile);
+          } else {
+            throw response;
+          }
+        })
+        .catch((err) => {
+          if (err._message) {
+            alert(err._message);
+          }
+          clearErrors(changeOtherForm);
+          errorFormHandler(errors, changeOtherForm);
+        })
+        .finally(() => {
+          changePassModal.classList.add("hidden-item");
+        });
+    }
   });
 })();
 

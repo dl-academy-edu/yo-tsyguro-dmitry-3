@@ -11,6 +11,7 @@ let closeButtonRegister = document.querySelector(".close-button-register_js");
   if (!signInButton) return;
   signInButton.addEventListener("click", () => {
     signInModal.classList.remove("hidden-item");
+    console.log(loaderCount);
   });
 })();
 /////////////////Открытие Register//////////////////////////////

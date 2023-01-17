@@ -94,20 +94,31 @@ const loginInputs = [...loginForm.getElementsByTagName("input")];
       })
         .then((response) => response.json())
         .then((response) => {
+          showLoader();
+          setTimeout(() => {
+            hideLoader();
+            location.pathname = "/my-profile.html";
+          }, 2000);
           console.log("Запрос успешно отправлен на сервер!");
           console.log(response);
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("userId", response.data.userId);
+          console.log("Gjrfpfnm kjflth");
           rerenderLinks();
-          location.pathname = "/my-profile.html";
+
           signInModal.classList.add("hidden-item");
         })
         .catch((err) => {
+          showLoader();
+          setTimeout(() => {
+            hideLoader();
+          }, 2000);
           console.log(err);
           if (err._message) {
             alert(err._message);
           }
-        });
+        })
+        .finally(() => {});
     } else {
       console.log("Есть ошибки в заполнении формы");
     }

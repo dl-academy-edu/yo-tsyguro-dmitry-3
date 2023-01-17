@@ -9,10 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Crimson+Text:ital,wght@1,400;1,700&family=Inter:wght@400;700&family=KoHo:wght@700&family=Lato:wght@400;700&family=Montserrat:wght@200;300;600;700&family=Open+Sans:wght@400;700&family=Pridi:wght@400;500;700&family=Roboto&display=swap"
       rel="stylesheet"
@@ -33,7 +38,7 @@
       docElement.className =
         docElement.className.replace(/\bno-js\b/, "") + " js";
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <!-- Favicon -->
 
     <!-- build:css -->
@@ -260,10 +265,10 @@
     <div class="color-wrapper">
       <section class="portfolio page-container">
         <h2 class="portfolio__title section-title font-bold">Portfolio</h2>
-        <div class="portfolio__slider slider">
-          <div class="portfolio__slider-wrapper slider__wrapper">
-            <div class="portfolio__slider-inner-wrapper slider__inner-wrapper">
-              <picture class="portfolio__slider-slide slider__slide">
+        <div class="portfolio__slider swiper">
+          <div class="portfolio__slider-wrapper swiper-wrapper">
+            <div class="portfolio__slider-slide swiper-slide">
+              <picture class="portfolio__slider-picture">
                 <source
                   media="(min-width: 920px)"
                   srcset="
@@ -293,7 +298,9 @@
                   alt="Скриншот сайта из портфолио"
                 />
               </picture>
-              <picture class="portfolio__slider-slide slider__slide">
+            </div>
+            <div class="portfolio__slider-slide swiper-slide">
+              <picture class="portfolio__slider-picture">
                 <source
                   media="(min-width: 920px)"
                   srcset="
@@ -374,7 +381,7 @@
       aria-label="Вверх"
     ></button>
     @@include('blocks/log-in.html') @@include('blocks/register.html')
-    @@include('blocks/send-message.html')
+    @@include('blocks/send-message.html') @@include('blocks/loader.html')
     <script src="js/app.js"></script>
     <script src="js/common.js"></script>
     <script src="js/scroll-top.js"></script>
@@ -387,6 +394,7 @@
     <script src="js/change-password.js"></script>
     <script src="js/change-other.js"></script>
     <script src="js/slider-main.js"></script>
-    <script src="js/slider-portfolio.js"></script>
+    <script src="js/swiper.js"></script>
+    <!-- <script src="js/slider-portfolio.js"></script> -->
   </body>
 </html>

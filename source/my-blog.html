@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
-    />
-    <link
-      rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
@@ -37,7 +33,7 @@
       docElement.className =
         docElement.className.replace(/\bno-js\b/, "") + " js";
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> -->
     <!-- Favicon -->
 
     <!-- build:css -->
@@ -376,7 +372,7 @@
       </section>
       <section class="my-blog-page__articles page-container">
         <h2 class="my-blog__articles-title hidden-item">Articles list</h2>
-        <div class="my-blog-slider swiper">
+        <!-- <div class="my-blog-slider swiper">
           <div class="my-blog-slider__wrapper swiper-wrapper">
             <div class="my-blog-slider__slide swiper-slide">
               <div class="my-blog-slider__image">
@@ -395,28 +391,24 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="my-blog-slider__navigation">
+        </div> -->
+        <!-- <div class="my-blog-slider__navigation">
           <div class="swiper-button-left"></div>
           <div class="swiper-pagination-numbers"></div>
           <div class="swiper-button-right"></div>
-        </div>
+        </div> -->
       </section>
       <div class="my-blog__pagination_js"></div>
       <div class="my-blog__articles result_js"></div>
-      <div class="main-loader_js loader hidden">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
     </div>
-
+    @@include('blocks/loader.html')
     <div class="color-wrapper">@@include('blocks/footer.html')</div>
     @@include('blocks/log-in.html') @@include('blocks/register.html')
     @@include('blocks/send-message.html')
     <script src="js/app.js"></script>
     <script src="js/common.js"></script>
     <script src="js/scroll-top.js"></script>
+    <script src="js/my-blog.js"></script>
     <script src="js/header.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/my-profile.js"></script>
@@ -426,6 +418,5 @@
     <script src="js/change-password.js"></script>
     <script src="js/change-other.js"></script>
     <script src="js/swiper.js"></script>
-    <script src="js/my-blog.js"></script>
   </body>
 </html>

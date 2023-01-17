@@ -10,6 +10,7 @@ let closeBtnChangePass = document.querySelector(
 let closeBtnChangeOther = document.querySelector(
   ".close-button-change-other_js"
 );
+const deleteBtnProfile = document.querySelector(".my-profile__delete-btn_js");
 let profileImgWrapper = document.querySelector(".my-profile__picture_js");
 const profileImg = document.querySelector(".my-profile__image_js");
 const profileName = document.querySelector(".my-profile__name_js");
@@ -46,6 +47,50 @@ const profileAge = document.querySelector(".my-profile__age_js");
   closeBtnChangeOther.addEventListener("click", () => {
     changeOtherModal.classList.add("hidden-item");
   });
+})();
+
+/////////////////////////////////////////////////////////////////
+// ///////////////Удаление аккаунта//////////////////////////////
+/////////////////////////////////////////////////////////////////
+(function () {
+  if (deleteProfile) {
+    deleteBtnProfile.addEventListener("click", deleteProfile);
+
+    function deleteProfile() {
+      if (localStorage.getItem("token")) {
+        sendRequest({
+          url: `/api/users/:${localStorage.getItem("userId")}`,
+          method: "DELETE",
+          headers: {
+            "x-access-token": localStorage.getItem("token"),
+          },
+        })
+          .then((response) => {
+            if (response.status === 401 || response.status === 403) {
+              localStorage.removeItem("token");
+              localStorage.removeItem("userId");
+              console.log("Аккаунт удален!");
+              return;
+            }
+            return response.json();
+          })
+          .then((response) => {
+            if (response.success) {
+              location.pathname = "/";
+            } else {
+              throw response;
+            }
+          })
+          .catch((err) => {
+            if (err._message) {
+              alert(err._message);
+            }
+          });
+      } else {
+        return;
+      }
+    }
+  }
 })();
 
 //////////////Закрытие нажатием Esc//////////////////////////////

@@ -126,7 +126,6 @@ function addValidColor(field) {
 
 /////////////////////////Рендеринг данных профиля//////////////////////
 function renderProfile(profile) {
-  console.log(profile.photoUrl);
   profileImg.src = `${BASE_SERVER_PATH + profile.photoUrl}`;
   profileName.innerText = profile.name;
   profileSurname.innerText = profile.surname;
@@ -135,4 +134,21 @@ function renderProfile(profile) {
   profileAge.innerText = profile.age;
 }
 
-console.log(document.querySelector(".change-other-modal__file-input_js"));
+//////////////////////////////////////////////////////////////////////
+////////////////////////Лоадер////////////////////////////////////////
+const mainLoader = document.querySelector(".main-loader_js");
+let loaderCount = 0;
+console.log(loaderCount);
+///Функция Показать loader////
+const showLoader = () => {
+  loaderCount++;
+  mainLoader.classList.remove("hidden-item");
+};
+///Функция Скрыть loader////
+const hideLoader = () => {
+  loaderCount--;
+  if (loaderCount <= 0) {
+    mainLoader.classList.add("hidden-item");
+    loaderCount = 0;
+  }
+};

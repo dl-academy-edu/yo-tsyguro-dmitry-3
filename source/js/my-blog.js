@@ -2,7 +2,7 @@
 
 let filterForm = document.forms.myBlogFilterForm;
 const SERVER_URL = "https://academy.directlinedev.com";
-const mainLoader = document.querySelector(".main-loader_js");
+
 const paginationLinks = document.querySelector(".my-blog__pagination_js");
 
 //проверяем наличие поискового запроса в url
@@ -143,20 +143,6 @@ filterForm.addEventListener("submit", (e) => {
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////XHR запрос/////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-let loaderCount = 0;
-///Функция Показать loader////
-const showLoader = () => {
-  loaderCount++;
-  mainLoader.classList.remove("hidden-item");
-};
-///Функция Скрыть loader////
-const hideLoader = () => {
-  loaderCount--;
-  if (loaderCount <= 0) {
-    mainLoader.classList.add("hidden-item");
-    loaderCount = 0;
-  }
-};
 
 /////////////////////Функция///////////////
 (function () {
@@ -170,7 +156,7 @@ const hideLoader = () => {
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
 
-    data.view = (
+    data.views = (
       [...filterForm.elements.filterViewsGroup].find(
         (radio) => radio.checked
       ) || { value: null }
@@ -243,7 +229,7 @@ function setSearchParams(data) {
     });
   }
   if (data.views) {
-    data.view.forEach((views) => {
+    data.views.forEach((views) => {
       searchParams.append("views", views);
     });
   }
@@ -274,7 +260,7 @@ function setDataToFilter(data) {
     checkbox.checked = data.tags.includes(checkbox.value);
   });
   filterForm.elements.filterViewsGroup.forEach((radio) => {
-    radio.checked = data.view === radio.value;
+    radio.checked = data.views === radio.value;
   });
   filterForm.elements.filterComments.forEach((checkbox) => {
     checkbox.checked = data.commentsCount.includes(checkbox.value);
@@ -329,7 +315,7 @@ function getData(params) {
   filter.commentsCount = {
     $between: [minComments, maxComments],
   };
-  console.log(filter.commentsCount);
+  console.log(filter);
 
   // console.log(params.commentsCount);
   // if (
@@ -345,7 +331,6 @@ function getData(params) {
   //   };
   // }
 
-  console.log(filter);
   searchParams.set("filter", JSON.stringify(filter));
   //по кол-ву постов//
   let postLimit = (() => {
@@ -366,7 +351,7 @@ function getData(params) {
   if (+params.page) {
     searchParams.set("offset", +params.page * postLimit);
   }
-  console.log(searchParams.toString());
+
   ///////////////////////////////////////////////////////////////////
   ////////////Запрос//////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
@@ -375,7 +360,7 @@ function getData(params) {
   showLoader();
   result.innerHTML = "";
   paginationLinks.innerHTML = ""; ///?????????????????????????????????????????????????????????????????
-  console.log(SERVER_URL + "/api/posts?" + searchParams.toString());
+
   xhr.onload = () => {
     const response = JSON.parse(xhr.response);
     let dataPosts = "";

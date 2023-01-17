@@ -156,12 +156,18 @@ checkbox.addEventListener("change", () => {
         .then((response) => response.json())
         .then((response) => {
           if (response.success === true) {
+            console.log("Успешно");
+            signUpForm.reset();
             registerModal.classList.add("hidden-item");
             alert(
               `Пользователь ${response.data.name} & email ${response.data.email} успешно зарегистрирован`
             );
-
-            signUpForm.reset();
+            rerenderLinks();
+            renderProfile();
+            setTimeout(() => {
+              hideLoader();
+              location.pathname = "/";
+            }, 2000);
           }
         })
         .catch((err) => {
