@@ -400,7 +400,7 @@
 
   position: absolute;
   bottom: 0;
-  transform: translate(0 -30%);
+  // transform: translate(0 -30%);
   left: 0;
   right: 0;
   background-color: black;
@@ -443,12 +443,16 @@
 .my-blog-page__title {
   margin-top: 100px;
 }
+.my-blog__filter {
+  padding-bottom: 20px;
+}
 .filter__container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   row-gap: 30px;
   column-gap: 10px;
   margin-top: 40px;
+  margin-bottom: 35px;
 }
 .filter__title {
   font-size: 14px;
@@ -459,16 +463,42 @@
   font-size: 18px;
   line-height: 21px;
 }
-.filter__submit {
+.filter__reset {
   display: flex;
   align-items: center;
+  justify-content: center;
 
   @media (max-width: 768px) {
     align-items: flex-end;
+    justify-content: flex-start;
   }
 }
-.filter__submit-button {
+.filter__reset-button {
   opacity: 1;
+}
+.filter__submit {
+  display: flex;
+  column-gap: 30px;
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+    row-gap: 20px;
+  }
+}
+.filter__search-field {
+  width: 100%;
+  max-width: 837px;
+  height: 50px;
+  border-width: 3px;
+  border-color: black;
+  opacity: 0.2;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:focus {
+    opacity: 1;
+    border-color: black;
+    outline: none;
+  }
 }
 //////////////////////// Цветные checkbox/////////////////
 .filter__color-checkbox-list {
@@ -723,72 +753,73 @@
 }
 
 //////////////////////// Секция со статьями/////////////////
-.my-blog-page__articles {
-  margin-top: 50px;
-}
+
 .my-blog__card {
   display: flex;
+  column-gap: 20px;
   padding-top: 20px;
+  border-top: #e5e5e5 2px solid;
   padding-bottom: 20px;
+  align-items: center;
 }
 .my-blog__card-img {
   width: 320px;
 }
-//////////////////////// Swiper/////////////////
+.my-blog__card-tag-list {
+  display: flex;
+  column-gap: 5px;
+  margin-bottom: 10px;
+}
+.my-blog__card-tag {
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+}
+.my-blog__card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.my-blog__card-other {
+  display: flex;
+  column-gap: 10px;
+  font-size: 14px;
+  opacity: 0.5;
+  margin-bottom: 15px;
+}
+.my-blog__card-text {
+  margin-bottom: 20px;
+}
+.my-blog__card-post-link {
+  font-size: 22 px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+  border-bottom: 2px dashed;
+  padding-bottom: 3px;
+  // outline: 3px;
+}
 
-// .my-blog-slider {
-//   width: 100%;
-//   // height: 100%;
-// }
-// .my-blog-slider__wrapper {
-//   display: flex;
-// }
-// .my-blog-slider__slide {
-//   text-align: center;
-//   font-size: 18px;
-//   background-color: aliceblue;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-// .my-blog__img {
-//   width: 58%;
-// }
-// .my-blog-slider__navigation {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-// .swiper-pagination-numbers {
-//   text-align: center;
-// }
-// .swiper-button-left,
-// .swiper-button-right {
-//   width: 42px;
-//   height: 42px;
-//   background-size: contain;
-//   background-repeat: no-repeat;
-// }
-// .swiper-button-right {
-//   background-image: url("../img/icons/slider-right.png");
-// }
-// .swiper-button-left {
-//   background-image: url("../img/icons/slider-left.png");
-// }
-// .swiper-pagination-bullet {
-//   width: 20px;
-//   height: 20px;
-//   text-align: center;
-//   line-height: 20px;
-//   font-size: 16px;
-//   color: #000;
-//   opacity: 0.4;
-//   background: none;
-// }
-// .swiper-pagination-bullet-active {
-//   color: #000;
-//   // background: #007aff;
-//   opacity: 1;
+//////////////////////// Pagination/////////////////
+
+.my-blog__pagination_js {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+.my-blog__link_js {
+  opacity: 0.3;
+}
+.my-blog__pagination-active_js {
+  color: black;
+  font-weight: 700;
+  opacity: 1;
+}
+// .my-blog__arrow-left_js,
+// my-blog__arrow-right_js {
+//   width: 30px;
+//   height: 30px;
+//   background-color: black;
 // }
 
 ///////////////////////////////////////////////////////////////////////////

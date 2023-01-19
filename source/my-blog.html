@@ -47,359 +47,291 @@
       <h1 class="main__title my-blog-page__title font-bold">My blog</h1>
       <section class="my-blog__filter">
         <h2 class="my-blog__filter-title hidden-item">Filter</h2>
-        <form name="myBlogFilterForm" class="filter__container">
-          <!-- <div class="select-of-box_js"></div> -->
-          <div class="filter__tags-wrapper">
-            <legend class="filter__title">Tags</legend>
-            <ul class="filter__color-checkbox-list">
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-blue"
-                  class="filter__blue-checkbox"
-                  name="filterTag"
-                  value="blue" 
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-blue"
-                  class="filter__blue-checkbox"
-                  name="filterTag"
-                  value="1"
-                />
-                <label class="filter__blue-label" for="checkbox-blue"></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-light-blue"
-                  class="filter__light-blue-checkbox"
-                  name="filterTag"
-                  value="lightBlue"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-light-blue"
-                  class="filter__light-blue-checkbox"
-                  name="filterTag"
-                  value="2"
-                />
-                <label
-                  class="filter__light-blue-label"
-                  for="checkbox-light-blue"
-                ></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-yellow"
-                  class="filter__yellow-checkbox"
-                  name="filterTag"
-                  value="yellow"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-yellow"
-                  class="filter__yellow-checkbox"
-                  name="filterTag"
-                  value="3"
-                />
-                <label
-                  class="filter__yellow-label"
-                  for="checkbox-yellow"
-                ></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-marine"
-                  class="filter__marine-checkbox"
-                  name="filterTag"
-                  value="marine"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-marine"
-                  class="filter__marine-checkbox"
-                  name="filterTag"
-                  value="4"
-                />
-                <label
-                  class="filter__marine-label"
-                  for="checkbox-marine"
-                ></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-orange"
-                  class="filter__orange-checkbox"
-                  name="filterTag"
-                  value="orange"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-orange"
-                  class="filter__orange-checkbox"
-                  name="filterTag"
-                  value="5"
-                />
-                <label
-                  class="filter__orange-label"
-                  for="checkbox-orange"
-                ></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-pink"
-                  class="filter__pink-checkbox"
-                  name="filterTag"
-                  value="pink"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-pink"
-                  class="filter__pink-checkbox"
-                  name="filterTag"
-                  value="6"
-                />
-                <label class="filter__pink-label" for="checkbox-pink"></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-purple"
-                  class="filter__purple-checkbox"
-                  name="filterTag"
-                  value="purple"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-purple"
-                  class="filter__purple-checkbox"
-                  name="filterTag"
-                  value="7"
-                />
-                <label
-                  class="filter__purple-label"
-                  for="checkbox-purple"
-                ></label>
-              </li>
-              <li>
-                <!-- <input
-                  type="checkbox"
-                  id="checkbox-green"
-                  class="filter__green-checkbox"
-                  name="filterTag"
-                  value="green"
-                /> -->
-                <input
-                  type="checkbox"
-                  id="checkbox-green"
-                  class="filter__green-checkbox"
-                  name="filterTag"
-                  value="8"
-                />
-                <label class="filter__green-label" for="checkbox-green"></label>
-              </li>
-            </ul>
-          </div>
-          <div class="filter__views-wrapper">
-            <legend class="filter__title">Views</legend>
-            <ul class="filter__views-list">
-              <li>
-                <input
-                  type="radio"
-                  id="radio-min"
-                  class="filter__views-min-checkbox"
-                  value="100-500"
-                  name="filterViewsGroup"
-                />
-                <label class="filter__views-min-label" for="radio-min"
-                  >100-500</label
-                >
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="radio-middle"
-                  class="filter__views-middle-checkbox"
-                  value="500-1000"
-                  name="filterViewsGroup"
-                />
-                <label class="filter__views-middle-label" for="radio-middle"
-                  >500-1000</label
-                >
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="radio-max"
-                  class="filter__views-max-checkbox"
-                  value="1000-2000"
-                  name="filterViewsGroup"
-                />
-                <label class="filter__views-max-label" for="radio-max"
-                  >1000-2000</label
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="filter__comments-wrapper">
-            <legend class="filter__title">Comments</legend>
-            <ul class="filter__comments-list">
-              <li>
-                <input
-                  type="checkbox"
-                  id="checkbox-0"
-                  class="filter__comments-min-checkbox"
-                  value="0"
-                  name="filterComments"
-                />
-                <label class="filter__comments-min-label" for="checkbox-0"
-                  >0</label
-                >
-              </li>
-              <li>
-                <input
-                  type="checkbox"
-                  id="checkbox-0-1"
-                  class="filter__comments-middle-checkbox"
-                  value="0-1"
-                  name="filterComments"
-                />
-                <label class="filter__comments-middle-label" for="checkbox-0-1"
-                  >0-1</label
-                >
-              </li>
-              <li>
-                <input
-                  type="checkbox"
-                  id="checkbox-1-50"
-                  class="filter__comments-max-checkbox"
-                  value="1-50"
-                  name="filterComments"
-                />
-                <label class="filter__comments-max-label" for="checkbox-1-50"
-                  >1-50</label
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="filter__how-show-wrapper">
-            <legend class="filter__title">How show?</legend>
-            <ul class="filter__how-show-list">
-              <li>
-                <input
-                  type="radio"
-                  id="radio-show-5"
-                  class="filter__how-show-min-radio"
-                  value="5"
-                  name="filterHowShowGroup"
-                />
-                <label class="filter__how-show-min-label" for="radio-show-5"
-                  >show 5</label
-                >
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="radio-show-10"
-                  class="filter__how-show-max-radio"
-                  value="10"
-                  name="filterHowShowGroup"
-                />
-                <label class="filter__how-show-max-label" for="radio-show-10"
-                  >show 10</label
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="filter__sort-by-wrapper">
-            <legend class="filter__title">Sort by</legend>
-            <ul class="filter__sort-by-list">
-              <li>
-                <input
-                  type="radio"
-                  id="radio-sort-by-date"
-                  class="filter__sort-by-date-radio"
-                  value="date"
-                  name="filterSortByGroup"
-                />
-                <label
-                  class="filter__sort-by-date-label"
-                  for="radio-sort-by-date"
-                  >date</label
-                >
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="radio-sort-by-title"
-                  class="filter__sort-by-title-radio"
-                  value="title"
-                  name="filterSortByGroup"
-                />
-                <label
-                  class="filter__sort-by-title-label"
-                  for="radio-sort-by-title"
-                  >title</label
-                >
-              </li>
-              <li>
-                <input
-                  type="radio"
-                  id="radio-sort-by-views"
-                  class="filter__sort-by-views-radio"
-                  value="views"
-                  name="filterSortByGroup"
-                />
-                <label
-                  class="filter__sort-by-views-label"
-                  for="radio-sort-by-views"
-                  >views</label
-                >
-              </li>
-            </ul>
+        <form name="myBlogFilterForm" class="my-blog__filter-wrapper">
+          <div class="filter__container">
+            <!-- <div class="select-of-box_js"></div> -->
+            <div class="filter__tags-wrapper">
+              <legend class="filter__title">Tags</legend>
+              <ul class="filter__color-checkbox-list">
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-blue"
+                    class="filter__blue-checkbox"
+                    name="filterTag"
+                    value="1"
+                  />
+                  <label class="filter__blue-label" for="checkbox-blue"></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-light-blue"
+                    class="filter__light-blue-checkbox"
+                    name="filterTag"
+                    value="2"
+                  />
+                  <label
+                    class="filter__light-blue-label"
+                    for="checkbox-light-blue"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-yellow"
+                    class="filter__yellow-checkbox"
+                    name="filterTag"
+                    value="3"
+                  />
+                  <label
+                    class="filter__yellow-label"
+                    for="checkbox-yellow"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-marine"
+                    class="filter__marine-checkbox"
+                    name="filterTag"
+                    value="4"
+                  />
+                  <label
+                    class="filter__marine-label"
+                    for="checkbox-marine"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-orange"
+                    class="filter__orange-checkbox"
+                    name="filterTag"
+                    value="5"
+                  />
+                  <label
+                    class="filter__orange-label"
+                    for="checkbox-orange"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-pink"
+                    class="filter__pink-checkbox"
+                    name="filterTag"
+                    value="6"
+                  />
+                  <label class="filter__pink-label" for="checkbox-pink"></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-purple"
+                    class="filter__purple-checkbox"
+                    name="filterTag"
+                    value="7"
+                  />
+                  <label
+                    class="filter__purple-label"
+                    for="checkbox-purple"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-green"
+                    class="filter__green-checkbox"
+                    name="filterTag"
+                    value="8"
+                  />
+                  <label
+                    class="filter__green-label"
+                    for="checkbox-green"
+                  ></label>
+                </li>
+              </ul>
+            </div>
+            <div class="filter__views-wrapper">
+              <legend class="filter__title">Views</legend>
+              <ul class="filter__views-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-min"
+                    class="filter__views-min-checkbox"
+                    value="100-500"
+                    name="filterViewsGroup"
+                  />
+                  <label class="filter__views-min-label" for="radio-min"
+                    >100-500</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-middle"
+                    class="filter__views-middle-checkbox"
+                    value="500-1000"
+                    name="filterViewsGroup"
+                  />
+                  <label class="filter__views-middle-label" for="radio-middle"
+                    >500-1000</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-max"
+                    class="filter__views-max-checkbox"
+                    value="1000-2000"
+                    name="filterViewsGroup"
+                  />
+                  <label class="filter__views-max-label" for="radio-max"
+                    >1000-2000</label
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="filter__comments-wrapper">
+              <legend class="filter__title">Comments</legend>
+              <ul class="filter__comments-list">
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-0"
+                    class="filter__comments-min-checkbox"
+                    value="0"
+                    name="filterComments"
+                  />
+                  <label class="filter__comments-min-label" for="checkbox-0"
+                    >0</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-0-1"
+                    class="filter__comments-middle-checkbox"
+                    value="0-1"
+                    name="filterComments"
+                  />
+                  <label
+                    class="filter__comments-middle-label"
+                    for="checkbox-0-1"
+                    >0-1</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-1-50"
+                    class="filter__comments-max-checkbox"
+                    value="1-50"
+                    name="filterComments"
+                  />
+                  <label class="filter__comments-max-label" for="checkbox-1-50"
+                    >1-50</label
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="filter__how-show-wrapper">
+              <legend class="filter__title">How show?</legend>
+              <ul class="filter__how-show-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-show-5"
+                    class="filter__how-show-min-radio"
+                    value="5"
+                    name="filterHowShowGroup"
+                  />
+                  <label class="filter__how-show-min-label" for="radio-show-5"
+                    >show 5</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-show-10"
+                    class="filter__how-show-max-radio"
+                    value="10"
+                    name="filterHowShowGroup"
+                  />
+                  <label class="filter__how-show-max-label" for="radio-show-10"
+                    >show 10</label
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="filter__sort-by-wrapper">
+              <legend class="filter__title">Sort by</legend>
+              <ul class="filter__sort-by-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-sort-by-date"
+                    class="filter__sort-by-date-radio"
+                    value="date"
+                    name="filterSortByGroup"
+                  />
+                  <label
+                    class="filter__sort-by-date-label"
+                    for="radio-sort-by-date"
+                    >date</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-sort-by-title"
+                    class="filter__sort-by-title-radio"
+                    value="title"
+                    name="filterSortByGroup"
+                  />
+                  <label
+                    class="filter__sort-by-title-label"
+                    for="radio-sort-by-title"
+                    >title</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-sort-by-views"
+                    class="filter__sort-by-views-radio"
+                    value="views"
+                    name="filterSortByGroup"
+                  />
+                  <label
+                    class="filter__sort-by-views-label"
+                    for="radio-sort-by-views"
+                    >views</label
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="filter__reset">
+              <button type="button" class="button filter__reset-button">
+                Reset
+              </button>
+            </div>
           </div>
           <div class="filter__submit">
+            <input type="text" class="filter__search-field" name="filterName" />
             <button type="submit" class="button filter__submit-button">
-              Apply
+              Search
             </button>
           </div>
         </form>
       </section>
       <section class="my-blog-page__articles page-container">
         <h2 class="my-blog__articles-title hidden-item">Articles list</h2>
-        <!-- <div class="my-blog-slider swiper">
-          <div class="my-blog-slider__wrapper swiper-wrapper">
-            <div class="my-blog-slider__slide swiper-slide">
-              <div class="my-blog-slider__image">
-                <img
-                  class="my-blog__img"
-                  src="/img/images/blog-page-2000x1208-2x.jpg"
-                />
-              </div>
-            </div>
-            <div class="my-blog-slider__slide swiper-slide">
-              <div class="my-blog-slider__image">
-                <img
-                  class="my-blog__img"
-                  src="/img/images/monster-page-2000x1208-2x.jpg"
-                />
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="my-blog-slider__navigation">
-          <div class="swiper-button-left"></div>
-          <div class="swiper-pagination-numbers"></div>
-          <div class="swiper-button-right"></div>
-        </div> -->
+        <div class="my-blog__articles result_js"></div>
       </section>
       <div class="my-blog__pagination_js"></div>
-      <div class="my-blog__articles result_js"></div>
     </div>
     @@include('blocks/loader.html')
     <div class="color-wrapper">@@include('blocks/footer.html')</div>
@@ -417,6 +349,5 @@
     <script src="js/registration.js"></script>
     <script src="js/change-password.js"></script>
     <script src="js/change-other.js"></script>
-    <script src="js/swiper.js"></script>
   </body>
 </html>

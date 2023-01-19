@@ -4,7 +4,9 @@ let filterForm = document.forms.myBlogFilterForm;
 const SERVER_URL = "https://academy.directlinedev.com";
 
 const paginationLinks = document.querySelector(".my-blog__pagination_js");
-
+////////////////////////////////////////////////////////////////////
+////////////////////Формируем строку с нажатыми фильтрами///////////
+////////////////////////////////////////////////////////////////////
 //проверяем наличие поискового запроса в url
 if (location.search) {
   const params = {}; //создаем объект будущих параметров
@@ -38,17 +40,18 @@ if (location.search) {
       }
     }
   };
-
+  // console.log(param);
   updateInput(filterForm.filterTag, `tags`);
   updateInput(filterForm.filterViewsGroup, `views`);
   updateInput(filterForm.filterComments, `commentsCount`);
   updateInput(filterForm.filterHowShowGroup, `limit`);
   updateInput(filterForm.filterSortByGroup, `sort`);
+
+  // updateInput(filterForm.filterName, `name`);//////////////TO DO
 }
 
 filterForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
   let arrayCheckedInput = [];
   const addCheckedInput = (nameGroupInput, typeParam) => {
     for (let checkbox of nameGroupInput) {
@@ -63,7 +66,11 @@ filterForm.addEventListener("submit", (e) => {
   addCheckedInput(e.target.filterComments, `commentsCount`);
   addCheckedInput(e.target.filterHowShowGroup, `limit`);
   addCheckedInput(e.target.filterSortByGroup, `sort`);
-
+  // addCheckedInput(e.target.filterName, `name`);
+  if (filterForm.filterName.value) {
+    arrayCheckedInput.push(`${"name"}=${filterForm.filterName.value}`);
+  }
+  console.log(arrayCheckedInput);
   //собираем строку с нажатыми инпутами
   let stringCheckedInput = "";
   for ([index, activeInput] of arrayCheckedInput.entries()) {
@@ -79,11 +86,11 @@ filterForm.addEventListener("submit", (e) => {
 });
 
 //////////////////////////////////////////////////////////////////////////////
-///////////////////////////работаем с location history////////////////////////
+///////////////////////////работаем с готовой location history////////////////
 //////////////////////////////////////////////////////////////////////////////
 
 if (location.search) {
-  const params = {};
+  let params = {};
 
   const arrayStringParams = location.search.substring(1).split("&");
 
@@ -91,18 +98,24 @@ if (location.search) {
     let param = stringParam.split("=");
     let nameParam = param[0];
     let valueParam = param[1];
-    if (nameParam in params) {
+    if (nameParam === "name") {
+      filterForm.filterName.value = valueParam;
+    } else if (nameParam in params) {
       params[nameParam] = [valueParam];
     }
   }
-
+  console.log(params.limit);
   const updateInput = (gInputs, typeParam) => {
-    for (let input of gInputs) {
-      if (!params[typeParam]) continue;
-      const param = params[typeParam];
+    if (gInputs.type === "text") {
+      gInputs.value = params[typeParam];
+    } else {
+      for (let input of gInputs) {
+        if (!params[typeParam]) continue;
+        const param = params[typeParam];
 
-      for (partParam of param) {
-        if (partParam === input.value) input.checked = true;
+        for (partParam of param) {
+          if (partParam === input.value) input.checked = true;
+        }
       }
     }
   };
@@ -112,6 +125,7 @@ if (location.search) {
   updateInput(filterForm.filterComments, "commentsCount");
   updateInput(filterForm.filterHowShowGroup, "limit");
   updateInput(filterForm.filterSortByGroup, "sort");
+  // updateInput(filterForm.filterName, "name");
 }
 
 const url = new URL(location.partname, location.origin);
@@ -123,7 +137,7 @@ filterForm.addEventListener("submit", (e) => {
   url.searchParams.delete("limit");
   url.searchParams.delete("sort");
   url.searchParams.delete("page"); ////////////////////////////?????????????????????/
-
+  url.searchParams.delete("name");
   const addCheckedInput = (nameGroupInput, typeParam) => {
     for (let checkbox of nameGroupInput) {
       if (checkbox.checked) {
@@ -136,14 +150,14 @@ filterForm.addEventListener("submit", (e) => {
   addCheckedInput(e.target.filterComments, `commentsCount`);
   addCheckedInput(e.target.filterHowShowGroup, `limit`);
   addCheckedInput(e.target.filterSortByGroup, `sort`);
-
+  addCheckedInput(e.target.filterName, `name`);
   history.replaceState(null, "", url);
 });
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////XHR запрос/////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-
+let newdata;
 /////////////////////Функция///////////////
 (function () {
   filterForm.addEventListener("submit", (e) => {
@@ -152,6 +166,8 @@ filterForm.addEventListener("submit", (e) => {
     let data = {
       page: 0,
     };
+    data.name = filterForm.elements.name.value;
+
     data.tags = [...filterForm.elements.filterTag]
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -162,11 +178,6 @@ filterForm.addEventListener("submit", (e) => {
       ) || { value: null }
     ).value;
 
-    // data.commentsCount = (
-    //   [...filterForm.elements.filterComments].filter(
-    //     (checkbox) => checkbox.checked
-    //   ) || { value: null }
-    // ).value;
     data.commentsCount = [...filterForm.elements.filterComments]
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
@@ -182,7 +193,7 @@ filterForm.addEventListener("submit", (e) => {
         (radio) => radio.checked
       ) || { value: null }
     ).value;
-
+    newdata = data;
     console.log(data);
     getData(data);
     setSearchParams(data);
@@ -193,6 +204,7 @@ filterForm.addEventListener("submit", (e) => {
   xhr.send();
   showLoader();
   xhr.onload = () => {
+    //отрисовка тегов
     // const tags = JSON.parse(xhr.response).data;
     // const tagsBox = document.querySelector(".select-of-box_js");
     // tags.forEach((tag) => {
@@ -215,6 +227,7 @@ function getParamsFromLocation() {
     limit: searchParams.get("limit"), //("filter")
     sort: searchParams.get("sort"),
     page: +searchParams.get("page") || 0,
+    name: searchParams.get("name"),
   };
 }
 /////////////////////Функция  позволяет положить новые значения в searchParams///////////////
@@ -252,6 +265,7 @@ function setSearchParams(data) {
     searchParams.set("page", 0);
   }
   history.replaceState(null, document.title, "?" + searchParams.toString());
+  console.log("searchParams" + searchParams);
 }
 /////////////////////Функция выделение элементов верстки которые выбраны///////////////
 function setDataToFilter(data) {
@@ -271,6 +285,7 @@ function setDataToFilter(data) {
   filterForm.elements.filterSortByGroup.forEach((radio) => {
     radio.checked = data.sort === radio.value;
   });
+  filterForm.elements.filterName.value = data.name;
 }
 ////////////////////////////////////////////////////////////
 /////////////////////Функция получения постов///////////////
@@ -296,40 +311,28 @@ function getData(params) {
     };
   }
   //формируем объект чекбоксов с комментариями///
-  let maxComments;
-  let minComments;
+  let maxComments, minComments;
+  // console.log(params);
   let commentsArr = params.commentsCount;
-  switch (commentsArr.length) {
-    //нажаты все чекбоксы
-    case 0: {
-      maxComments = 0;
-      minComments = 0;
-      break;
-    }
-    default: {
-      minComments = commentsArr[0].split("-")[0];
-      maxComments = commentsArr[commentsArr.length - 1].split("-")[1];
-      break;
-    }
+  console.log(commentsArr);
+  if (commentsArr[0] === "0" && commentsArr.length === 1) {
+    minComments = 0;
+    maxComments = 0;
+  } else if (commentsArr.length === 0) {
+    minComments = 0;
+    maxComments = 9999;
+  } else {
+    minComments = commentsArr[0].split("-")[0];
+    maxComments = commentsArr[commentsArr.length - 1].split("-")[1];
   }
+
   filter.commentsCount = {
     $between: [minComments, maxComments],
   };
-  console.log(filter);
-
-  // console.log(params.commentsCount);
-  // if (
-  //   params.commentsCount &&
-  //   Array.isArray(params.commentsCount) &&
-  //   params.commentsCount.length
-  // ) {
-  //   filter.commentsCount = {
-  //     $between: [
-  //       +params.commentsCount[0].split("-")[0],
-  //       +params.commentsCount[0].split("-")[1],
-  //     ],
-  //   };
-  // }
+  //по нимени в строке запроса//
+  if (params.name) {
+    filter.title = params.name;
+  }
 
   searchParams.set("filter", JSON.stringify(filter));
   //по кол-ву постов//
@@ -337,7 +340,7 @@ function getData(params) {
     if (+params.limit > 0) {
       return +params.limit;
     } else {
-      return 10;
+      return 20;
     }
   })();
   if (postLimit) {
@@ -351,7 +354,8 @@ function getData(params) {
   if (+params.page) {
     searchParams.set("offset", +params.page * postLimit);
   }
-
+  console.log(filter);
+  console.log(params);
   ///////////////////////////////////////////////////////////////////
   ////////////Запрос//////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
@@ -370,6 +374,9 @@ function getData(params) {
         text: post.text,
         src: post.photo.desktopPhotoUrl,
         tags: post.tags,
+        date: post.date,
+        commentsCount: post.commentsCount,
+        views: post.views,
       });
     });
     result.innerHTML = dataPosts;
@@ -378,9 +385,10 @@ function getData(params) {
     for (let i = 0; i < pageCount; i++) {
       const link = linkElementCreate(i);
       paginationLinks.insertAdjacentElement("beforeend", link);
-      paginationLinks.insertAdjacentHTML("beforeend", "<br>");
+      // paginationLinks.insertAdjacentHTML("beforeend", "<br>");
     }
     hideLoader();
+    console.log(response);
   };
 }
 ////////////////////////////////////////////////////////////////////////
@@ -388,22 +396,21 @@ function getData(params) {
 function linkElementCreate(page) {
   const link = document.createElement("a");
   link.href = "?page=" + page;
-  link.innerText = "Страница №" + (page + 1);
-  link.classList.add("link_js");
+  link.innerText = page + 1;
+  link.classList.add("my-blog__link_js");
 
   let params = getParamsFromLocation();
   if (page === +params.page) {
-    link.classList.add("active");
+    link.classList.add("my-blog__pagination-active_js");
   }
   link.addEventListener("click", (e) => {
     e.preventDefault();
-    const links = document.querySelectorAll(".link_js");
+    const links = document.querySelectorAll(".my-blog__link_js");
     let searchParams = new URLSearchParams(location.search);
     let params = getParamsFromLocation();
-    links[params.page].classList.remove("active");
+    links[params.page].classList.remove("my-blog__pagination-active_js");
     searchParams.set("page", page);
-    console.log(links[page]);
-    links[page].classList.add("active");
+    links[page].classList.add("my-blog__pagination-active_js");
     history.replaceState(null, document.title, "?" + searchParams.toString());
     getData(getParamsFromLocation());
   });
@@ -413,20 +420,49 @@ function linkElementCreate(page) {
 /////////////////////////////////////////////////////////////////////
 /////////////////////Функция создания верстки карточек///////////////
 //////////////////////////////////////////////////////////////////////
-function cardCreate({ title, text, src, tags }) {
+function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
   return `
   <div class="my-blog__article">
     <div class="my-blog__card">
-      <img src="${SERVER_URL}${src}" class="my-blog__card-img" alt="$[title}"></img>
-      <div class="card-body">
-        <h5 class="card-title">${title}</h5>
-        <p class="card-text">${text}</p>${tags
-    .map((tag) => `<span style="color: ${tag.color}">${tag.name}</span>`)
-    .join("<br>")}
+      <img src="${SERVER_URL}${src}" class="my-blog__card-img" alt="${title}">
+      <div class="my-blog__card-body">
+        <ul class="my-blog__card-tag-list">
+        ${tags
+          .map(
+            (tag) =>
+              `<li class="my-blog__card-tag" style="background-color: ${tag.color}"></li>`
+          )
+          .join(" ")}
+        </ul>
+        <div class="my-blog__card-other">
+          <div class="my-blog__card-date">${modifDate(date)}</div>
+          <div class="my-blog__card-views">${views} views</div>
+          <div class="my-blog__card-comments">${commentsCount} comments</div>
+        </div>
+        <h5 class="my-blog__card-title">${title}</h5>        
+        <p class="my-blog__card-text">${text}</p>
+        <a href="#" class="my-blog__card-post-link">Go to this post</a>
+       
       </div>
     </div>
+    <style>
+    
+    </style>
   </div> `;
 }
+
+/*  <div class="my-blog__article">
+    <div class="my-blog__card">
+      <img src="${SERVER_URL}${src}" class="my-blog__card-img" alt="${title}">
+      <div class="card-body">
+        <h5 class="card-title">${title}</h5>
+        <p class="card-text">${text}</p>
+        ${tags
+          .map((tag) => `<span style="color: ${tag.color}">${tag.name}</span>`)
+          .join(" ")}
+      </div>
+    </div>
+  </div> `; */
 
 ////Функция создания тегов(чекбоксов) - не используется//////
 // function createTag({ id, name, color }) {

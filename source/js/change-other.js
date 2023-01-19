@@ -96,6 +96,7 @@ if (changeOtherForm) {
     /////////////////////Отправка  данных на сервер//////////////////////
     /////////////////////////////////////////////////////////////////////
     const changeData = (e) => {
+      showLoader();
       errors = {}; //обнуляем объект
       e.preventDefault(); //отменяем стандартное поведение при submit
 
@@ -173,6 +174,7 @@ if (changeOtherForm) {
             if (response.success) {
               profile = response.data; ///////////////??????????????????????????????
               renderProfile(profile);
+              // location.pathname = "/my-profile.html";
             } else {
               throw response;
             }
@@ -186,7 +188,10 @@ if (changeOtherForm) {
           })
           .finally(() => {
             changeOtherModal.classList.add("hidden-item");
-            location.pathname = "/";
+            setTimeout(() => {
+              location.pathname = "/my-profile.html";
+            }, 2000);
+            hideLoader();
           });
       }
     };

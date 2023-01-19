@@ -126,7 +126,9 @@ function addValidColor(field) {
 
 /////////////////////////Рендеринг данных профиля//////////////////////
 function renderProfile(profile) {
+  // profileImg.remove();
   profileImg.src = `${BASE_SERVER_PATH + profile.photoUrl}`;
+  // profileImgWrapper.append(profileImg);
   profileName.innerText = profile.name;
   profileSurname.innerText = profile.surname;
   profileEmail.innerText = profile.email;
@@ -152,3 +154,16 @@ const hideLoader = () => {
     loaderCount = 0;
   }
 };
+
+////////////////////////////////////////////////////
+///////////////Функция преобразования даты//////////
+function modifDate(date) {
+  let tagDate = new Date(date);
+  let day = tagDate.getDate();
+  if (day < 10) day = "0" + day;
+  let month = tagDate.getMonth();
+  if (month < 10) month = "0" + month;
+  let cardDate = `${day}.${month}.${tagDate.getFullYear()}`;
+  console.log(cardDate);
+  return cardDate;
+}
