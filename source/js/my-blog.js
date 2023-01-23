@@ -316,7 +316,7 @@ function getData(params) {
   let maxComments, minComments;
   // console.log(params);
   let commentsArr = params.commentsCount;
-  console.log(commentsArr);
+
   if (commentsArr[0] === "0" && commentsArr.length === 1) {
     minComments = 0;
     maxComments = 0;
@@ -356,8 +356,7 @@ function getData(params) {
   if (+params.page) {
     searchParams.set("offset", +params.page * postLimit);
   }
-  console.log(filter);
-  console.log(params);
+
   ///////////////////////////////////////////////////////////////////
   ////////////Запрос//////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
@@ -388,9 +387,8 @@ function getData(params) {
       const link = linkElementCreate(i);
       paginationLinks.insertAdjacentElement("beforeend", link);
     }
-
+    btnSliding();
     hideLoader();
-    console.log(response);
   };
 }
 
@@ -418,7 +416,7 @@ function linkElementCreate(page) {
     getData(getParamsFromLocation());
   });
 
-  console.log(link);
+  // console.log(link);
   return link;
 }
 
@@ -458,6 +456,8 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
 /////////////////////////////////////////////////////
 ///////////////Управление стрелками//////////////////
 ///////////////////////////////////////////////////////
+function btnSliding() {
+  let params = getParamsFromLocation();
   if (params.page <= 1) {
     myBlogBtnLeft.setAttribute("disabled", "disabled");
     myBlogBtnRight.setAttribute("disabled", "disabled");
@@ -477,12 +477,13 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
     }
   }
   myBlogBtnLeft.addEventListener("click", () => {
+    const links = [...document.querySelectorAll(".my-blog__link_js")];
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
     let searchParams = new URLSearchParams(location.search);
-    let newPage = page - 1;
-    if (links[page]) {
-      links[page].classList.remove("my-blog__pagination-active_js");
+    let newPage = params.page - 1;
+    if (links[params.page]) {
+      links[params.page].classList.remove("my-blog__pagination-active_js");
     }
     searchParams.set("page", newPage);
     links[newPage].classList.add("my-blog__pagination-active_js");
@@ -492,6 +493,7 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
     ///////////////////////////////////////////////////////
   });
 }
+
 /////////////////////////////////////////////////////////////////////
 /////////////////////Реализация сброса (Reset)////////////////////////
 //////////////////////////////////////////////////////////////////////
