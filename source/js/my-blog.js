@@ -380,14 +380,13 @@ function getData(params) {
       });
     });
     result.innerHTML = dataPosts;
-
     const pageCount = Math.ceil(response.count / postLimit);
 
     for (let i = 0; i < pageCount; i++) {
       const link = linkElementCreate(i);
       paginationLinks.insertAdjacentElement("beforeend", link);
     }
-    btnSliding();
+
     hideLoader();
   };
 }
@@ -404,6 +403,7 @@ function linkElementCreate(page) {
   if (page === +params.page) {
     link.classList.add("my-blog__pagination-active_js");
   }
+  btnSliding();
   link.addEventListener("click", (e) => {
     e.preventDefault();
     const links = document.querySelectorAll(".my-blog__link_js");
@@ -481,12 +481,15 @@ function btnSliding() {
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
     let searchParams = new URLSearchParams(location.search);
-    let newPage = params.page - 1;
+    // let newPage = params.page - 1;
     if (links[params.page]) {
       links[params.page].classList.remove("my-blog__pagination-active_js");
     }
-    searchParams.set("page", newPage);
-    links[newPage].classList.add("my-blog__pagination-active_js");
+    if (links[params.page]) {
+      links[params.page - 1].classList.add("my-blog__pagination-active_js");
+    }
+    searchParams.set("page", params.page - 1);
+
     history.replaceState(null, document.title, "?" + searchParams.toString());
     getData(getParamsFromLocation());
     ///////////////////////////////////////////////////////
