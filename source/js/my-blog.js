@@ -388,43 +388,6 @@ function getData(params) {
       const link = linkElementCreate(i);
       paginationLinks.insertAdjacentElement("beforeend", link);
     }
-    /////////////////////////////////////////////////////
-    ///////////////Управление стрелками//////////////////
-    if (pageCount <= 1) {
-      myBlogBtnLeft.setAttribute("disabled", "disabled");
-      myBlogBtnRight.setAttribute("disabled", "disabled");
-    } else {
-      let params = getParamsFromLocation();
-      console.log(params.page);
-      const links = [...document.querySelectorAll(".my-blog__link_js")];
-      if (params.page === 0) {
-        myBlogBtnLeft.setAttribute("disabled", "disabled");
-        myBlogBtnRight.removeAttribute("disabled", "disabled");
-      } else if (params.page === links.length - 1) {
-        myBlogBtnRight.setAttribute("disabled", "disabled");
-        myBlogBtnLeft.removeAttribute("disabled", "disabled");
-      } else {
-        myBlogBtnLeft.removeAttribute("disabled", "disabled");
-        myBlogBtnRight.removeAttribute("disabled", "disabled");
-      }
-      myBlogBtnLeft.addEventListener("click", () => {
-        ///////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////
-        let searchParams = new URLSearchParams(location.search);
-        let page = params.page - 1;
-        links[page].classList.remove("my-blog__pagination-active_js");
-        searchParams.set("page", page);
-        links[page].classList.add("my-blog__pagination-active_js");
-        history.replaceState(
-          null,
-          document.title,
-          "?" + searchParams.toString()
-        );
-        getData(getParamsFromLocation());
-        ///////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////
-      });
-    }
 
     hideLoader();
     console.log(response);
@@ -454,6 +417,41 @@ function linkElementCreate(page) {
     history.replaceState(null, document.title, "?" + searchParams.toString());
     getData(getParamsFromLocation());
   });
+  /////////////////////////////////////////////////////
+  ///////////////Управление стрелками//////////////////
+
+  if (page <= 1) {
+    myBlogBtnLeft.setAttribute("disabled", "disabled");
+    myBlogBtnRight.setAttribute("disabled", "disabled");
+  } else {
+    const links = document.querySelectorAll(".my-blog__link_js");
+    let params = getParamsFromLocation();
+    console.log(params.page);
+    if (params.page === 0) {
+      myBlogBtnLeft.setAttribute("disabled", "disabled");
+      myBlogBtnRight.removeAttribute("disabled", "disabled");
+    } else if (params.page === links.length - 1) {
+      myBlogBtnRight.setAttribute("disabled", "disabled");
+      myBlogBtnLeft.removeAttribute("disabled", "disabled");
+    } else {
+      myBlogBtnLeft.removeAttribute("disabled", "disabled");
+      myBlogBtnRight.removeAttribute("disabled", "disabled");
+    }
+    myBlogBtnLeft.addEventListener("click", () => {
+      ///////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////
+      let searchParams = new URLSearchParams(location.search);
+      let newPage = page - 1;
+
+      links[page].classList.remove("my-blog__pagination-active_js");
+      searchParams.set("page", newPage);
+      links[newPage].classList.add("my-blog__pagination-active_js");
+      history.replaceState(null, document.title, "?" + searchParams.toString());
+      // getData(getParamsFromLocation());
+      ///////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////
+    });
+  }
   return link;
 }
 
