@@ -458,27 +458,7 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
 /////////////////////////////////////////////////////
 ///////////////Управление стрелками//////////////////
 ///////////////////////////////////////////////////////
-if (page <= 1) {
-  myBlogBtnLeft.setAttribute("disabled", "disabled");
-  myBlogBtnRight.setAttribute("disabled", "disabled");
-} else {
-  const links = [...document.querySelectorAll(".my-blog__link_js")];
-  let params = getParamsFromLocation();
-  console.log(params.page);
-  if (params.page === 0) {
-    myBlogBtnLeft.setAttribute("disabled", "disabled");
-    myBlogBtnRight.removeAttribute("disabled", "disabled");
-  } else if (params.page === links.length - 1) {
-    myBlogBtnRight.setAttribute("disabled", "disabled");
-    myBlogBtnLeft.removeAttribute("disabled", "disabled");
-  } else {
-    myBlogBtnLeft.removeAttribute("disabled", "disabled");
-    myBlogBtnRight.removeAttribute("disabled", "disabled");
-  }
-  /////////////////////////////////////////////////////
-  ///////////////Управление стрелками//////////////////
-
-  if (page <= 1) {
+  if (params.page <= 1) {
     myBlogBtnLeft.setAttribute("disabled", "disabled");
     myBlogBtnRight.setAttribute("disabled", "disabled");
   } else {
