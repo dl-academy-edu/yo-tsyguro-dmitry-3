@@ -117,6 +117,7 @@ messageCheckbox.addEventListener("change", () => {
     };
 
     if (!Object.keys(errors).length) {
+      showLoader();
       let sendMessageData = {
         to: data.email,
         body: JSON.stringify(data),
@@ -129,32 +130,49 @@ messageCheckbox.addEventListener("change", () => {
         },
         body: JSON.stringify(sendMessageData),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          console.log(response);
+          if (
+            response.status === 401 ||
+            response.status === 403 ||
+            response.status === 422 ||
+            response.status === 400 ||
+            response.status === 200
+          ) {
+            return response.json();
+          } else {
+            throw new Error(`status: ${response.status}`);
+          }
+        })
         .then((response) => {
           if (response.success) {
-            sendMessageModal.classList.add("hidden-item");
-            alert(`Сообщение успешно отправлено пользователем ${data.name}`);
-            loaderRegister.classList.add("hidden-item"); // убираем loader
+            let message = `Сообщение от пользователя ${data.name} успешно отправлено`;
+            afterModalOpen(message, "success");
             messageForm.reset();
+            setTimeout(() => {
+              afterModalClose();
+              signInModal.classList.add("hidden-item");
+              location.pathname = "/";
+            }, 2000);
+          } else {
+            throw response;
           }
         })
         .catch((err) => {
-          clearErrors(messageForm);
+          let message = `Не отправлено: ${err._message}`;
+          afterModalOpen(message, "unsuccess");
+          setTimeout(() => {
+            afterModalClose();
+          }, 2000);
+          console.log(err);
+          // clearErrors(messageForm);
           errorFormHandler(err.errors, messageForm);
         })
         .finally(() => {
-          loaderRegister.classList.add("hidden-item");
+          hideLoader();
         });
     } else {
       console.log("Есть ошибки в заполнении формы");
     }
   });
 })();
-
-//валидация телефона (используется выше)
-
-function isMobilePhoneValid(mobilePhone) {
-  return mobilePhone.match(
-    /(\+7|8)[\s(]?(\d{3})[\s)]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})/g
-  );
-}

@@ -96,7 +96,6 @@ if (changeOtherForm) {
     /////////////////////Отправка  данных на сервер//////////////////////
     /////////////////////////////////////////////////////////////////////
     const changeData = (e) => {
-      showLoader();
       errors = {}; //обнуляем объект
       e.preventDefault(); //отменяем стандартное поведение при submit
 
@@ -151,6 +150,7 @@ if (changeOtherForm) {
       }
       ////////////////////Запрос/////////////////////////////////
       if (!Object.keys(errors).length) {
+        showLoader();
         const data = new FormData(changeOtherForm);
         sendRequest({
           url: "/api/users",
@@ -161,37 +161,46 @@ if (changeOtherForm) {
           body: data,
         })
           .then((response) => {
-            if (response.status === 401 || response.status === 403) {
-              localStorage.removeItem("token");
-              localStorage.removeItem("userId");
-
-              console.log("Данные успешно отправлены на сервер!");
-              return;
+            console.log(response);
+            if (
+              response.status === 401 ||
+              response.status === 403 ||
+              response.status === 422 ||
+              response.status === 400 ||
+              response.status === 200
+            ) {
+              return response.json();
+            } else {
+              throw new Error(`status: ${response.status}`);
             }
-            return response.json();
           })
+
           .then((response) => {
             if (response.success) {
-              profile = response.data; ///////////////??????????????????????????????
+              // localStorage.removeItem("token");
+              // localStorage.removeItem("userId");
+              profile = response.data;
               renderProfile(profile);
-              // location.pathname = "/my-profile.html";
+              let message = `Данные успешно обновлены`;
+              afterModalOpen(message, "success");
+              changeOtherModal.classList.add("hidden-item");
             } else {
               throw response;
             }
           })
           .catch((err) => {
             if (err._message) {
-              alert(err._message);
+              console.log(err._message);
             }
-            clearErrors(changeOtherForm);
+            let message = `Ошибка обновления данных: ${err._message}`;
+            afterModalOpen(message, "unsuccess");
             errorFormHandler(errors, changeOtherForm);
           })
           .finally(() => {
-            changeOtherModal.classList.add("hidden-item");
-            setTimeout(() => {
-              location.pathname = "/my-profile.html";
-            }, 2000);
             hideLoader();
+            setTimeout(() => {
+              afterModalClose();
+            }, 2000);
           });
       }
     };

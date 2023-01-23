@@ -2,8 +2,10 @@
 
 let filterForm = document.forms.myBlogFilterForm;
 const SERVER_URL = "https://academy.directlinedev.com";
-
 const paginationLinks = document.querySelector(".my-blog__pagination_js");
+const myBlogBtnLeft = document.querySelector(".my-blog__slider-button-left");
+const myBlogBtnRight = document.querySelector(".my-blog__slider-button-right");
+const resetButton = filterForm.querySelector(".filter__reset-button_js");
 ////////////////////////////////////////////////////////////////////
 ////////////////////Формируем строку с нажатыми фильтрами///////////
 ////////////////////////////////////////////////////////////////////
@@ -47,7 +49,7 @@ if (location.search) {
   updateInput(filterForm.filterHowShowGroup, `limit`);
   updateInput(filterForm.filterSortByGroup, `sort`);
 
-  // updateInput(filterForm.filterName, `name`);//////////////TO DO
+  // updateInput(filterForm.filterName, `name`);
 }
 
 filterForm.addEventListener("submit", (e) => {
@@ -98,24 +100,24 @@ if (location.search) {
     let param = stringParam.split("=");
     let nameParam = param[0];
     let valueParam = param[1];
-    if (nameParam === "name") {
-      filterForm.filterName.value = valueParam;
-    } else if (nameParam in params) {
-      params[nameParam] = [valueParam];
-    }
+    params[nameParam] = [valueParam];
   }
-  console.log(params.limit);
+
   const updateInput = (gInputs, typeParam) => {
-    if (gInputs.type === "text") {
-      gInputs.value = params[typeParam];
-    } else {
+    if (Array.isArray(gInputs)) {
       for (let input of gInputs) {
         if (!params[typeParam]) continue;
         const param = params[typeParam];
-
         for (partParam of param) {
           if (partParam === input.value) input.checked = true;
         }
+      }
+    } else {
+      const param = params[typeParam];
+      if (param) {
+        gInputs.value = param;
+      } else {
+        gInputs.value = "";
       }
     }
   };
@@ -125,7 +127,7 @@ if (location.search) {
   updateInput(filterForm.filterComments, "commentsCount");
   updateInput(filterForm.filterHowShowGroup, "limit");
   updateInput(filterForm.filterSortByGroup, "sort");
-  // updateInput(filterForm.filterName, "name");
+  updateInput(filterForm.filterName, "name");
 }
 
 const url = new URL(location.partname, location.origin);
@@ -363,8 +365,7 @@ function getData(params) {
   xhr.send();
   showLoader();
   result.innerHTML = "";
-  paginationLinks.innerHTML = ""; ///?????????????????????????????????????????????????????????????????
-
+  paginationLinks.innerHTML = "";
   xhr.onload = () => {
     const response = JSON.parse(xhr.response);
     let dataPosts = "";
@@ -382,15 +383,54 @@ function getData(params) {
     result.innerHTML = dataPosts;
 
     const pageCount = Math.ceil(response.count / postLimit);
+
     for (let i = 0; i < pageCount; i++) {
       const link = linkElementCreate(i);
       paginationLinks.insertAdjacentElement("beforeend", link);
-      // paginationLinks.insertAdjacentHTML("beforeend", "<br>");
     }
+    /////////////////////////////////////////////////////
+    ///////////////Управление стрелками//////////////////
+    if (pageCount <= 1) {
+      myBlogBtnLeft.setAttribute("disabled", "disabled");
+      myBlogBtnRight.setAttribute("disabled", "disabled");
+    } else {
+      let params = getParamsFromLocation();
+      console.log(params.page);
+      const links = [...document.querySelectorAll(".my-blog__link_js")];
+      if (params.page === 0) {
+        myBlogBtnLeft.setAttribute("disabled", "disabled");
+        myBlogBtnRight.removeAttribute("disabled", "disabled");
+      } else if (params.page === links.length - 1) {
+        myBlogBtnRight.setAttribute("disabled", "disabled");
+        myBlogBtnLeft.removeAttribute("disabled", "disabled");
+      } else {
+        myBlogBtnLeft.removeAttribute("disabled", "disabled");
+        myBlogBtnRight.removeAttribute("disabled", "disabled");
+      }
+      myBlogBtnLeft.addEventListener("click", () => {
+        ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////
+        let searchParams = new URLSearchParams(location.search);
+        let page = params.page - 1;
+        links[page].classList.remove("my-blog__pagination-active_js");
+        searchParams.set("page", page);
+        links[page].classList.add("my-blog__pagination-active_js");
+        history.replaceState(
+          null,
+          document.title,
+          "?" + searchParams.toString()
+        );
+        getData(getParamsFromLocation());
+        ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////
+      });
+    }
+
     hideLoader();
     console.log(response);
   };
 }
+
 ////////////////////////////////////////////////////////////////////////
 /////////////////////Функция создания ссылки для пагинации//////////////
 function linkElementCreate(page) {
@@ -450,25 +490,28 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
     </style>
   </div> `;
 }
+/////////////////////////////////////////////////////////////////////
+/////////////////////Реализация сброса (Reset)////////////////////////
+//////////////////////////////////////////////////////////////////////
 
-/*  <div class="my-blog__article">
-    <div class="my-blog__card">
-      <img src="${SERVER_URL}${src}" class="my-blog__card-img" alt="${title}">
-      <div class="card-body">
-        <h5 class="card-title">${title}</h5>
-        <p class="card-text">${text}</p>
-        ${tags
-          .map((tag) => `<span style="color: ${tag.color}">${tag.name}</span>`)
-          .join(" ")}
-      </div>
-    </div>
-  </div> `; */
+resetButton.addEventListener("click", resetFilter);
 
-////Функция создания тегов(чекбоксов) - не используется//////
-// function createTag({ id, name, color }) {
-//   return `
-//   <div class="filter__tags-group">
-//     <input name="tags" type="checkbox" class="filter__check-input" id="tags-${id}" value="${id}">
-//     <label style="color: ${color}" class="filter__check-label" for="tags-${id}">${name}</label>
-//   </div>`;
-// }
+function resetFilter() {
+  const resetInput = (gInputs) => {
+    console.log(gInputs.length);
+    if (gInputs.length) {
+      for (let input of gInputs) {
+        input.checked = false;
+      }
+    } else {
+      gInputs.value = "";
+    }
+  };
+
+  resetInput(filterForm.filterTag);
+  resetInput(filterForm.filterViewsGroup);
+  resetInput(filterForm.filterComments);
+  resetInput(filterForm.filterHowShowGroup);
+  resetInput(filterForm.filterSortByGroup);
+  resetInput(filterForm.filterName);
+}

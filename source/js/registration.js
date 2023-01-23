@@ -1,13 +1,24 @@
 const signUpForm = document.forms.signUp; //получаем форму
 const reisterInputs = [...signUpForm.getElementsByTagName("input")];
+const afterRegisterModal = document.querySelector(".sign-up-after-modal_js");
+
 const EMAIL_REGEXP =
   '/^(([^<>()[].,;:s@"]+(.[^<>()[].,;:s@"]+)*)|(".+"))@(([^<>()[].,;:s@"]+.)+[^<>()[].,;:s@"]{2,})$/iu';
 //const NAME_REGEXP = /^[a-zA-Z'][a-zA-Z-' ]+[a-zA-Z']?$/; // имя + фамилия (исходник что нашел в инете)
-
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////Закрытие окна после загрузки/////////////////////////////
+if (afterRegisterModal) {
+  const afterRegisterCloseBtn = document.querySelector(
+    ".register-after-close-button_js"
+  );
+  afterRegisterCloseBtn.addEventListener("click", () => {
+    afterRegisterModal.classList.add("hidden-item");
+  });
+}
 ///////////////////Включение кнопки чекбоксом///////////////////////////////
 const checkbox = signUpForm.elements.checkbox;
 const signUpButton = document.querySelector(".register-button_js");
-const loaderRegister = document.querySelector(".register-loader_js");
+// const loaderRegister = document.querySelector(".register-loader_js");
 ///////////////////////////////////включаем кнопку////////////
 checkbox.addEventListener("change", () => {
   if (checkbox.checked) {
@@ -35,7 +46,6 @@ checkbox.addEventListener("change", () => {
   signUpForm.addEventListener("submit", (e) => {
     errors = {}; //обнуляем объект
     e.preventDefault(); //отменяем стандартное поведение при submit
-    loaderRegister.classList.remove("hidden-item"); // показываем loader
 
     //очищаем предварительно код от ошибки после первого нажатия на submit
     clearErrors(signUpForm);
@@ -145,6 +155,7 @@ checkbox.addEventListener("change", () => {
       age: age.value,
     };
     if (!Object.keys(errors).length) {
+      showLoader();
       sendRequest({
         url: "/api/users",
         method: "POST",
@@ -153,34 +164,46 @@ checkbox.addEventListener("change", () => {
         },
         body: JSON.stringify(data), //???????????????????????????????????????????????????????????????
       })
-        .then((response) => response.json())
         .then((response) => {
-          if (response.success === true) {
-            console.log("Успешно");
+          console.log(response);
+          if (
+            response.status === 401 ||
+            response.status === 403 ||
+            response.status === 422 ||
+            response.status === 400 ||
+            response.status === 200
+          ) {
+            return response.json();
+          } else {
+            throw new Error(`status: ${response.status}`);
+          }
+        })
+        .then((response) => {
+          if (response.success) {
+            console.log(response);
             signUpForm.reset();
             registerModal.classList.add("hidden-item");
-            alert(
-              `Пользователь ${response.data.name} & email ${response.data.email} успешно зарегистрирован`
-            );
-            rerenderLinks();
-            renderProfile();
-            setTimeout(() => {
-              hideLoader();
-              location.pathname = "/";
-            }, 2000);
+            let message = `Пользователь ${response.data.name} & email ${response.data.email} успешно зарегистрирован`;
+            afterModalOpen(message, "success");
+          } else {
+            throw response;
           }
         })
         .catch((err) => {
-          // console.log(err.errors);
-          clearErrors(signUpForm);
+          console.log(err.errors);
+          let message = `Пользователь не зарегистрирован, потому что: ${err.errors.email}`;
+          afterModalOpen(message, "unsuccess");
           errorFormHandler(err.errors, signUpForm);
         })
         .finally(() => {
-          loaderRegister.classList.add("hidden-item"); // убираем loader
+          hideLoader();
+          setTimeout(() => {
+            afterModalClose();
+          }, 2000);
         });
     } else {
       console.log("Есть ошибки в заполнении формы");
-      loaderRegister.classList.add("hidden-item"); // убираем loader
+      // loaderRegister.classList.add("hidden-item"); // убираем loader
     }
   });
 })();

@@ -1,5 +1,15 @@
+.register-modal_js {
+  @media (max-width: 480px) {
+    overflow: scroll;
+  }
+}
 .register-modal__form {
   width: 680px;
+
+  @media (max-width: 480px) {
+    height: 90%;
+    // padding-bottom: 40px;
+  }
 }
 
 .register-modal__email-wrapper {

@@ -1,7 +1,4 @@
 const changePassForm = document.forms.changePassword;
-if (changePassForm) {
-  const changePassInputs = [...changePassForm.getElementsByTagName("input")];
-}
 
 (function () {
   let changePassModal = document.querySelector(".change-password-modal_js");
@@ -16,6 +13,7 @@ if (changePassForm) {
 /////////////////////////////////Функция валидации////////////////////////////////
 (function () {
   if (!changePassForm) return;
+  const changePassInputs = [...changePassForm.getElementsByTagName("input")];
   const oldPass = changePassForm.elements.oldPassword;
   const newPass = changePassForm.elements.newPassword;
   const repeatPass = changePassForm.elements.repeatPassword;
@@ -84,6 +82,7 @@ if (changePassForm) {
     ///////////////////////////////////////////////////////////
     ////////////////////Запрос/////////////////////////////////
     if (!Object.keys(errors).length) {
+      showLoader();
       const data = new FormData(changePassForm);
       sendRequest({
         url: "/api/users",
@@ -94,32 +93,50 @@ if (changePassForm) {
         body: data,
       })
         .then((response) => {
-          if (response.status === 401 || response.status === 403) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("userId");
-            location.pathname = "/";
-            console.log("Данные о смене пароля успешно отправлены на сервер!");
-            return;
+          console.log(response);
+          if (
+            response.status === 401 ||
+            response.status === 403 ||
+            response.status === 422 ||
+            response.status === 400 ||
+            response.status === 200
+          ) {
+            return response.json();
+          } else {
+            throw new Error(`status: ${response.status}`);
           }
-          return response.json();
         })
         .then((response) => {
           if (response.success) {
-            profile = response.data; ///////////////??????????????????????????????
+            profile = response.data;
             renderProfile(profile);
+            let message = `Пароль успешно изменён`;
+            afterModalOpen(message, "success");
+            changePassModal.classList.add("hidden-item");
+            setTimeout(() => {
+              afterModalClose();
+              changePassModal.classList.add("hidden-item");
+              changePassForm.reset();
+              // location.pathname = "/";
+            }, 2000);
           } else {
             throw response;
           }
         })
         .catch((err) => {
           if (err._message) {
-            alert(err._message);
+            console.log(err._message);
           }
-          clearErrors(changeOtherForm);
+          // clearErrors(changeOtherForm);
           errorFormHandler(errors, changeOtherForm);
+          let message = `Ошибка входа: ${err._message}`;
+          afterModalOpen(message, "unsuccess");
+          setTimeout(() => {
+            afterModalClose();
+          }, 2000);
         })
         .finally(() => {
-          changePassModal.classList.add("hidden-item");
+          hideLoader();
         });
     }
   });

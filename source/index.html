@@ -46,38 +46,17 @@
     <!-- endbuild -->
   </head>
   <body class="home-page font-medium">
-    @@include('blocks/header.html')
-    <div class="mobile-menu font-bold hidden-item">
-      <button class="mobile-menu__close"></button>
-      <nav class="mobile-menu__nav">
-        <a href="../../index.html" class="mobile-menu__link header__home-active"
-          >Home</a
-        >
-        <a
-          href="../../my-blog.html"
-          class="mobile-menu__link header__my-blog-active"
-          >My blog</a
-        >
-        <button type="button" class="mobile-menu__link header__button">
-          Sign in
-        </button>
-        <button type="button" class="mobile-menu__link header__button">
-          Register
-        </button>
-        <a
-          href="../../my-profile.html"
-          class="mobile-menu__link hidden-item mobile-menu__my-profile-active"
-          >My profile</a
-        >
-      </nav>
-    </div>
+    @@include('blocks/header.html') @@include('blocks/mobile-menu.html')
     <section class="main page-container">
       <h1 class="main__title main-page__title">Tsyguro Dmitry</h1>
       <div class="main__content-wrapper">
         <p class="main__content">
           Future front-end developer 35 years old, Tolyatti
         </p>
-        <button type="button" class="main__sandwich-button"></button>
+        <button
+          type="button"
+          class="sandwich-button main__sandwich-button main__sandwich-button_js"
+        ></button>
       </div>
       <div class="main__slider slider">
         <div class="main__slider-wrapper slider__wrapper">
@@ -200,7 +179,7 @@
           />
           <span class="skills__name">HTML 5</span>
           <div class="skills__progress-wrapper">
-            <span class="skills__percent">85%</span>
+            <span class="skills__percent">80%</span>
             <div class="skills__progress-bar skills__progress-bar-html"></div>
           </div>
         </li>
@@ -228,7 +207,7 @@
           />
           <span class="skills__name">JavaScript</span>
           <div class="skills__progress-wrapper">
-            <span class="skills__percent">5%</span>
+            <span class="skills__percent">20%</span>
             <div class="skills__progress-bar skills__progress-bar-js"></div>
           </div>
         </li>
@@ -256,7 +235,7 @@
           />
           <span class="skills__name">Figma</span>
           <div class="skills__progress-wrapper">
-            <span class="skills__percent">80%</span>
+            <span class="skills__percent">20%</span>
             <div class="skills__progress-bar skills__progress-bar-figma"></div>
           </div>
         </li>
@@ -394,17 +373,21 @@
     ></button>
     @@include('blocks/log-in.html') @@include('blocks/register.html')
     @@include('blocks/send-message.html') @@include('blocks/loader.html')
+    @@include('blocks/after-modal.html')
     <script src="js/app.js"></script>
+    <script src="js/mobile-menu.js"></script>
     <script src="js/common.js"></script>
     <script src="js/scroll-top.js"></script>
     <script src="js/header.js"></script>
     <script src="js/footer.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/my-profile.js"></script>
     <script src="js/log-in.js"></script>
     <script src="js/registration.js"></script>
     <script src="js/send-message.js"></script>
     <script src="js/change-password.js"></script>
     <script src="js/change-other.js"></script>
+
     <script src="js/slider-main.js"></script>
     <script src="js/swiper.js"></script>
     <!-- <script src="js/slider-portfolio.js"></script> -->

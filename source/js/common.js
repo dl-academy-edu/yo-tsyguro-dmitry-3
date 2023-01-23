@@ -1,6 +1,6 @@
 const BASE_SERVER_PATH = "https://academy.directlinedev.com";
-
-///////////////////////Перерисовать ссылки/////////////////////
+const afterModal = document.querySelector(".after-modal_js");
+///////////////////////Перерисовать ссылки в меню/////////////////////
 function rerenderLinks() {
   const isLogin = localStorage.getItem("token");
   if (isLogin) {
@@ -8,11 +8,25 @@ function rerenderLinks() {
     signInButton.classList.add("hidden-item");
     registerButton.classList.add("hidden-item");
     toProfileButton.classList.remove("hidden-item");
+    logoutButton.classList.remove("hidden-item");
+    if (mobileMenu) {
+      mobileSignInBtn.classList.add("hidden-item");
+      mobileRegisterBtn.classList.add("hidden-item");
+      mobileToProfileBtn.classList.remove("hidden-item");
+      mobileLogoutBtn.classList.remove("hidden-item");
+    }
   } else {
     //если токен отсутствует
     signInButton.classList.remove("hidden-item");
     registerButton.classList.remove("hidden-item");
     toProfileButton.classList.add("hidden-item");
+    logoutButton.classList.add("hidden-item");
+    if (mobileMenu) {
+      mobileSignInBtn.classList.remove("hidden-item");
+      mobileRegisterBtn.classList.remove("hidden-item");
+      mobileToProfileBtn.classList.add("hidden-item");
+      mobileLogoutBtn.classList.add("hidden-item");
+    }
   }
 }
 
@@ -58,6 +72,7 @@ function errorFormHandler(errors, form) {
       const messageError = errors[key];
       const input = form.elements[key];
       setErrorText(input, messageError);
+      addInvalidColor(input);
     });
     return;
   }
@@ -97,6 +112,12 @@ function isEmailValid(email) {
   } else {
     return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
   }
+}
+/////////////////////валидация валидация телефона ////////////////////
+function isMobilePhoneValid(mobilePhone) {
+  return mobilePhone.match(
+    /(\+7|8)[\s(]?(\d{3})[\s)]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})/g
+  );
 }
 ///////////////// добавить красный цвет бордеру/////////////
 function addInvalidColor(field) {
@@ -140,7 +161,7 @@ function renderProfile(profile) {
 ////////////////////////Лоадер////////////////////////////////////////
 const mainLoader = document.querySelector(".main-loader_js");
 let loaderCount = 0;
-console.log(loaderCount);
+
 ///Функция Показать loader////
 const showLoader = () => {
   loaderCount++;
@@ -164,6 +185,24 @@ function modifDate(date) {
   let month = tagDate.getMonth();
   if (month < 10) month = "0" + month;
   let cardDate = `${day}.${month}.${tagDate.getFullYear()}`;
-  console.log(cardDate);
+
   return cardDate;
+}
+
+//////////////////////////////////////////////////////////
+/////////Открыть / Закрыть окно после загрузки////////////
+
+function afterModalOpen(message, status) {
+  let modalMessage = afterModal.querySelector(".modal-after-text");
+  modalMessage.innerText = message;
+  if (status === "success") {
+    modalMessage.style.color = "green";
+  } else {
+    modalMessage.style.color = "red";
+  }
+  afterModal.classList.remove("hidden-item");
+}
+
+function afterModalClose() {
+  afterModal.classList.add("hidden-item");
 }

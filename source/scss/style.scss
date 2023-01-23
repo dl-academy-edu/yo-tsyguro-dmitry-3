@@ -29,6 +29,8 @@
 @import "_blocks/change-other";
 @import "_blocks/modal";
 @import "_blocks/slider";
+@import "_blocks/modal-after";
+@import "_blocks/sandwich-button";
 
 /*
   Ниже пример подключения других блоков
@@ -61,6 +63,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  z-index: 20;
   @media (min-width: 355px) {
     display: none;
   }
@@ -119,30 +122,17 @@
 .main-page__title {
   width: 200px;
 }
-.main__sandwich-button {
-  @media (min-width: 355px) {
-    display: none;
-  }
-}
+
 .main__content-wrapper {
   display: flex;
   justify-self: start;
+  align-items: flex-start;
   column-gap: 43px;
 }
 .main__content {
   max-width: 250px;
 }
-.main__sandwich-button {
-  background-image: url("../img/icons/sandwich.png");
-  background-repeat: no-repeat;
-  background-position: top;
-  width: 32px;
-  height: 30px;
-  flex-shrink: 0;
-  border: none;
-  padding: 0;
-  transition: all 400ms;
-}
+
 // .main__picture {
 //   // display: inline-block;
 //   // margin-left: auto;
@@ -284,7 +274,7 @@
 }
 .skills__progress-bar-html {
   &::after {
-    width: 85%;
+    width: 80%;
   }
 }
 .skills__progress-bar-css {
@@ -294,7 +284,7 @@
 }
 .skills__progress-bar-js {
   &::after {
-    width: 5%;
+    width: 20%;
   }
 }
 .skills__progress-bar-git {
@@ -304,7 +294,7 @@
 }
 .skills__progress-bar-figma {
   &::after {
-    width: 80%;
+    width: 20%;
   }
 }
 
@@ -440,8 +430,13 @@
 ///////////////////////////////////////////////////////////////////////////
 
 ////////////////////////Секция с фильтрами/////////////////
+
 .my-blog-page__title {
   margin-top: 100px;
+  @media (max-width: 354px) {
+    margin-top: 0px;
+    max-width: 55%;
+  }
 }
 .my-blog__filter {
   padding-bottom: 20px;
@@ -480,6 +475,7 @@
   display: flex;
   column-gap: 30px;
   @media (max-width: 500px) {
+    justify-content: end;
     flex-wrap: wrap;
     row-gap: 20px;
   }
@@ -761,9 +757,20 @@
   border-top: #e5e5e5 2px solid;
   padding-bottom: 20px;
   align-items: center;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+.my-blog__card-body {
+  @media (max-width: 700px) {
+    margin-top: 20px;
+  }
 }
 .my-blog__card-img {
   width: 320px;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 }
 .my-blog__card-tag-list {
   display: flex;
@@ -801,7 +808,11 @@
 }
 
 //////////////////////// Pagination/////////////////
-
+.my-blog__pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .my-blog__pagination_js {
   display: flex;
   justify-content: center;
@@ -815,12 +826,15 @@
   font-weight: 700;
   opacity: 1;
 }
-// .my-blog__arrow-left_js,
-// my-blog__arrow-right_js {
-//   width: 30px;
-//   height: 30px;
-//   background-color: black;
-// }
+.my-blog__slider-button-left,
+.my-blog__slider-button-right {
+  border: none;
+  background: none;
+}
+.my-blog__slider-button-left:disabled,
+.my-blog__slider-button-right:disabled {
+  opacity: 0.2;
+}
 
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////My blog end////////////////////////////
@@ -833,7 +847,8 @@
   margin-top: 128px;
   margin-bottom: 40px;
   @media (max-width: 354px) {
-    margin-top: 30px;
+    margin-top: 0px;
+    max-width: 60%;
   }
 }
 .my-profile__container {

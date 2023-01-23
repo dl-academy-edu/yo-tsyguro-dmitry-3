@@ -1,5 +1,14 @@
 const loginForm = document.forms.login;
 const loginInputs = [...loginForm.getElementsByTagName("input")];
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////Закрытие окна после загрузки/////////////////////////////
+if (afterModal) {
+  const afterLoginCloseBtn = document.querySelector(".after-close-button_js");
+  afterLoginCloseBtn.addEventListener("click", () => {
+    afterModal.classList.add("hidden-item");
+  });
+}
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////Функция валидации////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -84,6 +93,7 @@ const loginInputs = [...loginForm.getElementsByTagName("input")];
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (!Object.keys(errors).length) {
+      showLoader();
       sendRequest({
         url: "/api/users/login",
         method: "POST",
@@ -92,34 +102,52 @@ const loginInputs = [...loginForm.getElementsByTagName("input")];
         },
         body: JSON.stringify(data),
       })
-        .then((response) => response.json())
         .then((response) => {
-          showLoader();
-          console.log("Запрос успешно отправлен на сервер!");
           console.log(response);
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("userId", response.data.userId);
-          console.log("Gjrfpfnm kjflth");
-          rerenderLinks();
-          signInModal.classList.add("hidden-item");
-          hideLoader();
-          setTimeout(() => {
-            location.pathname = "/my-profile.html";
-          }, 2000);
-        })
-        .catch((err) => {
-          showLoader();
-          setTimeout(() => {
-            hideLoader();
-          }, 2000);
-          console.log(err);
-          if (err._message) {
-            console.log(err._message);
+          if (
+            response.status === 401 ||
+            response.status === 403 ||
+            response.status === 422 ||
+            response.status === 400 ||
+            response.status === 200
+          ) {
+            return response.json();
           } else {
-            console.log(err);
+            throw new Error(`status: ${response.status}`);
           }
         })
-        .finally(() => {});
+        .then((response) => {
+          if (response.success) {
+            console.log(response);
+            rerenderLinks();
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("userId", response.data.userId);
+
+            let message = `Пользователь c логином ${data.email} успешно вошел в аккаунт`;
+            afterModalOpen(message, "success");
+            setTimeout(() => {
+              afterModalClose();
+              signInModal.classList.add("hidden-item");
+              location.pathname = "/";
+            }, 2000);
+          } else {
+            throw response;
+          }
+        })
+        .catch((err) => {
+          if (err._message) {
+            console.log(err._message);
+          }
+          let message = `Ошибка входа: ${err._message}`;
+          afterModalOpen(message, "unsuccess");
+          setTimeout(() => {
+            afterModalClose();
+          }, 2000);
+          console.log(err);
+        })
+        .finally(() => {
+          hideLoader();
+        });
     } else {
       console.log("Есть ошибки в заполнении формы");
     }

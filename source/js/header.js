@@ -5,13 +5,12 @@ let signInModal = document.querySelector(".sign-in-modal_js");
 let registerModal = document.querySelector(".register-modal_js");
 let closeButtonLogin = document.querySelector(".close-button-login_js");
 let closeButtonRegister = document.querySelector(".close-button-register_js");
-
+let logoutButton = document.querySelector(".header__logout_js");
 /////////////////Открытие Sign in//////////////////////////////
 (function () {
   if (!signInButton) return;
   signInButton.addEventListener("click", () => {
     signInModal.classList.remove("hidden-item");
-    console.log(loaderCount);
   });
 })();
 /////////////////Открытие Register//////////////////////////////
@@ -45,5 +44,17 @@ let closeButtonRegister = document.querySelector(".close-button-register_js");
       signInModal.classList.add("hidden-item");
       registerModal.classList.add("hidden-item");
     }
+  });
+})();
+
+/////////////Выход из аккаунта///////////////////////////////////
+(function () {
+  if (!logoutButton) return;
+  logoutButton.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    rerenderLinks();
+    // renderProfile();
+    location.pathname = "/";
   });
 })();

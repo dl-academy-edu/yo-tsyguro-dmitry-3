@@ -42,9 +42,15 @@
     <!-- endbuild -->
   </head>
   <body class="my-blog-page font-medium">
-    @@include('blocks/header.html')
+    @@include('blocks/header.html') @@include('blocks/mobile-menu.html')
     <div class="page-container">
-      <h1 class="main__title my-blog-page__title font-bold">My blog</h1>
+      <div class="title-sandwich-container">
+        <h1 class="main__title my-blog-page__title font-bold">My blog</h1>
+        <button
+          type="button"
+          class="sandwich-button main__sandwich-button main__sandwich-button_js"
+        ></button>
+      </div>
       <section class="my-blog__filter">
         <h2 class="my-blog__filter-title hidden-item">Filter</h2>
         <form name="myBlogFilterForm" class="my-blog__filter-wrapper">
@@ -314,7 +320,10 @@
               </ul>
             </div>
             <div class="filter__reset">
-              <button type="button" class="button filter__reset-button">
+              <button
+                type="button"
+                class="button filter__reset-button filter__reset-button_js"
+              >
                 Reset
               </button>
             </div>
@@ -327,17 +336,30 @@
           </div>
         </form>
       </section>
-      <section class="my-blog-page__articles page-container">
+      <section class="my-blog-page__articles">
         <h2 class="my-blog__articles-title hidden-item">Articles list</h2>
         <div class="my-blog__articles result_js"></div>
       </section>
-      <div class="my-blog__pagination_js"></div>
+      <div class="my-blog__pagination-wrapper">
+        <button
+          class="my-blog__slider-button-left my-blog__slider-button-left_js"
+        >
+          <img src="../img/icons/slider-left.png" alt="Стрелка влево" />
+        </button>
+        <div class="my-blog__pagination_js"></div>
+        <button
+          class="my-blog__slider-button-right my-blog__slider-button-right_js"
+        >
+          <img src="../img/icons/slider-right.png" alt="Стрелка вправо" />
+        </button>
+      </div>
     </div>
     @@include('blocks/loader.html')
     <div class="color-wrapper">@@include('blocks/footer.html')</div>
     @@include('blocks/log-in.html') @@include('blocks/register.html')
-    @@include('blocks/send-message.html')
+    @@include('blocks/send-message.html') @@include('blocks/after-modal.html')
     <script src="js/app.js"></script>
+    <script src="js/mobile-menu.js"></script>
     <script src="js/common.js"></script>
     <script src="js/scroll-top.js"></script>
     <script src="js/my-blog.js"></script>

@@ -46,9 +46,15 @@
     <!-- endbuild -->
   </head>
   <body class="my-profile-page font-medium page-container">
-    @@include('blocks/header.html')
+    @@include('blocks/header.html') @@include('blocks/mobile-menu.html')
     <section class="my-profile">
-      <h1 class="main__title my-profile-page__title">My profile</h1>
+      <div class="title-sandwich-container">
+        <h1 class="main__title my-profile-page__title">My profile</h1>
+        <button
+          type="button"
+          class="sandwich-button main__sandwich-button main__sandwich-button_js"
+        ></button>
+      </div>
       <div class="my-profile__container">
         <picture class="my-profile__picture my-profile__picture_js">
           <!-- <source
@@ -128,7 +134,9 @@
     @@include('blocks/register.html') @@include('blocks/send-message.html')
     @@include('blocks/change-password.html')
     @@include('blocks/change-other.html') @@include('blocks/loader.html')
+    @@include('blocks/after-modal.html')
     <script src="js/app.js"></script>
+    <script src="js/mobile-menu.js"></script>
     <script src="js/common.js"></script>
     <!-- <script src="js/my-blog.js"></script> -->
     <script src="js/scroll-top.js"></script>

@@ -53,30 +53,36 @@ const profileAge = document.querySelector(".my-profile__age_js");
 // ///////////////Удаление аккаунта//////////////////////////////
 /////////////////////////////////////////////////////////////////
 (function () {
-  if (deleteProfile) {
+  if (deleteBtnProfile) {
     deleteBtnProfile.addEventListener("click", deleteProfile);
 
     function deleteProfile() {
+      console.log(`${localStorage.getItem("userId")}`);
       if (localStorage.getItem("token")) {
         sendRequest({
-          url: `/api/users/:${localStorage.getItem("userId")}`,
+          url: `/api/users/${localStorage.getItem("userId")}`,
           method: "DELETE",
           headers: {
-            "x-access-token": localStorage.getItem("token"),
+            "x-access-token": `${localStorage.getItem("token")}`,
+            "Content-Type": "application/json;charset=utf-8",
           },
         })
           .then((response) => {
-            if (response.status === 401 || response.status === 403) {
-              localStorage.removeItem("token");
-              localStorage.removeItem("userId");
-              console.log("Аккаунт удален!");
-              return;
+            console.log(response);
+            if (
+              response.status === 401 ||
+              response.status === 403 ||
+              response.status === 422
+            ) {
+              return response.json();
+            } else {
+              throw new Error(`status: ${response.status}`);
             }
-            return response.json();
           })
           .then((response) => {
             if (response.success) {
-              location.pathname = "/";
+              localStorage.removeItem("token");
+              localStorage.removeItem("userId");
             } else {
               throw response;
             }
@@ -85,6 +91,13 @@ const profileAge = document.querySelector(".my-profile__age_js");
             if (err._message) {
               alert(err._message);
             }
+            console.log(err);
+          })
+          .finally(() => {
+            setTimeout(() => {
+              // afterModalClose(afterLoginModal);
+            }, 2000);
+            location.pathname = "/";
           });
       } else {
         return;
