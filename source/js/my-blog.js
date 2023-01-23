@@ -417,41 +417,8 @@ function linkElementCreate(page) {
     history.replaceState(null, document.title, "?" + searchParams.toString());
     getData(getParamsFromLocation());
   });
-  /////////////////////////////////////////////////////
-  ///////////////Управление стрелками//////////////////
 
-  if (page <= 1) {
-    myBlogBtnLeft.setAttribute("disabled", "disabled");
-    myBlogBtnRight.setAttribute("disabled", "disabled");
-  } else {
-    const links = document.querySelectorAll(".my-blog__link_js");
-    let params = getParamsFromLocation();
-    console.log(params.page);
-    if (params.page === 0) {
-      myBlogBtnLeft.setAttribute("disabled", "disabled");
-      myBlogBtnRight.removeAttribute("disabled", "disabled");
-    } else if (params.page === links.length - 1) {
-      myBlogBtnRight.setAttribute("disabled", "disabled");
-      myBlogBtnLeft.removeAttribute("disabled", "disabled");
-    } else {
-      myBlogBtnLeft.removeAttribute("disabled", "disabled");
-      myBlogBtnRight.removeAttribute("disabled", "disabled");
-    }
-    myBlogBtnLeft.addEventListener("click", () => {
-      ///////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////
-      let searchParams = new URLSearchParams(location.search);
-      let newPage = page - 1;
-
-      links[page].classList.remove("my-blog__pagination-active_js");
-      searchParams.set("page", newPage);
-      links[newPage].classList.add("my-blog__pagination-active_js");
-      history.replaceState(null, document.title, "?" + searchParams.toString());
-      // getData(getParamsFromLocation());
-      ///////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////
-    });
-  }
+  console.log(link);
   return link;
 }
 
@@ -487,6 +454,63 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
     
     </style>
   </div> `;
+}
+/////////////////////////////////////////////////////
+///////////////Управление стрелками//////////////////
+///////////////////////////////////////////////////////
+if (page <= 1) {
+  myBlogBtnLeft.setAttribute("disabled", "disabled");
+  myBlogBtnRight.setAttribute("disabled", "disabled");
+} else {
+  const links = [...document.querySelectorAll(".my-blog__link_js")];
+  let params = getParamsFromLocation();
+  console.log(params.page);
+  if (params.page === 0) {
+    myBlogBtnLeft.setAttribute("disabled", "disabled");
+    myBlogBtnRight.removeAttribute("disabled", "disabled");
+  } else if (params.page === links.length - 1) {
+    myBlogBtnRight.setAttribute("disabled", "disabled");
+    myBlogBtnLeft.removeAttribute("disabled", "disabled");
+  } else {
+    myBlogBtnLeft.removeAttribute("disabled", "disabled");
+    myBlogBtnRight.removeAttribute("disabled", "disabled");
+  }
+  /////////////////////////////////////////////////////
+  ///////////////Управление стрелками//////////////////
+
+  if (page <= 1) {
+    myBlogBtnLeft.setAttribute("disabled", "disabled");
+    myBlogBtnRight.setAttribute("disabled", "disabled");
+  } else {
+    const links = [...document.querySelectorAll(".my-blog__link_js")];
+    let params = getParamsFromLocation();
+    console.log(params.page);
+    if (params.page === 0) {
+      myBlogBtnLeft.setAttribute("disabled", "disabled");
+      myBlogBtnRight.removeAttribute("disabled", "disabled");
+    } else if (params.page === links.length - 1) {
+      myBlogBtnRight.setAttribute("disabled", "disabled");
+      myBlogBtnLeft.removeAttribute("disabled", "disabled");
+    } else {
+      myBlogBtnLeft.removeAttribute("disabled", "disabled");
+      myBlogBtnRight.removeAttribute("disabled", "disabled");
+    }
+  }
+  myBlogBtnLeft.addEventListener("click", () => {
+    ///////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
+    let searchParams = new URLSearchParams(location.search);
+    let newPage = page - 1;
+    if (links[page]) {
+      links[page].classList.remove("my-blog__pagination-active_js");
+    }
+    searchParams.set("page", newPage);
+    links[newPage].classList.add("my-blog__pagination-active_js");
+    history.replaceState(null, document.title, "?" + searchParams.toString());
+    getData(getParamsFromLocation());
+    ///////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
+  });
 }
 /////////////////////////////////////////////////////////////////////
 /////////////////////Реализация сброса (Reset)////////////////////////
