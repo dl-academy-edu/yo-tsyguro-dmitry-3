@@ -4,5 +4,9 @@
   padding: 10px 20px;
   line-height: 22px;
   font-size: 18px;
-  // opacity: 0.1;
+  transition: all 400ms;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.6;
+  }
 }

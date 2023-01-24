@@ -535,6 +535,7 @@
     height: 25px;
     background-size: cover;
     background-repeat: no-repeat;
+    cursor: pointer;
   }
 }
 .filter__blue-label {
@@ -663,6 +664,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../img/icons/radio.png");
+    cursor: pointer;
   }
 }
 .filter__comments-min-label,
@@ -680,6 +682,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url("../img/icons/checkbox.png");
+    cursor: pointer;
   }
 }
 .filter__views-min-checkbox:checked ~ .filter__views-min-label,
@@ -692,6 +695,7 @@
 .filter__sort-by-views-radio:checked ~ .filter__sort-by-views-label {
   &:before {
     background-image: url("../img/icons/radio-checked.png");
+    cursor: pointer;
   }
 }
 .filter__comments-min-checkbox:checked ~ .filter__comments-min-label,
@@ -699,6 +703,11 @@
 .filter__comments-max-checkbox:checked ~ .filter__comments-max-label {
   &:before {
     background-image: url("../img/icons/checkbox-checked.png");
+    transition: all 400ms;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
   }
 }
 
