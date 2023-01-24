@@ -398,6 +398,7 @@
   opacity: 0.8;
 }
 .portfolio__desription-title {
+  text-decoration: none;
   color: white;
   text-decoration: underline dashed;
   text-underline-position: under;
@@ -418,7 +419,7 @@
 }
 .portfolio__slider-button-left,
 .portfolio__slider-button-right {
-  background: none;
+  background: white;
   z-index: 10;
 }
 ///////////////////////////////////////////////////////////////////////////

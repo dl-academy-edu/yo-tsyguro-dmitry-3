@@ -386,7 +386,7 @@ function getData(params) {
       const link = linkElementCreate(i);
       paginationLinks.insertAdjacentElement("beforeend", link);
     }
-
+    btnSliding();
     hideLoader();
   };
 }
@@ -403,7 +403,7 @@ function linkElementCreate(page) {
   if (page === +params.page) {
     link.classList.add("my-blog__pagination-active_js");
   }
-  btnSliding();
+
   link.addEventListener("click", (e) => {
     e.preventDefault();
     const links = document.querySelectorAll(".my-blog__link_js");
@@ -457,14 +457,14 @@ function cardCreate({ title, text, src, tags, commentsCount, views, date }) {
 ///////////////Управление стрелками//////////////////
 ///////////////////////////////////////////////////////
 function btnSliding() {
-  let params = getParamsFromLocation();
-  if (params.page <= 1) {
+  const params = getParamsFromLocation();
+  console.log(params);
+  const links = [...document.querySelectorAll(".my-blog__link_js")];
+  console.log(links);
+  if (links.length <= 1) {
     myBlogBtnLeft.setAttribute("disabled", "disabled");
     myBlogBtnRight.setAttribute("disabled", "disabled");
   } else {
-    const links = [...document.querySelectorAll(".my-blog__link_js")];
-    let params = getParamsFromLocation();
-    console.log(params.page);
     if (params.page === 0) {
       myBlogBtnLeft.setAttribute("disabled", "disabled");
       myBlogBtnRight.removeAttribute("disabled", "disabled");
@@ -476,12 +476,13 @@ function btnSliding() {
       myBlogBtnRight.removeAttribute("disabled", "disabled");
     }
   }
+  ///////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////
   myBlogBtnLeft.addEventListener("click", () => {
+    let params = getParamsFromLocation();
     const links = [...document.querySelectorAll(".my-blog__link_js")];
-    ///////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////
     let searchParams = new URLSearchParams(location.search);
-    // let newPage = params.page - 1;
+
     if (links[params.page]) {
       links[params.page].classList.remove("my-blog__pagination-active_js");
     }
@@ -490,10 +491,26 @@ function btnSliding() {
     }
     searchParams.set("page", params.page - 1);
 
-    history.replaceState(null, document.title, "?" + searchParams.toString());
-    getData(getParamsFromLocation());
-    ///////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////
+    // history.replaceState(null, document.title, "?" + searchParams.toString());
+    location.search = searchParams;
+  });
+  ///////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////
+  myBlogBtnRight.addEventListener("click", () => {
+    let params = getParamsFromLocation();
+    const links = [...document.querySelectorAll(".my-blog__link_js")];
+    let searchParams = new URLSearchParams(location.search);
+
+    if (links[params.page]) {
+      links[params.page].classList.remove("my-blog__pagination-active_js");
+    }
+    if (links[params.page]) {
+      links[params.page + 1].classList.add("my-blog__pagination-active_js");
+    }
+    searchParams.set("page", params.page + 1);
+
+    // history.replaceState(null, document.title, "?" + searchParams.toString());
+    location.search = searchParams;
   });
 }
 
