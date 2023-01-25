@@ -49,36 +49,40 @@
         <button
           type="button"
           class="sandwich-button main__sandwich-button main__sandwich-button_js"
+          aria-label="Главное меню"
         ></button>
       </div>
       <section class="my-blog__filter">
         <h2 class="my-blog__filter-title hidden-item">Filter</h2>
         <form name="myBlogFilterForm" class="my-blog__filter-wrapper">
-          <div class="filter__container">
+          <div class="my-blog__filter-container">
             <!-- <div class="select-of-box_js"></div> -->
-            <div class="filter__tags-wrapper">
-              <legend class="filter__title">Tags</legend>
-              <ul class="filter__color-checkbox-list">
+            <fieldset class="my-blog__filter-tags-wrapper">
+              <legend class="my-blog__filter-title">Tags</legend>
+              <ul class="my-blog__filter-color-checkbox-list">
                 <li>
                   <input
                     type="checkbox"
                     id="checkbox-blue"
-                    class="filter__blue-checkbox"
+                    class="my-blog__filter-blue-checkbox"
                     name="filterTag"
                     value="1"
                   />
-                  <label class="filter__blue-label" for="checkbox-blue"></label>
+                  <label
+                    class="my-blog__filter-blue-label"
+                    for="checkbox-blue"
+                  ></label>
                 </li>
                 <li>
                   <input
                     type="checkbox"
                     id="checkbox-light-blue"
-                    class="filter__light-blue-checkbox"
+                    class="my-blog__filter-light-blue-checkbox"
                     name="filterTag"
                     value="2"
                   />
                   <label
-                    class="filter__light-blue-label"
+                    class="my-blog__filter-light-blue-label"
                     for="checkbox-light-blue"
                   ></label>
                 </li>
@@ -86,12 +90,12 @@
                   <input
                     type="checkbox"
                     id="checkbox-yellow"
-                    class="filter__yellow-checkbox"
+                    class="my-blog__filter-yellow-checkbox"
                     name="filterTag"
                     value="3"
                   />
                   <label
-                    class="filter__yellow-label"
+                    class="my-blog__filter-yellow-label"
                     for="checkbox-yellow"
                   ></label>
                 </li>
@@ -99,12 +103,12 @@
                   <input
                     type="checkbox"
                     id="checkbox-marine"
-                    class="filter__marine-checkbox"
+                    class="my-blog__filter-marine-checkbox"
                     name="filterTag"
                     value="4"
                   />
                   <label
-                    class="filter__marine-label"
+                    class="my-blog__filter-marine-label"
                     for="checkbox-marine"
                   ></label>
                 </li>
@@ -112,12 +116,12 @@
                   <input
                     type="checkbox"
                     id="checkbox-orange"
-                    class="filter__orange-checkbox"
+                    class="my-blog__filter-orange-checkbox"
                     name="filterTag"
                     value="5"
                   />
                   <label
-                    class="filter__orange-label"
+                    class="my-blog__filter-orange-label"
                     for="checkbox-orange"
                   ></label>
                 </li>
@@ -125,22 +129,25 @@
                   <input
                     type="checkbox"
                     id="checkbox-pink"
-                    class="filter__pink-checkbox"
+                    class="my-blog__filter-pink-checkbox"
                     name="filterTag"
                     value="6"
                   />
-                  <label class="filter__pink-label" for="checkbox-pink"></label>
+                  <label
+                    class="my-blog__filter-pink-label"
+                    for="checkbox-pink"
+                  ></label>
                 </li>
                 <li>
                   <input
                     type="checkbox"
                     id="checkbox-purple"
-                    class="filter__purple-checkbox"
+                    class="my-blog__filter-purple-checkbox"
                     name="filterTag"
                     value="7"
                   />
                   <label
-                    class="filter__purple-label"
+                    class="my-blog__filter-purple-label"
                     for="checkbox-purple"
                   ></label>
                 </li>
@@ -148,29 +155,29 @@
                   <input
                     type="checkbox"
                     id="checkbox-green"
-                    class="filter__green-checkbox"
+                    class="my-blog__filter-green-checkbox"
                     name="filterTag"
                     value="8"
                   />
                   <label
-                    class="filter__green-label"
+                    class="my-blog__filter-green-label"
                     for="checkbox-green"
                   ></label>
                 </li>
               </ul>
-            </div>
-            <div class="filter__views-wrapper">
-              <legend class="filter__title">Views</legend>
-              <ul class="filter__views-list">
+            </fieldset>
+            <fieldset class="my-blog__filter-views-wrapper">
+              <legend class="my-blog__filter-title">Views</legend>
+              <ul class="my-blog__filter-views-list">
                 <li>
                   <input
                     type="radio"
                     id="radio-min"
-                    class="filter__views-min-checkbox"
+                    class="my-blog__filter-views-min-checkbox"
                     value="100-500"
                     name="filterViewsGroup"
                   />
-                  <label class="filter__views-min-label" for="radio-min"
+                  <label class="my-blog__filter-views-min-label" for="radio-min"
                     >100-500</label
                   >
                 </li>
@@ -178,11 +185,13 @@
                   <input
                     type="radio"
                     id="radio-middle"
-                    class="filter__views-middle-checkbox"
+                    class="my-blog__filter-views-middle-checkbox"
                     value="500-1000"
                     name="filterViewsGroup"
                   />
-                  <label class="filter__views-middle-label" for="radio-middle"
+                  <label
+                    class="my-blog__filter-views-middle-label"
+                    for="radio-middle"
                     >500-1000</label
                   >
                 </li>
@@ -190,28 +199,30 @@
                   <input
                     type="radio"
                     id="radio-max"
-                    class="filter__views-max-checkbox"
+                    class="my-blog__filter-views-max-checkbox"
                     value="1000-2000"
                     name="filterViewsGroup"
                   />
-                  <label class="filter__views-max-label" for="radio-max"
+                  <label class="my-blog__filter-views-max-label" for="radio-max"
                     >1000-2000</label
                   >
                 </li>
               </ul>
-            </div>
-            <div class="filter__comments-wrapper">
-              <legend class="filter__title">Comments</legend>
-              <ul class="filter__comments-list">
+            </fieldset>
+            <fieldset class="my-blog__filter-comments-wrapper">
+              <legend class="my-blog__filter-title">Comments</legend>
+              <ul class="my-blog__filter-comments-list">
                 <li>
                   <input
                     type="checkbox"
                     id="checkbox-0"
-                    class="filter__comments-min-checkbox"
+                    class="my-blog__filter-comments-min-checkbox"
                     value="0"
                     name="filterComments"
                   />
-                  <label class="filter__comments-min-label" for="checkbox-0"
+                  <label
+                    class="my-blog__filter-comments-min-label"
+                    for="checkbox-0"
                     >0</label
                   >
                 </li>
@@ -219,12 +230,12 @@
                   <input
                     type="checkbox"
                     id="checkbox-0-1"
-                    class="filter__comments-middle-checkbox"
+                    class="my-blog__filter-comments-middle-checkbox"
                     value="0-1"
                     name="filterComments"
                   />
                   <label
-                    class="filter__comments-middle-label"
+                    class="my-blog__filter-comments-middle-label"
                     for="checkbox-0-1"
                     >0-1</label
                   >
@@ -233,28 +244,32 @@
                   <input
                     type="checkbox"
                     id="checkbox-1-50"
-                    class="filter__comments-max-checkbox"
+                    class="my-blog__filter-comments-max-checkbox"
                     value="1-50"
                     name="filterComments"
                   />
-                  <label class="filter__comments-max-label" for="checkbox-1-50"
+                  <label
+                    class="my-blog__filter-comments-max-label"
+                    for="checkbox-1-50"
                     >1-50</label
                   >
                 </li>
               </ul>
-            </div>
-            <div class="filter__how-show-wrapper">
-              <legend class="filter__title">How show?</legend>
-              <ul class="filter__how-show-list">
+            </fieldset>
+            <fieldset class="my-blog__filter-how-show-wrapper">
+              <legend class="my-blog__filter-title">How show?</legend>
+              <ul class="my-blog__filter-how-show-list">
                 <li>
                   <input
                     type="radio"
                     id="radio-show-5"
-                    class="filter__how-show-min-radio"
+                    class="my-blog__filter-how-show-min-radio"
                     value="5"
                     name="filterHowShowGroup"
                   />
-                  <label class="filter__how-show-min-label" for="radio-show-5"
+                  <label
+                    class="my-blog__filter-how-show-min-label"
+                    for="radio-show-5"
                     >show 5</label
                   >
                 </li>
@@ -262,29 +277,31 @@
                   <input
                     type="radio"
                     id="radio-show-10"
-                    class="filter__how-show-max-radio"
+                    class="my-blog__filter-how-show-max-radio"
                     value="10"
                     name="filterHowShowGroup"
                   />
-                  <label class="filter__how-show-max-label" for="radio-show-10"
+                  <label
+                    class="my-blog__filter-how-show-max-label"
+                    for="radio-show-10"
                     >show 10</label
                   >
                 </li>
               </ul>
-            </div>
-            <div class="filter__sort-by-wrapper">
-              <legend class="filter__title">Sort by</legend>
-              <ul class="filter__sort-by-list">
+            </fieldset>
+            <fieldset class="my-blog__filter-sort-by-wrapper">
+              <legend class="my-blog__filter-title">Sort by</legend>
+              <ul class="my-blog__filter-sort-by-list">
                 <li>
                   <input
                     type="radio"
                     id="radio-sort-by-date"
-                    class="filter__sort-by-date-radio"
+                    class="my-blog__filter-sort-by-date-radio"
                     value="date"
                     name="filterSortByGroup"
                   />
                   <label
-                    class="filter__sort-by-date-label"
+                    class="my-blog__filter-sort-by-date-label"
                     for="radio-sort-by-date"
                     >date</label
                   >
@@ -293,12 +310,12 @@
                   <input
                     type="radio"
                     id="radio-sort-by-title"
-                    class="filter__sort-by-title-radio"
+                    class="my-blog__filter-sort-by-title-radio"
                     value="title"
                     name="filterSortByGroup"
                   />
                   <label
-                    class="filter__sort-by-title-label"
+                    class="my-blog__filter-sort-by-title-label"
                     for="radio-sort-by-title"
                     >title</label
                   >
@@ -307,30 +324,34 @@
                   <input
                     type="radio"
                     id="radio-sort-by-views"
-                    class="filter__sort-by-views-radio"
+                    class="my-blog__filter-sort-by-views-radio"
                     value="views"
                     name="filterSortByGroup"
                   />
                   <label
-                    class="filter__sort-by-views-label"
+                    class="my-blog__filter-sort-by-views-label"
                     for="radio-sort-by-views"
                     >views</label
                   >
                 </li>
               </ul>
-            </div>
-            <div class="filter__reset">
+            </fieldset>
+            <div class="my-blog__filter-reset">
               <button
                 type="button"
-                class="button filter__reset-button filter__reset-button_js"
+                class="button my-blog__filter-reset-button my-blog__filter-reset-button_js"
               >
                 Reset
               </button>
             </div>
           </div>
-          <div class="filter__submit">
-            <input type="text" class="filter__search-field" name="filterName" />
-            <button type="submit" class="button filter__submit-button">
+          <div class="my-blog__filter-submit">
+            <input
+              type="text"
+              class="my-blog__filter-search-field"
+              name="filterName"
+            />
+            <button type="submit" class="button my-blog__filter-submit-button">
               Search
             </button>
           </div>
@@ -343,12 +364,14 @@
       <div class="my-blog__pagination-wrapper">
         <button
           class="my-blog__slider-button-left my-blog__slider-button-left_js"
+          aria-label="Листать влево"
         >
           <img src="../img/icons/slider-left.png" alt="Стрелка влево" />
         </button>
         <div class="my-blog__pagination_js"></div>
         <button
           class="my-blog__slider-button-right my-blog__slider-button-right_js"
+          aria-label="Листать вправо"
         >
           <img src="../img/icons/slider-right.png" alt="Стрелка вправо" />
         </button>

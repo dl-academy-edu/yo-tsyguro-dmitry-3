@@ -442,7 +442,7 @@
 .my-blog__filter {
   padding-bottom: 20px;
 }
-.filter__container {
+.my-blog__filter-container {
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   row-gap: 30px;
@@ -450,16 +450,16 @@
   margin-top: 40px;
   margin-bottom: 35px;
 }
-.filter__title {
+.my-blog__filter-title {
   font-size: 14px;
   line-height: 16px;
   margin-bottom: 15px;
 }
-.filter__container label {
+.my-blog__filter-container label {
   font-size: 18px;
   line-height: 21px;
 }
-.filter__reset {
+.my-blog__filter-reset {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -469,10 +469,10 @@
     justify-content: flex-start;
   }
 }
-.filter__reset-button {
+.my-blog__filter-reset-button {
   opacity: 1;
 }
-.filter__submit {
+.my-blog__filter-submit {
   display: flex;
   column-gap: 30px;
   @media (max-width: 500px) {
@@ -481,7 +481,7 @@
     row-gap: 20px;
   }
 }
-.filter__search-field {
+.my-blog__filter-search-field {
   width: 100%;
   max-width: 837px;
   height: 50px;
@@ -498,32 +498,32 @@
   }
 }
 //////////////////////// Цветные checkbox/////////////////
-.filter__color-checkbox-list {
+.my-blog__filter-color-checkbox-list {
   width: 116px;
   display: flex;
   flex-wrap: wrap;
   column-gap: 15px;
   row-gap: 5px;
 }
-.filter__blue-checkbox,
-.filter__light-blue-checkbox,
-.filter__yellow-checkbox,
-.filter__marine-checkbox,
-.filter__orange-checkbox,
-.filter__pink-checkbox,
-.filter__purple-checkbox,
-.filter__green-checkbox {
+.my-blog__filter-blue-checkbox,
+.my-blog__filter-light-blue-checkbox,
+.my-blog__filter-yellow-checkbox,
+.my-blog__filter-marine-checkbox,
+.my-blog__filter-orange-checkbox,
+.my-blog__filter-pink-checkbox,
+.my-blog__filter-purple-checkbox,
+.my-blog__filter-green-checkbox {
   z-index: -1;
   opacity: 0;
 }
-.filter__blue-label,
-.filter__light-blue-label,
-.filter__yellow-label,
-.filter__marine-label,
-.filter__orange-label,
-.filter__pink-label,
-.filter__purple-label,
-.filter__green-label {
+.my-blog__filter-blue-label,
+.my-blog__filter-light-blue-label,
+.my-blog__filter-yellow-label,
+.my-blog__filter-marine-label,
+.my-blog__filter-orange-label,
+.my-blog__filter-pink-label,
+.my-blog__filter-purple-label,
+.my-blog__filter-green-label {
   position: relative;
   margin: 0;
   &:before {
@@ -538,120 +538,121 @@
     cursor: pointer;
   }
 }
-.filter__blue-label {
+.my-blog__filter-blue-label {
   &:before {
     background-image: url("../img/icons/checkbox-blue.png");
   }
 }
-.filter__light-blue-label {
+.my-blog__filter-light-blue-label {
   &:before {
     background-image: url("../img/icons/checkbox-light-blue.png");
   }
 }
-.filter__yellow-label {
+.my-blog__filter-yellow-label {
   &:before {
     background-image: url("../img/icons/checkbox-yellow.png");
   }
 }
-.filter__marine-label {
+.my-blog__filter-marine-label {
   &:before {
     background-image: url("../img/icons/checkbox-marine.png");
   }
 }
-.filter__orange-label {
+.my-blog__filter-orange-label {
   &:before {
     background-image: url("../img/icons/checkbox-orange.png");
   }
 }
-.filter__pink-label {
+.my-blog__filter-pink-label {
   &:before {
     background-image: url("../img/icons/checkbox-pink.png");
   }
 }
-.filter__purple-label {
+.my-blog__filter-purple-label {
   &:before {
     background-image: url("../img/icons/checkbox-purple.png");
   }
 }
-.filter__green-label {
+.my-blog__filter-green-label {
   &:before {
     background-image: url("../img/icons/checkbox-green.png");
   }
 }
 
-.filter__blue-checkbox:checked ~ .filter__blue-label {
+.my-blog__filter-blue-checkbox:checked ~ .my-blog__filter-blue-label {
   &:before {
     background-image: url("../img/icons/checkbox-blue-checked.png");
   }
 }
-.filter__light-blue-checkbox:checked ~ .filter__light-blue-label {
+.my-blog__filter-light-blue-checkbox:checked
+  ~ .my-blog__filter-light-blue-label {
   &:before {
     background-image: url("../img/icons/checkbox-light-blue-checked.png");
   }
 }
-.filter__yellow-checkbox:checked ~ .filter__yellow-label {
+.my-blog__filter-yellow-checkbox:checked ~ .my-blog__filter-yellow-label {
   &:before {
     background-image: url("../img/icons/checkbox-yellow-checked.png");
   }
 }
-.filter__marine-checkbox:checked ~ .filter__marine-label {
+.my-blog__filter-marine-checkbox:checked ~ .my-blog__filter-marine-label {
   &:before {
     background-image: url("../img/icons/checkbox-marine-checked.png");
   }
 }
-.filter__orange-checkbox:checked ~ .filter__orange-label {
+.my-blog__filter-orange-checkbox:checked ~ .my-blog__filter-orange-label {
   &:before {
     background-image: url("../img/icons/checkbox-orange-checked.png");
   }
 }
-.filter__pink-checkbox:checked ~ .filter__pink-label {
+.my-blog__filter-pink-checkbox:checked ~ .my-blog__filter-pink-label {
   &:before {
     background-image: url("../img/icons/checkbox-pink-checked.png");
   }
 }
-.filter__purple-checkbox:checked ~ .filter__purple-label {
+.my-blog__filter-purple-checkbox:checked ~ .my-blog__filter-purple-label {
   &:before {
     background-image: url("../img/icons/checkbox-purple-checked.png");
   }
 }
-.filter__green-checkbox:checked ~ .filter__green-label {
+.my-blog__filter-green-checkbox:checked ~ .my-blog__filter-green-label {
   &:before {
     background-image: url("../img/icons/checkbox-green-checked.png");
   }
 }
 
 //////////////////////// Черные checkbox и radio/////////////////
-.filter__views-list,
-.filter__comments-list,
-.filter__how-show-list,
-.filter__sort-by-list {
+.my-blog__filter-views-list,
+.my-blog__filter-comments-list,
+.my-blog__filter-how-show-list,
+.my-blog__filter-sort-by-list {
   display: flex;
   flex-direction: column;
   row-gap: 10px;
 }
-.filter__views-min-checkbox,
-.filter__views-middle-checkbox,
-.filter__views-max-checkbox,
-.filter__comments-min-checkbox,
-.filter__comments-middle-checkbox,
-.filter__comments-max-checkbox,
-.filter__how-show-min-radio,
-.filter__how-show-max-radio,
-.filter__sort-by-date-radio,
-.filter__sort-by-title-radio,
-.filter__sort-by-views-radio {
+.my-blog__filter-views-min-checkbox,
+.my-blog__filter-views-middle-checkbox,
+.my-blog__filter-views-max-checkbox,
+.my-blog__filter-comments-min-checkbox,
+.my-blog__filter-comments-middle-checkbox,
+.my-blog__filter-comments-max-checkbox,
+.my-blog__filter-how-show-min-radio,
+.my-blog__filter-how-show-max-radio,
+.my-blog__filter-sort-by-date-radio,
+.my-blog__filter-sort-by-title-radio,
+.my-blog__filter-sort-by-views-radio {
   z-index: -1;
   opacity: 0;
   width: 25px;
 }
-.filter__views-min-label,
-.filter__views-middle-label,
-.filter__views-max-label,
-.filter__how-show-min-label,
-.filter__how-show-max-label,
-.filter__sort-by-date-label,
-.filter__sort-by-title-label,
-.filter__sort-by-views-label {
+.my-blog__filter-views-min-label,
+.my-blog__filter-views-middle-label,
+.my-blog__filter-views-max-label,
+.my-blog__filter-how-show-min-label,
+.my-blog__filter-how-show-max-label,
+.my-blog__filter-sort-by-date-label,
+.my-blog__filter-sort-by-title-label,
+.my-blog__filter-sort-by-views-label {
   position: relative;
   margin: 0;
   &:before {
@@ -667,9 +668,9 @@
     cursor: pointer;
   }
 }
-.filter__comments-min-label,
-.filter__comments-middle-label,
-.filter__comments-max-label {
+.my-blog__filter-comments-min-label,
+.my-blog__filter-comments-middle-label,
+.my-blog__filter-comments-max-label {
   position: relative;
   margin: 0;
   &:before {
@@ -685,22 +686,31 @@
     cursor: pointer;
   }
 }
-.filter__views-min-checkbox:checked ~ .filter__views-min-label,
-.filter__views-middle-checkbox:checked ~ .filter__views-middle-label,
-.filter__views-max-checkbox:checked ~ .filter__views-max-label,
-.filter__how-show-min-radio:checked ~ .filter__how-show-min-label,
-.filter__how-show-max-radio:checked ~ .filter__how-show-max-label,
-.filter__sort-by-date-radio:checked ~ .filter__sort-by-date-label,
-.filter__sort-by-title-radio:checked ~ .filter__sort-by-title-label,
-.filter__sort-by-views-radio:checked ~ .filter__sort-by-views-label {
+.my-blog__filter-views-min-checkbox:checked ~ .my-blog__filter-views-min-label,
+.my-blog__filter-views-middle-checkbox:checked
+  ~ .my-blog__filter-views-middle-label,
+.my-blog__filter-views-max-checkbox:checked ~ .my-blog__filter-views-max-label,
+.my-blog__filter-how-show-min-radio:checked
+  ~ .my-blog__filter-how-show-min-label,
+.my-blog__filter-how-show-max-radio:checked
+  ~ .my-blog__filter-how-show-max-label,
+.my-blog__filter-sort-by-date-radio:checked
+  ~ .my-blog__filter-sort-by-date-label,
+.my-blog__filter-sort-by-title-radio:checked
+  ~ .my-blog__filter-sort-by-title-label,
+.my-blog__filter-sort-by-views-radio:checked
+  ~ .my-blog__filter-sort-by-views-label {
   &:before {
     background-image: url("../img/icons/radio-checked.png");
     cursor: pointer;
   }
 }
-.filter__comments-min-checkbox:checked ~ .filter__comments-min-label,
-.filter__comments-middle-checkbox:checked ~ .filter__comments-middle-label,
-.filter__comments-max-checkbox:checked ~ .filter__comments-max-label {
+.my-blog__filter-comments-min-checkbox:checked
+  ~ .my-blog__filter-comments-min-label,
+.my-blog__filter-comments-middle-checkbox:checked
+  ~ .my-blog__filter-comments-middle-label,
+.my-blog__filter-comments-max-checkbox:checked
+  ~ .my-blog__filter-comments-max-label {
   &:before {
     background-image: url("../img/icons/checkbox-checked.png");
     transition: all 400ms;
@@ -714,46 +724,46 @@
 //////////////////////// Медиа запросы для фильтров/////////////////
 
 @media (min-width: 580px) and (max-width: 768px) {
-  .filter__container {
+  .my-blog__filter-container {
     grid-template-columns: auto auto auto auto;
   }
 }
 
 @media (min-width: 579px) and (max-width: 768px) {
-  .filter__tags-wrapper {
+  .my-blog__filter-tags-wrapper {
     grid-row: 2/3;
   }
-  .filter__views-wrapper {
+  .my-blog__filter-views-wrapper {
     grid-column: 2/3;
   }
-  .filter__comments-wrapper {
+  .my-blog__filter-comments-wrapper {
     grid-column: 1/2;
     grid-row: 1/2;
   }
-  .filter__sort-by-wrapper {
+  .my-blog__filter-sort-by-wrapper {
     grid-column: 3/4;
     grid-row: 1/2;
   }
 }
 @media (max-width: 579px) {
-  .filter__container {
+  .my-blog__filter-container {
     grid-template-columns: auto auto;
     row-gap: 25px;
   }
-  .filter__tags-wrapper {
+  .my-blog__filter-tags-wrapper {
     grid-row: 3/4;
   }
-  .filter__views-wrapper {
+  .my-blog__filter-views-wrapper {
     grid-column: 2/3;
   }
-  .filter__comments-wrapper {
+  .my-blog__filter-comments-wrapper {
     grid-row: 1/2;
   }
-  .filter__sort-by-wrapper {
+  .my-blog__filter-sort-by-wrapper {
     grid-column: 1/2;
     grid-row: 2/3;
   }
-  .filter__how-show-wrapper {
+  .my-blog__filter-how-show-wrapper {
     grid-column: 2/3;
   }
 }
