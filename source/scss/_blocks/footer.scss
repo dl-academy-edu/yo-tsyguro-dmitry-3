@@ -1,6 +1,3 @@
-/*
-  Код ниже нужно удалить, он добавлен просто для примера
-*/
 .footer {
   display: block;
   text-align: center;
@@ -28,7 +25,9 @@
   transition: all 400ms;
   &:hover {
     cursor: pointer;
-    opacity: 0.6;
+    // opacity: 0.6;
+    color: black;
+    background-color: white;
   }
 }
 .footer__link-list {
