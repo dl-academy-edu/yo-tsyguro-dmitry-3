@@ -1,0 +1,33 @@
+.modal-after-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  margin-right: 50px;
+  @media (max-width: 500px) {
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+.modal-after-text-wrapper {
+  width: 100%;
+}
+.modal-after-text {
+  text-align: center;
+  width: 100%;
+}
+.modal-after-close-button {
+  position: absolute;
+  top: 0px;
+  right: -40px;
+  &:hover {
+    cursor: pointer;
+  }
+  @media (max-width: 480px) {
+    top: 10px;
+    left: 0px;
+  }
+}

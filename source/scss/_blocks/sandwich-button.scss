@@ -1,0 +1,22 @@
+.title-sandwich-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  align-items: baseline;
+}
+
+.sandwich-button {
+  background-image: url("../img/icons/sandwich.png");
+  background-repeat: no-repeat;
+  background-position: top;
+  width: 32px;
+  height: 30px;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+  //   margin-top: 40px;
+  transition: all 400ms;
+  @media (min-width: 355px) {
+    display: none;
+  }
+}

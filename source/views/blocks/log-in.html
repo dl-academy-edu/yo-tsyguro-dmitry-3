@@ -1,20 +1,42 @@
-<div class="sign-in-modal sign-in-modal_js hidden-item">
-  <form class="sign-in-modal__form" action="#">
-    <div class="sign-in-modal__field-wrapper">
-      <label for="email-field" class="sign-in-modal__label"
-        >Email<span>*</span></label
-      >
-      <input type="email" id="email-field" class="sign-in-modal__email" />
-      <label for="password-field" class="sign-in-modal__label"
-        >Password<span>*</span></label
-      >
-      <input
-        type="password"
-        id="password-field"
-        class="sign-in-modal__password"
-      />
+<div class="modal sign-in-modal_js hidden-item">
+  <form
+    name="login"
+    class="sign-in-modal__form modal__form"
+    action="#"
+    novalidate
+  >
+    <div class="sign-in-modal__wrapper">
+      <div class="sign-in-modal__field-wrapper">
+        <label for="sign-in-email-field" class="sign-in-modal__label"
+          >Email<span>*</span></label
+        >
+        <input
+          type="email"
+          id="sign-in-email-field"
+          class="sign-in-modal__email modal__field"
+          name="email"
+          required
+        />
+      </div>
+      <div class="sign-in-modal__field-wrapper">
+        <label for="sign-in-password-field" class="sign-in-modal__label"
+          >Password<span>*</span></label
+        >
+        <input
+          type="password"
+          id="sign-in-password-field"
+          class="sign-in-modal__password modal__field"
+          name="password"
+          required
+        />
+      </div>
     </div>
-    <button type="button" class="button font-bold">Log in</button>
+    <button type="submit" class="button sign-in-modal__button font-bold">
+      Log in
+    </button>
     <button type="button" class="close-button close-button-login_js"></button>
   </form>
 </div>
+
+</div>
+

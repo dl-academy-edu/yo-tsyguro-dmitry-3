@@ -25,6 +25,12 @@
 @import "_blocks/button";
 @import "_blocks/send-message";
 @import "_blocks/close-button";
+@import "_blocks/change-password";
+@import "_blocks/change-other";
+@import "_blocks/modal";
+@import "_blocks/slider";
+@import "_blocks/modal-after";
+@import "_blocks/sandwich-button";
 
 /*
   Ниже пример подключения других блоков
@@ -57,6 +63,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  z-index: 20;
   @media (min-width: 355px) {
     display: none;
   }
@@ -111,58 +118,35 @@
     margin-top: 0;
   }
 }
-.main__title {
-  font-size: 47px;
-  line-height: 57px;
+
+.main-page__title {
   width: 200px;
 }
-.main__sandwich-button {
-  @media (min-width: 355px) {
-    display: none;
-  }
-}
+
 .main__content-wrapper {
   display: flex;
   justify-self: start;
+  align-items: flex-start;
   column-gap: 43px;
 }
 .main__content {
   max-width: 250px;
 }
-.main__sandwich-button {
-  background-image: url("../img/icons/sandwich.png");
-  background-repeat: no-repeat;
-  background-position: top;
-  width: 32px;
-  height: 30px;
-  flex-shrink: 0;
-  border: none;
-  padding: 0;
-  transition: all 400ms;
-}
-.main__picture {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-}
+
+// .main__picture {
+//   // display: inline-block;
+//   // margin-left: auto;
+//   // margin-right: auto;
+// }
 .main__image {
   width: 100%;
   height: 100%;
 }
-.main__slider {
+.main__slider-navigation {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.main__spot-button {
-  padding: 0;
-  width: 10px;
-  height: 10px;
-  border-style: none;
-  border-radius: 5px;
-  background-color: black;
-  opacity: 0.1;
 }
 
 ///////////////////////////////About me////////////////////////////////////////
@@ -290,7 +274,7 @@
 }
 .skills__progress-bar-html {
   &::after {
-    width: 85%;
+    width: 80%;
   }
 }
 .skills__progress-bar-css {
@@ -300,7 +284,7 @@
 }
 .skills__progress-bar-js {
   &::after {
-    width: 5%;
+    width: 20%;
   }
 }
 .skills__progress-bar-git {
@@ -310,7 +294,7 @@
 }
 .skills__progress-bar-figma {
   &::after {
-    width: 80%;
+    width: 20%;
   }
 }
 
@@ -348,6 +332,52 @@
   font-size: 34px;
   margin-bottom: 20px;
 }
+//////////////////////// Swiper/////////////////
+
+.portfolio__slider {
+  width: 100%;
+  // height: 100%;
+}
+.portfolio__slider-wrapper {
+  display: flex;
+  // width: 100%;
+}
+.portfolio__slider-slide {
+  text-align: center;
+  font-size: 18px;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.portfolio__slider-picture {
+  width: 100%;
+}
+.portfolio__slider-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+// .swiper-pagination-numbers {
+//   text-align: center;
+// }
+.swiper-button-left,
+.swiper-button-right {
+  width: 42px;
+  height: 42px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.swiper-button-right {
+  background-image: url("../img/icons/slider-right.png");
+}
+.swiper-button-left {
+  background-image: url("../img/icons/slider-left.png");
+}
+.portfolio__swiper-wrapper {
+  display: flex;
+}
 .portfolio__image {
   width: 100%;
   height: 100%;
@@ -360,7 +390,7 @@
 
   position: absolute;
   bottom: 0;
-  transform: translate(0 -30%);
+  // transform: translate(0 -30%);
   left: 0;
   right: 0;
   background-color: black;
@@ -368,6 +398,7 @@
   opacity: 0.8;
 }
 .portfolio__desription-title {
+  text-decoration: none;
   color: white;
   text-decoration: underline dashed;
   text-underline-position: under;
@@ -379,6 +410,510 @@
   font-size: 14px;
   line-height: 16px;
 }
+.portfolio__slider-navigation {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.portfolio__slider-button-left,
+.portfolio__slider-button-right {
+  background: white;
+  z-index: 10;
+}
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////INDEX end////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////My blog start////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+////////////////////////Секция с фильтрами/////////////////
+
+.my-blog-page__title {
+  margin-top: 100px;
+  @media (max-width: 354px) {
+    margin-top: 0px;
+    max-width: 55%;
+  }
+}
+.my-blog__filter {
+  padding-bottom: 20px;
+}
+.my-blog__filter-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  row-gap: 30px;
+  column-gap: 10px;
+  margin-top: 40px;
+  margin-bottom: 35px;
+}
+.my-blog__filter-title {
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 15px;
+}
+.my-blog__filter-container label {
+  font-size: 18px;
+  line-height: 21px;
+}
+.my-blog__filter-reset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 768px) {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+}
+.my-blog__filter-reset-button {
+  opacity: 1;
+}
+.my-blog__filter-submit {
+  display: flex;
+  column-gap: 30px;
+  @media (max-width: 500px) {
+    justify-content: end;
+    flex-wrap: wrap;
+    row-gap: 20px;
+  }
+}
+.my-blog__filter-search-field {
+  width: 100%;
+  max-width: 837px;
+  height: 50px;
+  border-width: 3px;
+  border-color: black;
+  opacity: 0.2;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:focus {
+    opacity: 1;
+    border-color: black;
+    outline: none;
+  }
+}
+//////////////////////// Цветные checkbox/////////////////
+.my-blog__filter-color-checkbox-list {
+  width: 116px;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 15px;
+  row-gap: 5px;
+}
+.my-blog__filter-blue-checkbox,
+.my-blog__filter-light-blue-checkbox,
+.my-blog__filter-yellow-checkbox,
+.my-blog__filter-marine-checkbox,
+.my-blog__filter-orange-checkbox,
+.my-blog__filter-pink-checkbox,
+.my-blog__filter-purple-checkbox,
+.my-blog__filter-green-checkbox {
+  z-index: -1;
+  opacity: 0;
+}
+.my-blog__filter-blue-label,
+.my-blog__filter-light-blue-label,
+.my-blog__filter-yellow-label,
+.my-blog__filter-marine-label,
+.my-blog__filter-orange-label,
+.my-blog__filter-pink-label,
+.my-blog__filter-purple-label,
+.my-blog__filter-green-label {
+  position: relative;
+  margin: 0;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: -14px;
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
+}
+.my-blog__filter-blue-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-blue.png");
+  }
+}
+.my-blog__filter-light-blue-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-light-blue.png");
+  }
+}
+.my-blog__filter-yellow-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-yellow.png");
+  }
+}
+.my-blog__filter-marine-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-marine.png");
+  }
+}
+.my-blog__filter-orange-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-orange.png");
+  }
+}
+.my-blog__filter-pink-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-pink.png");
+  }
+}
+.my-blog__filter-purple-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-purple.png");
+  }
+}
+.my-blog__filter-green-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-green.png");
+  }
+}
+
+.my-blog__filter-blue-checkbox:checked ~ .my-blog__filter-blue-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-blue-checked.png");
+  }
+}
+.my-blog__filter-light-blue-checkbox:checked
+  ~ .my-blog__filter-light-blue-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-light-blue-checked.png");
+  }
+}
+.my-blog__filter-yellow-checkbox:checked ~ .my-blog__filter-yellow-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-yellow-checked.png");
+  }
+}
+.my-blog__filter-marine-checkbox:checked ~ .my-blog__filter-marine-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-marine-checked.png");
+  }
+}
+.my-blog__filter-orange-checkbox:checked ~ .my-blog__filter-orange-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-orange-checked.png");
+  }
+}
+.my-blog__filter-pink-checkbox:checked ~ .my-blog__filter-pink-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-pink-checked.png");
+  }
+}
+.my-blog__filter-purple-checkbox:checked ~ .my-blog__filter-purple-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-purple-checked.png");
+  }
+}
+.my-blog__filter-green-checkbox:checked ~ .my-blog__filter-green-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-green-checked.png");
+  }
+}
+
+//////////////////////// Черные checkbox и radio/////////////////
+.my-blog__filter-views-list,
+.my-blog__filter-comments-list,
+.my-blog__filter-how-show-list,
+.my-blog__filter-sort-by-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+.my-blog__filter-views-min-checkbox,
+.my-blog__filter-views-middle-checkbox,
+.my-blog__filter-views-max-checkbox,
+.my-blog__filter-comments-min-checkbox,
+.my-blog__filter-comments-middle-checkbox,
+.my-blog__filter-comments-max-checkbox,
+.my-blog__filter-how-show-min-radio,
+.my-blog__filter-how-show-max-radio,
+.my-blog__filter-sort-by-date-radio,
+.my-blog__filter-sort-by-title-radio,
+.my-blog__filter-sort-by-views-radio {
+  z-index: -1;
+  opacity: 0;
+  width: 25px;
+}
+.my-blog__filter-views-min-label,
+.my-blog__filter-views-middle-label,
+.my-blog__filter-views-max-label,
+.my-blog__filter-how-show-min-label,
+.my-blog__filter-how-show-max-label,
+.my-blog__filter-sort-by-date-label,
+.my-blog__filter-sort-by-title-label,
+.my-blog__filter-sort-by-views-label {
+  position: relative;
+  margin: 0;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -30px;
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../img/icons/radio.png");
+    cursor: pointer;
+  }
+}
+.my-blog__filter-comments-min-label,
+.my-blog__filter-comments-middle-label,
+.my-blog__filter-comments-max-label {
+  position: relative;
+  margin: 0;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -30px;
+    width: 25px;
+    height: 25px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("../img/icons/checkbox.png");
+    cursor: pointer;
+  }
+}
+.my-blog__filter-views-min-checkbox:checked ~ .my-blog__filter-views-min-label,
+.my-blog__filter-views-middle-checkbox:checked
+  ~ .my-blog__filter-views-middle-label,
+.my-blog__filter-views-max-checkbox:checked ~ .my-blog__filter-views-max-label,
+.my-blog__filter-how-show-min-radio:checked
+  ~ .my-blog__filter-how-show-min-label,
+.my-blog__filter-how-show-max-radio:checked
+  ~ .my-blog__filter-how-show-max-label,
+.my-blog__filter-sort-by-date-radio:checked
+  ~ .my-blog__filter-sort-by-date-label,
+.my-blog__filter-sort-by-title-radio:checked
+  ~ .my-blog__filter-sort-by-title-label,
+.my-blog__filter-sort-by-views-radio:checked
+  ~ .my-blog__filter-sort-by-views-label {
+  &:before {
+    background-image: url("../img/icons/radio-checked.png");
+    cursor: pointer;
+  }
+}
+.my-blog__filter-comments-min-checkbox:checked
+  ~ .my-blog__filter-comments-min-label,
+.my-blog__filter-comments-middle-checkbox:checked
+  ~ .my-blog__filter-comments-middle-label,
+.my-blog__filter-comments-max-checkbox:checked
+  ~ .my-blog__filter-comments-max-label {
+  &:before {
+    background-image: url("../img/icons/checkbox-checked.png");
+    transition: all 400ms;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+    }
+  }
+}
+
+//////////////////////// Медиа запросы для фильтров/////////////////
+
+@media (min-width: 580px) and (max-width: 768px) {
+  .my-blog__filter-container {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+@media (min-width: 579px) and (max-width: 768px) {
+  .my-blog__filter-tags-wrapper {
+    grid-row: 2/3;
+  }
+  .my-blog__filter-views-wrapper {
+    grid-column: 2/3;
+  }
+  .my-blog__filter-comments-wrapper {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .my-blog__filter-sort-by-wrapper {
+    grid-column: 3/4;
+    grid-row: 1/2;
+  }
+}
+@media (max-width: 579px) {
+  .my-blog__filter-container {
+    grid-template-columns: auto auto;
+    row-gap: 25px;
+  }
+  .my-blog__filter-tags-wrapper {
+    grid-row: 3/4;
+  }
+  .my-blog__filter-views-wrapper {
+    grid-column: 2/3;
+  }
+  .my-blog__filter-comments-wrapper {
+    grid-row: 1/2;
+  }
+  .my-blog__filter-sort-by-wrapper {
+    grid-column: 1/2;
+    grid-row: 2/3;
+  }
+  .my-blog__filter-how-show-wrapper {
+    grid-column: 2/3;
+  }
+}
+
+//////////////////////// Секция со статьями/////////////////
+
+.my-blog__card {
+  display: flex;
+  column-gap: 20px;
+  padding-top: 20px;
+  border-top: #e5e5e5 2px solid;
+  padding-bottom: 20px;
+  align-items: center;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+.my-blog__card-body {
+  @media (max-width: 700px) {
+    margin-top: 20px;
+  }
+}
+.my-blog__card-img {
+  width: 320px;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+}
+.my-blog__card-tag-list {
+  display: flex;
+  column-gap: 5px;
+  margin-bottom: 10px;
+}
+.my-blog__card-tag {
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+}
+.my-blog__card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.my-blog__card-other {
+  display: flex;
+  column-gap: 10px;
+  font-size: 14px;
+  opacity: 0.5;
+  margin-bottom: 15px;
+}
+.my-blog__card-text {
+  margin-bottom: 20px;
+}
+.my-blog__card-post-link {
+  font-size: 22 px;
+  font-weight: 700;
+  text-decoration: none;
+  color: black;
+  border-bottom: 2px dashed;
+  padding-bottom: 3px;
+  // outline: 3px;
+}
+
+//////////////////////// Pagination/////////////////
+.my-blog__pagination-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.my-blog__pagination_js {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+.my-blog__link_js {
+  opacity: 0.3;
+}
+.my-blog__pagination-active_js {
+  color: black;
+  font-weight: 700;
+  opacity: 1;
+}
+.my-blog__slider-button-left,
+.my-blog__slider-button-right {
+  border: none;
+  background: none;
+}
+.my-blog__slider-button-left:disabled,
+.my-blog__slider-button-right:disabled {
+  opacity: 0.2;
+}
+
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////My blog end////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////My profile start////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+.my-profile-page__title {
+  margin-top: 128px;
+  margin-bottom: 40px;
+  @media (max-width: 354px) {
+    margin-top: 0px;
+    max-width: 60%;
+  }
+}
+.my-profile__container {
+  display: flex;
+  column-gap: 105px;
+}
+.my-profile__picture {
+  flex-shrink: 0;
+  width: 330px;
+  @media (max-width: 919px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 290px;
+  }
+}
+.my-profile__image {
+  width: 100%;
+}
+.my-profile__data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 20px;
+  line-height: 22px;
+}
+
+.my-profile__data-wrapper {
+  display: flex;
+  column-gap: 15px;
+}
+.my-profile__password-btn {
+  margin-top: 10px;
+}
+@media (min-width: 700px) and (max-width: 919px) {
+  .my-profile__container {
+    column-gap: 76px;
+  }
+}
+@media (max-width: 699px) {
+  .my-profile__container {
+    flex-direction: column;
+    row-gap: 40px;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////////
+////////////////////////////////////My profile end////////////////////////////
 ///////////////////////////////////////////////////////////////////////////

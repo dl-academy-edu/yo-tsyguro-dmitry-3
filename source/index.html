@@ -8,6 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <link
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Crimson+Text:ital,wght@1,400;1,700&family=Inter:wght@400;700&family=KoHo:wght@700&family=Lato:wght@400;700&family=Montserrat:wght@200;300;600;700&family=Open+Sans:wght@400;700&family=Pridi:wght@400;500;700&family=Roboto&display=swap"
       rel="stylesheet"
     />
@@ -27,7 +38,7 @@
       docElement.className =
         docElement.className.replace(/\bno-js\b/, "") + " js";
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <!-- Favicon -->
 
     <!-- build:css -->
@@ -35,82 +46,103 @@
     <!-- endbuild -->
   </head>
   <body class="home-page font-medium">
-    @@include('blocks/header.html')
-
-    <div class="mobile-menu font-bold hidden-item">
-      <button class="mobile-menu__close"></button>
-      <nav class="mobile-menu__nav">
-        <a href="../../index.html" class="mobile-menu__link header__home-active"
-          >Home</a
-        >
-        <a
-          href="../../my-blog.html"
-          class="mobile-menu__link header__my-blog-active"
-          >My blog</a
-        >
-        <button type="button" class="mobile-menu__link header__button">
-          Sign in
-        </button>
-        <button type="button" class="mobile-menu__link header__button">
-          Register
-        </button>
-        <a
-          href="../../my-profile.html"
-          class="mobile-menu__link hidden-item mobile-menu__my-profile-active"
-          >My profile</a
-        >
-      </nav>
-    </div>
-    <div class="color-wrapper">
-      <section class="main page-container">
-        <h1 class="main__title">Tsyguro Dmitry</h1>
-        <div class="main__content-wrapper">
-          <p class="main__content">
-            Future front-end developer 35 years old, Tolyatti
-          </p>
-          <button type="button" class="main__sandwich-button"></button>
-        </div>
-        <picture class="main__picture">
-          <source
-            media="(min-width: 920px)"
-            srcset="
-              ../img/images/main-1000x465-1x.jpg 1x,
-              ../img/images/main-2000x930-2x.jpg 2x
-            "
-          />
-          <source
-            media="(min-width: 501px) and (max-width: 919px)"
-            srcset="
-              ../img/images/main-648x465-tablet-1x.jpg  1x,
-              ../img/images/main-1296x930-tablet-2x.jpg 2x
-            "
-          />
-          <source
-            media="(max-width: 500px)"
-            srcset="
-              ../img/images/main-280x465-mobile-1x.jpg 1x,
-              ../img/images/main-560x930-mobile-2x.jpg 2x
-            "
-          />
-          <img
-            src="../img/images/main-1000x465-1x.jpg"
-            class="main__image"
-            width="1000"
-            height="465"
-            alt="Моя фотка"
-          />
-        </picture>
-        <div class="main__slider">
-          <img src="../img/icons/slider-left.png" alt="Стрелка влево" />
-          <div class="main__spots">
-            <button class="main__spot-button"></button>
-            <button class="main__spot-button"></button>
-            <button class="main__spot-button"></button>
+    @@include('blocks/header.html') @@include('blocks/mobile-menu.html')
+    <section class="main page-container">
+      <h1 class="main__title main-page__title">Tsyguro Dmitry</h1>
+      <div class="main__content-wrapper">
+        <p class="main__content">
+          Future front-end developer 35 years old, Tolyatti
+        </p>
+        <button
+          type="button"
+          class="sandwich-button main__sandwich-button main__sandwich-button_js"
+          aria-label="Главное меню"
+        ></button>
+      </div>
+      <div class="main__slider slider">
+        <div class="main__slider-wrapper slider__wrapper">
+          <div class="main__slider-inner-wrapper slider__inner-wrapper">
+            <picture class="main__slider-slide slider__slide">
+              <source
+                media="(min-width: 920px)"
+                srcset="
+                  ../img/images/main-1000x465-1x.jpg 1x,
+                  ../img/images/main-2000x930-2x.jpg 2x
+                "
+              />
+              <source
+                media="(min-width: 501px) and (max-width: 919px)"
+                srcset="
+                  ../img/images/main-648x465-tablet-1x.jpg  1x,
+                  ../img/images/main-1296x930-tablet-2x.jpg 2x
+                "
+              />
+              <source
+                media="(max-width: 500px)"
+                srcset="
+                  ../img/images/main-280x465-mobile-1x.jpg 1x,
+                  ../img/images/main-560x930-mobile-2x.jpg 2x
+                "
+              />
+              <img
+                src="../img/images/main-1000x465-1x.jpg"
+                class="main__image"
+                width="1000"
+                height="465"
+                alt="Моя фотка"
+              />
+            </picture>
+            <picture class="main__slider-slide slider__slide">
+              <source
+                media="(min-width: 920px)"
+                srcset="
+                  ../img/images/main2-1000x465-1x.jpg 1x,
+                  ../img/images/main2-2000x930-2x.jpg 2x
+                "
+              />
+              <source
+                media="(min-width: 501px) and (max-width: 919px)"
+                srcset="
+                  ../img/images/main2-648x465-tablet-1x.jpg  1x,
+                  ../img/images/main2-1296x930-tablet-2x.jpg 2x
+                "
+              />
+              <source
+                media="(max-width: 500px)"
+                srcset="
+                  ../img/images/main2-280x465-mobile-1x.jpg 1x,
+                  ../img/images/main2-560x930-mobile-2x.jpg 2x
+                "
+              />
+              <img
+                src="../img/images/main2-1000x465-1x.jpg"
+                class="main__image"
+                width="1000"
+                height="465"
+                alt="Моя фотка"
+              />
+            </picture>
           </div>
-          <img src="../img/icons/slider-right.png" alt="Стрелка вправо" />
         </div>
-      </section>
-    </div>
+      </div>
+      <div class="main__slider-navigation slider__navigation">
+        <button
+          class="main__slider-button-left slider__button-left main__slider-button-left_js"
+          aria-label="Листать влево"
+        >
+          <img src="../img/icons/slider-left.png" alt="Стрелка влево" />
+        </button>
+        <div
+          class="main__navigation-spots main__navigation-spots_js slider__navigation-spots"
+        ></div>
+        <button
+          class="main__slider-button-right slider__button-right main__slider-button-right_js"
+          aria-label="Листать вправо"
+        >
+          <img src="../img/icons/slider-right.png" alt="Стрелка вправо" />
+        </button>
+      </div>
+    </section>
     <div class="color-wrapper">
       <section class="about page-container">
         <h2 class="about__title section-title font-bold">About me</h2>
@@ -136,174 +168,276 @@
         </div>
       </section>
     </div>
-    <div class="color-wrapper">
-      <section class="skills page-container font-bold">
-        <h2 class="skills__title section-title font-bold">Skills</h2>
-        <p class="skills__comment font-medium">I work in such programs as</p>
-        <ul class="skills__rate-list">
-          <li class="skills__rate-list-item">
-            <img
-              class="skills__image"
-              src="/img/icons/html5-logo.png"
-              width="79"
-              height="90"
-              alt="html logo"
-            />
-            <span class="skills__name">HTML 5</span>
-            <div class="skills__progress-wrapper">
-              <span class="skills__percent">85%</span>
-              <div class="skills__progress-bar skills__progress-bar-html"></div>
-            </div>
-          </li>
-          <li class="skills__rate-list-item">
-            <img
-              class="skills__image"
-              src="/img/icons/css-logo.png"
-              width="79"
-              height="90"
-              alt="css logo"
-            />
-            <span class="skills__name">CSS/SCSS</span>
-            <div class="skills__progress-wrapper">
-              <span class="skills__percent">55%</span>
-              <div class="skills__progress-bar skills__progress-bar-css"></div>
-            </div>
-          </li>
-          <li class="skills__rate-list-item">
-            <img
-              class="skills__image"
-              src="/img/icons/js-logo.png"
-              width="68"
-              height="90"
-              alt="css logo"
-            />
-            <span class="skills__name">JavaScript</span>
-            <div class="skills__progress-wrapper">
-              <span class="skills__percent">5%</span>
-              <div class="skills__progress-bar skills__progress-bar-js"></div>
-            </div>
-          </li>
-          <li class="skills__rate-list-item">
-            <img
-              class="skills__image"
-              src="/img/icons/github-logo.png"
-              width="90"
-              height="90"
-              alt="css logo"
-            />
-            <span class="skills__name">Git/GitHub</span>
-            <div class="skills__progress-wrapper">
-              <span class="skills__percent">15%</span>
-              <div class="skills__progress-bar skills__progress-bar-git"></div>
-            </div>
-          </li>
-          <li class="skills__rate-list-item">
-            <img
-              class="skills__image"
-              src="/img/icons/figma-logo.png"
-              width="60"
-              height="90"
-              alt="css logo"
-            />
-            <span class="skills__name">Figma</span>
-            <div class="skills__progress-wrapper">
-              <span class="skills__percent">80%</span>
-              <div
-                class="skills__progress-bar skills__progress-bar-figma"
-              ></div>
-            </div>
-          </li>
-        </ul>
-      </section>
-      <div class="color-wrapper">
-        <section class="portfolio page-container">
-          <h2 class="portfolio__title section-title font-bold">Portfolio</h2>
-          <picture class="portfolio__screenshot">
-            <source
-              media="(min-width: 920px)"
-              srcset="
-                ../img/images/monster-page-648x604-1x.jpg   1x,
-                ../img/images/monster-page-2000x1208-2x.jpg 2x
-              "
-            />
-            <source
-              media="(min-width: 501px) and (max-width: 919px)"
-              srcset="
-                ../img/images/monster-page-648x604-tablet-1x.jpg   1x,
-                ../img/images/monster-page-1296x1208-tablet-2x.jpg 2x
-              "
-            />
-            <source
-              media="(max-width: 500px)"
-              srcset="
-                ../img/images/monster-page-280x604-mobile-1x.jpg  1x,
-                ../img/images/monster-page-560x1208-mobile-2x.jpg 2x
-              "
-            />
-            <img
-              src="../img/images/monster-page-2000x1208-2x.jpg"
-              class="portfolio__image"
-              width="2000"
-              height="1208"
-              alt="Скриншот сайта из портфолио"
-            />
-          </picture>
-          <picture class="portfolio__screenshot hidden-item">
-            <source
-              media="(min-width: 920px)"
-              srcset="
-                ../img/images/blog-page-1000x604-1x.jpg  1x,
-                ../img/images/blog-page-2000x1208-2x.jpg 2x
-              "
-            />
-            <source
-              media="(min-width: 501px) and (max-width: 919px)"
-              srcset="
-                ../img/images/blog-page-1292x1208-tablet-1x.jpg 1x,
-                ../img/images/blog-page-648x604-tablet-2x.jpg   2x
-              "
-            />
-            <source
-              media="(max-width: 500px)"
-              srcset="
-                ../img/images/blog-page-267x573-mobile-1x  1x,
-                ../img/images/blog-page-534x1146-mobile-2x 2x
-              "
-            />
-            <img
-              src="../img/images/monster-page-2000x1208-2x.jpg.jpg"
-              class="portfolio__image"
-              width="2000"
-              height="1208"
-              alt="Скриншот
-            сайта из портфолио"
-            />
-          </picture>
-          <div class="portfolio__description-wrapper font-medium">
-            <h3 class="portfolio__desription-title">
-              Learning site for DL Academy courses
-            </h3>
-            <p class="portfolio__description-text">
-              A simple multi-page static site. The design layout was in Figma.
-              HTML and CSS were used. The site is responsive and cross-browser,
-              but without adding interactivity via JavaScript.
-            </p>
+    <section class="skills page-container font-bold">
+      <h2 class="skills__title section-title font-bold">Skills</h2>
+      <p class="skills__comment font-medium">I work in such programs as</p>
+      <ul class="skills__rate-list">
+        <li class="skills__rate-list-item">
+          <img
+            class="skills__image"
+            src="/img/icons/html5-logo.png"
+            width="79"
+            height="90"
+            alt="html logo"
+          />
+          <span class="skills__name">HTML 5</span>
+          <div class="skills__progress-wrapper">
+            <span class="skills__percent">80%</span>
+            <div class="skills__progress-bar skills__progress-bar-html"></div>
           </div>
-        </section>
-      </div>
+        </li>
+        <li class="skills__rate-list-item">
+          <img
+            class="skills__image"
+            src="/img/icons/css-logo.png"
+            width="79"
+            height="90"
+            alt="css logo"
+          />
+          <span class="skills__name">CSS/SCSS</span>
+          <div class="skills__progress-wrapper">
+            <span class="skills__percent">55%</span>
+            <div class="skills__progress-bar skills__progress-bar-css"></div>
+          </div>
+        </li>
+        <li class="skills__rate-list-item">
+          <img
+            class="skills__image"
+            src="/img/icons/js-logo.png"
+            width="68"
+            height="90"
+            alt="css logo"
+          />
+          <span class="skills__name">JavaScript</span>
+          <div class="skills__progress-wrapper">
+            <span class="skills__percent">20%</span>
+            <div class="skills__progress-bar skills__progress-bar-js"></div>
+          </div>
+        </li>
+        <li class="skills__rate-list-item">
+          <img
+            class="skills__image"
+            src="/img/icons/github-logo.png"
+            width="90"
+            height="90"
+            alt="css logo"
+          />
+          <span class="skills__name">Git/GitHub</span>
+          <div class="skills__progress-wrapper">
+            <span class="skills__percent">15%</span>
+            <div class="skills__progress-bar skills__progress-bar-git"></div>
+          </div>
+        </li>
+        <li class="skills__rate-list-item">
+          <img
+            class="skills__image"
+            src="/img/icons/figma-logo.png"
+            width="60"
+            height="90"
+            alt="css logo"
+          />
+          <span class="skills__name">Figma</span>
+          <div class="skills__progress-wrapper">
+            <span class="skills__percent">20%</span>
+            <div class="skills__progress-bar skills__progress-bar-figma"></div>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <div class="color-wrapper">
+      <section class="portfolio page-container">
+        <h2 class="portfolio__title section-title font-bold">Portfolio</h2>
+        <div class="portfolio__slider swiper">
+          <div class="portfolio__slider-wrapper swiper-wrapper">
+            <div class="portfolio__slider-slide swiper-slide">
+              <picture class="portfolio__slider-picture">
+                <source
+                  media="(min-width: 920px)"
+                  srcset="
+                    ../img/images/monster-page-648x604-1x.jpg   1x,
+                    ../img/images/monster-page-2000x1208-2x.jpg 2x
+                  "
+                />
+                <source
+                  media="(min-width: 501px) and (max-width: 919px)"
+                  srcset="
+                    ../img/images/monster-page-648x604-tablet-1x.jpg   1x,
+                    ../img/images/monster-page-1296x1208-tablet-2x.jpg 2x
+                  "
+                />
+                <source
+                  media="(max-width: 500px)"
+                  srcset="
+                    ../img/images/monster-page-280x604-mobile-1x.jpg  1x,
+                    ../img/images/monster-page-560x1208-mobile-2x.jpg 2x
+                  "
+                />
+                <img
+                  src="../img/images/monster-page-2000x1208-2x.jpg"
+                  class="portfolio__image"
+                  width="2000"
+                  height="1208"
+                  alt="Скриншот сайта из портфолио"
+                />
+              </picture>
+              <div class="portfolio__description-wrapper font-medium">
+                <a href="#" class="portfolio__desription-title">
+                  Learning site for DL Academy courses
+                </a>
+                <p class="portfolio__description-text">
+                  A simple multi-page static site. The design layout was in
+                  Figma. HTML and CSS were used. The site is responsive and
+                  cross-browser, but without adding interactivity via
+                  JavaScript.
+                </p>
+              </div>
+            </div>
+            <div class="portfolio__slider-slide swiper-slide">
+              <picture class="portfolio__slider-picture">
+                <source
+                  media="(min-width: 920px)"
+                  srcset="
+                    ../img/images/blog-page-1000x604-1x.jpg  1x,
+                    ../img/images/blog-page-2000x1208-2x.jpg 2x
+                  "
+                />
+                <source
+                  media="(min-width: 501px) and (max-width: 919px)"
+                  srcset="
+                    ../img/images/blog-page-1292x1208-tablet-1x.jpg 1x,
+                    ../img/images/blog-page-648x604-tablet-2x.jpg   2x
+                  "
+                />
+                <source
+                  media="(max-width: 500px)"
+                  srcset="
+                    ../img/images/blog-page-267x573-mobile-1x.jpg  1x,
+                    ../img/images/blog-page-534x1146-mobile-2x.jpg 2x
+                  "
+                />
+                <img
+                  src="../img/images/blog-page-2000x1208-2x.jpg"
+                  class="portfolio__image"
+                  width="2000"
+                  height="1208"
+                  alt="Скриншот
+            сайта из портфолио"
+                />
+              </picture>
+              <div class="portfolio__description-wrapper font-medium">
+                <a href="#" class="portfolio__desription-title">
+                  Learning site for Netology courses
+                </a>
+                <p class="portfolio__description-text">
+                  A simple one-page static site. Created on Codepen service
+                  platform. The design layout was in jpg. HTML and CSS were
+                  used. The site is responsive and cross-browser, but without
+                  adding interactivity via JavaScript.
+                </p>
+              </div>
+            </div>
+            <div class="portfolio__slider-slide swiper-slide">
+              <picture class="portfolio__slider-picture">
+                <source
+                  media="(min-width: 920px)"
+                  srcset="
+                    ../img/images/sport-page-1000x604-1x.jpg  1x,
+                    ../img/images/sport-page-2000x1208-2x.jpg 2x
+                  "
+                />
+                <source
+                  media="(min-width: 501px) and (max-width: 919px)"
+                  srcset="
+                    ../img/images/sport-page-1292x1208-tablet-1x.jpg 1x,
+                    ../img/images/sport-page-648x604-tablet-2x.jpg   2x
+                  "
+                />
+                <source
+                  media="(max-width: 500px)"
+                  srcset="
+                    ../img/images/sport-page-267x573-mobile-1x.jpg  1x,
+                    ../img/images/sport-page-534x1146-mobile-2x.jpg 2x
+                  "
+                />
+                <img
+                  src="../img/images/sport-page-2000x1208-2x.jpg"
+                  class="portfolio__image"
+                  width="2000"
+                  height="1208"
+                  alt="Скриншот
+            сайта из портфолио"
+                />
+              </picture>
+              <div class="portfolio__description-wrapper font-medium">
+                <a href="#" class="portfolio__desription-title">
+                  Learning site N2 for Netology courses
+                </a>
+                <p class="portfolio__description-text">
+                  A simple one-page adaptive site. The design layout was in jpg.
+                  HTML and CSS were used. The site is responsive and
+                  cross-browser, but without adding interactivity via
+                  JavaScript.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio__slider-navigation slider__navigation">
+          <button
+            class="portfolio__slider-button-left slider__button-left portfolio__slider-button-left_js"
+            aria-label="Листать влево"
+          >
+            <img
+              src="../img/icons/arrow-left.png"
+              width="25"
+              height="42"
+              alt="Стрелка влево"
+              class="arrow-img"
+            />
+          </button>
+          <div
+            class="portfolio__navigation-spots portfolio__navigation-spots_js slider__navigation-spots"
+          ></div>
+          <button
+            class="portfolio__slider-button-right slider__button-right portfolio__slider-button-right_js"
+            aria-label="Листать вправо"
+          >
+            <img
+              src="../img/icons/arrow-right.png"
+              width="25"
+              height="42"
+              alt="Стрелка вправо"
+            />
+          </button>
+        </div>
+      </section>
     </div>
-
+    <!-- </li>
+  <li> -->
     @@include('blocks/footer.html')
     <button
       type="button"
       class="scroll-top scroll-top_js hidden-item"
-      aria-label="Вверх"
+      aria-label="Наверх"
     ></button>
     @@include('blocks/log-in.html') @@include('blocks/register.html')
-    @@include('blocks/send-message.html')
-    <script src="js/app.js" defer></script>
-    <script src="js/scroll-top.js" defer></script>
-    <script src="js/header.js" defer></script>
-    <script src="js/footer.js" defer></script>
+    @@include('blocks/send-message.html') @@include('blocks/loader.html')
+    @@include('blocks/after-modal.html')
+    <script src="js/app.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/scroll-top.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/my-profile.js"></script>
+    <script src="js/log-in.js"></script>
+    <script src="js/registration.js"></script>
+    <script src="js/send-message.js"></script>
+    <script src="js/change-password.js"></script>
+    <script src="js/change-other.js"></script>
+    <script src="js/slider-main.js"></script>
+    <script src="js/swiper.js"></script>
+    <!-- <script src="js/slider-portfolio.js"></script> -->
   </body>
 </html>

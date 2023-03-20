@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="google" content="notranslate" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Crimson+Text:ital,wght@1,400;1,700&family=Inter:wght@400;700&family=KoHo:wght@700&family=Lato:wght@400;700&family=Montserrat:wght@200;300;600;700&family=Open+Sans:wght@400;700&family=Pridi:wght@400;500;700&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <title>My blog</title>
+    <meta
+      name="description"
+      content="Данный сайт сверстал студент курса по
+    изучению специальности Frontend-разработчик"
+    />
+    <meta
+      name="keywords"
+      content="Frontend, gulp, javascript, css, scss, html"
+    />
+
+    <script>
+      var docElement = document.documentElement;
+      docElement.className =
+        docElement.className.replace(/\bno-js\b/, "") + " js";
+    </script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script> -->
+    <!-- Favicon -->
+
+    <!-- build:css -->
+    <link href="css/style.min.css" rel="stylesheet" />
+
+    <!-- endbuild -->
+  </head>
+  <body class="my-blog-page font-medium">
+    @@include('blocks/header.html') @@include('blocks/mobile-menu.html')
+    <div class="page-container">
+      <div class="title-sandwich-container">
+        <h1 class="main__title my-blog-page__title font-bold">My blog</h1>
+        <button
+          type="button"
+          class="sandwich-button main__sandwich-button main__sandwich-button_js"
+          aria-label="Главное меню"
+        ></button>
+      </div>
+      <section class="my-blog__filter">
+        <h2 class="my-blog__filter-title hidden-item">Filter</h2>
+        <form name="myBlogFilterForm" class="my-blog__filter-wrapper">
+          <div class="my-blog__filter-container">
+            <!-- <div class="select-of-box_js"></div> -->
+            <fieldset class="my-blog__filter-tags-wrapper">
+              <legend class="my-blog__filter-title">Tags</legend>
+              <ul class="my-blog__filter-color-checkbox-list">
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-blue"
+                    class="my-blog__filter-blue-checkbox"
+                    name="filterTag"
+                    value="1"
+                  />
+                  <label
+                    class="my-blog__filter-blue-label"
+                    for="checkbox-blue"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-light-blue"
+                    class="my-blog__filter-light-blue-checkbox"
+                    name="filterTag"
+                    value="2"
+                  />
+                  <label
+                    class="my-blog__filter-light-blue-label"
+                    for="checkbox-light-blue"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-yellow"
+                    class="my-blog__filter-yellow-checkbox"
+                    name="filterTag"
+                    value="3"
+                  />
+                  <label
+                    class="my-blog__filter-yellow-label"
+                    for="checkbox-yellow"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-marine"
+                    class="my-blog__filter-marine-checkbox"
+                    name="filterTag"
+                    value="4"
+                  />
+                  <label
+                    class="my-blog__filter-marine-label"
+                    for="checkbox-marine"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-orange"
+                    class="my-blog__filter-orange-checkbox"
+                    name="filterTag"
+                    value="5"
+                  />
+                  <label
+                    class="my-blog__filter-orange-label"
+                    for="checkbox-orange"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-pink"
+                    class="my-blog__filter-pink-checkbox"
+                    name="filterTag"
+                    value="6"
+                  />
+                  <label
+                    class="my-blog__filter-pink-label"
+                    for="checkbox-pink"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-purple"
+                    class="my-blog__filter-purple-checkbox"
+                    name="filterTag"
+                    value="7"
+                  />
+                  <label
+                    class="my-blog__filter-purple-label"
+                    for="checkbox-purple"
+                  ></label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-green"
+                    class="my-blog__filter-green-checkbox"
+                    name="filterTag"
+                    value="8"
+                  />
+                  <label
+                    class="my-blog__filter-green-label"
+                    for="checkbox-green"
+                  ></label>
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset class="my-blog__filter-views-wrapper">
+              <legend class="my-blog__filter-title">Views</legend>
+              <ul class="my-blog__filter-views-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-min"
+                    class="my-blog__filter-views-min-checkbox"
+                    value="100-500"
+                    name="filterViewsGroup"
+                  />
+                  <label class="my-blog__filter-views-min-label" for="radio-min"
+                    >100-500</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-middle"
+                    class="my-blog__filter-views-middle-checkbox"
+                    value="500-1000"
+                    name="filterViewsGroup"
+                  />
+                  <label
+                    class="my-blog__filter-views-middle-label"
+                    for="radio-middle"
+                    >500-1000</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-max"
+                    class="my-blog__filter-views-max-checkbox"
+                    value="1000-2000"
+                    name="filterViewsGroup"
+                  />
+                  <label class="my-blog__filter-views-max-label" for="radio-max"
+                    >1000-2000</label
+                  >
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset class="my-blog__filter-comments-wrapper">
+              <legend class="my-blog__filter-title">Comments</legend>
+              <ul class="my-blog__filter-comments-list">
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-0"
+                    class="my-blog__filter-comments-min-checkbox"
+                    value="0"
+                    name="filterComments"
+                  />
+                  <label
+                    class="my-blog__filter-comments-min-label"
+                    for="checkbox-0"
+                    >0</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-0-1"
+                    class="my-blog__filter-comments-middle-checkbox"
+                    value="0-1"
+                    name="filterComments"
+                  />
+                  <label
+                    class="my-blog__filter-comments-middle-label"
+                    for="checkbox-0-1"
+                    >0-1</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    id="checkbox-1-50"
+                    class="my-blog__filter-comments-max-checkbox"
+                    value="1-50"
+                    name="filterComments"
+                  />
+                  <label
+                    class="my-blog__filter-comments-max-label"
+                    for="checkbox-1-50"
+                    >1-50</label
+                  >
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset class="my-blog__filter-how-show-wrapper">
+              <legend class="my-blog__filter-title">How show?</legend>
+              <ul class="my-blog__filter-how-show-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-show-5"
+                    class="my-blog__filter-how-show-min-radio"
+                    value="5"
+                    name="filterHowShowGroup"
+                  />
+                  <label
+                    class="my-blog__filter-how-show-min-label"
+                    for="radio-show-5"
+                    >show 5</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-show-10"
+                    class="my-blog__filter-how-show-max-radio"
+                    value="10"
+                    name="filterHowShowGroup"
+                  />
+                  <label
+                    class="my-blog__filter-how-show-max-label"
+                    for="radio-show-10"
+                    >show 10</label
+                  >
+                </li>
+              </ul>
+            </fieldset>
+            <fieldset class="my-blog__filter-sort-by-wrapper">
+              <legend class="my-blog__filter-title">Sort by</legend>
+              <ul class="my-blog__filter-sort-by-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-sort-by-date"
+                    class="my-blog__filter-sort-by-date-radio"
+                    value="date"
+                    name="filterSortByGroup"
+                  />
+                  <label
+                    class="my-blog__filter-sort-by-date-label"
+                    for="radio-sort-by-date"
+                    >date</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-sort-by-title"
+                    class="my-blog__filter-sort-by-title-radio"
+                    value="title"
+                    name="filterSortByGroup"
+                  />
+                  <label
+                    class="my-blog__filter-sort-by-title-label"
+                    for="radio-sort-by-title"
+                    >title</label
+                  >
+                </li>
+                <li>
+                  <input
+                    type="radio"
+                    id="radio-sort-by-views"
+                    class="my-blog__filter-sort-by-views-radio"
+                    value="views"
+                    name="filterSortByGroup"
+                  />
+                  <label
+                    class="my-blog__filter-sort-by-views-label"
+                    for="radio-sort-by-views"
+                    >views</label
+                  >
+                </li>
+              </ul>
+            </fieldset>
+            <div class="my-blog__filter-reset">
+              <button
+                type="button"
+                class="button my-blog__filter-reset-button my-blog__filter-reset-button_js"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+          <div class="my-blog__filter-submit">
+            <input
+              type="text"
+              class="my-blog__filter-search-field"
+              name="filterName"
+            />
+            <button type="submit" class="button my-blog__filter-submit-button">
+              Search
+            </button>
+          </div>
+        </form>
+      </section>
+      <section class="my-blog-page__articles">
+        <h2 class="my-blog__articles-title hidden-item">Articles list</h2>
+        <div class="my-blog__articles result_js"></div>
+      </section>
+      <div class="my-blog__pagination-wrapper">
+        <button
+          class="my-blog__slider-button-left my-blog__slider-button-left_js"
+          aria-label="Листать влево"
+        >
+          <img src="../img/icons/slider-left.png" alt="Стрелка влево" />
+        </button>
+        <div class="my-blog__pagination_js"></div>
+        <button
+          class="my-blog__slider-button-right my-blog__slider-button-right_js"
+          aria-label="Листать вправо"
+        >
+          <img src="../img/icons/slider-right.png" alt="Стрелка вправо" />
+        </button>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="scroll-top scroll-top_js hidden-item"
+      aria-label="Вверх"
+    ></button>
+
+    @@include('blocks/loader.html')
+    <div class="color-wrapper">@@include('blocks/footer.html')</div>
+    @@include('blocks/log-in.html') @@include('blocks/register.html')
+    @@include('blocks/send-message.html') @@include('blocks/after-modal.html')
+
+    <script src="js/app.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/scroll-top.js"></script>
+    <script src="js/my-blog.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/my-profile.js"></script>
+    <script src="js/send-message.js"></script>
+    <script src="js/log-in.js"></script>
+    <script src="js/registration.js"></script>
+    <script src="js/change-password.js"></script>
+    <script src="js/change-other.js"></script>
+  </body>
+</html>

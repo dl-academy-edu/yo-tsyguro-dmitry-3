@@ -16,11 +16,14 @@ p,
 h1,
 h2,
 h3,
-ul {
+ul,
+label {
   padding: 0;
   margin: 0;
 }
-
+li {
+  list-style: none;
+}
 ///////////////////////Шрифты/////////////////////////////////////////////////////////
 
 @font-face {
@@ -64,7 +67,27 @@ ul {
   line-height: 41px;
 }
 
+.main__title {
+  font-size: 47px;
+  line-height: 57px;
+}
+
 //////////////////////Цветной контейнер///////////////////////////////////////////////
-.color-wrapper:nth-child(even) {
+.color-wrapper {
   background-color: #f6f6f6;
+}
+
+///////////////////////Loader//////////////////////////////////////////////
+.loader {
+  background-color: #00000050;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
